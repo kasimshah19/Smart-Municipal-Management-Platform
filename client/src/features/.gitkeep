@@ -1,0 +1,12 @@
+// Feature modules will be organized here.
+// Each feature gets its own folder containing components, slices, and services.
+//
+// Example structure:
+//   features/
+//     complaints/
+//       ComplaintList.jsx
+//       complaintSlice.js
+//       complaintService.js
+//     wards/
+//     departments/
+//     workers/

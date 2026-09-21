@@ -1,0 +1,3 @@
+// Business logic services will be added here as modules are built.
+// Services encapsulate logic that controllers delegate to,
+// keeping controllers thin and focused on request/response handling.

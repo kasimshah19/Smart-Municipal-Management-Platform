@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* =============================================
+   DESIGN TOKENS — Light theme (default)
+   ============================================= */
+:root {
+  --bg: #F4F7FB;
+  --surface: #FFFFFF;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --line: #E2E8F0;
+  --navy: #0B1F3A;
+  --primary: #2563EB;
+  --accent: #14B8A6;
+  --on-accent: #062B27;
+  --accent-text: #0F766E;
+
+  /* Status — light */
+  --status-submitted-dot: #2563EB;
+  --status-submitted-bg: #DBEAFE;
+  --status-submitted-text: #1E3A8A;
+  --status-inprogress-dot: #F59E0B;
+  --status-inprogress-bg: #FEF3C7;
+  --status-inprogress-text: #78350F;
+  --status-resolved-dot: #22C55E;
+  --status-resolved-bg: #DCFCE7;
+  --status-resolved-text: #14532D;
+  --status-urgent-dot: #EF4444;
+  --status-urgent-bg: #FEE2E2;
+  --status-urgent-text: #7F1D1D;
+}
+
+/* =============================================
+   DESIGN TOKENS — Dark theme (explicit toggle)
+   ============================================= */
+:root[data-theme="dark"] {
+  --bg: #0A1220;
+  --surface: #111C31;
+  --ink: #E6EDF7;
+  --muted: #94A3B8;
+  --line: #1F2D48;
+  --navy: #06132A;
+  --primary: #3B82F6;
+  --accent: #2DD4BF;
+  --accent-text: #5EEAD4;
+
+  --status-submitted-bg: #1E3A8A;
+  --status-submitted-text: #DBEAFE;
+  --status-inprogress-bg: #78350F;
+  --status-inprogress-text: #FEF3C7;
+  --status-resolved-bg: #14532D;
+  --status-resolved-text: #DCFCE7;
+  --status-urgent-bg: #7F1D1D;
+  --status-urgent-text: #FEE2E2;
+}
+
+/* =============================================
+   DESIGN TOKENS — Dark theme (system preference,
+   unless user explicitly chose light)
+   ============================================= */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1220;
+    --surface: #111C31;
+    --ink: #E6EDF7;
+    --muted: #94A3B8;
+    --line: #1F2D48;
+    --navy: #06132A;
+    --primary: #3B82F6;
+    --accent: #2DD4BF;
+    --accent-text: #5EEAD4;
+
+    --status-submitted-bg: #1E3A8A;
+    --status-submitted-text: #DBEAFE;
+    --status-inprogress-bg: #78350F;
+    --status-inprogress-text: #FEF3C7;
+    --status-resolved-bg: #14532D;
+    --status-resolved-text: #DCFCE7;
+    --status-urgent-bg: #7F1D1D;
+    --status-urgent-text: #FEE2E2;
+  }
+}
+
+/* =============================================
+   TAILWIND v4 THEME INTEGRATION
+   Map CSS variables → Tailwind utility classes
+   ============================================= */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-text: var(--accent-text);
+
+  --font-family-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keyboard focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================
+   TOAST KEYFRAMES
+   ============================================= */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(12px); }
+}

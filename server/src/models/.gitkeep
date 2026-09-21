@@ -1,0 +1,3 @@
+// Mongoose models will be added here as modules are built.
+// Each model file should export a single Mongoose model.
+// Example: User.model.js, Complaint.model.js
