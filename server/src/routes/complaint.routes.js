@@ -1,8 +1,10 @@
 import express from 'express';
 import complaintService from '../services/complaint.service.js';
+import fieldOperationsService from '../services/fieldOperations.service.js';
 import { authenticate, authorizeRoles } from '../middlewares/auth.middleware.js';
 import uploadEvidence from '../middlewares/uploadEvidence.js';
 import ComplaintEvidence from '../models/ComplaintEvidence.js';
+import { ROLES } from '../constants/roles.js';
 
 const router = express.Router();
 
@@ -83,18 +85,21 @@ router.get(
       const filter = {};
       
       // RBAC Filtering Strategy
-      if (req.user.role === 'CITIZEN') {
+      if (req.user.role === ROLES.CITIZEN) {
         // Citizens can only see their own
         filter.citizenId = req.user._id;
-      } else if (req.user.role === 'MUNICIPAL_ADMIN' || req.user.role === 'GRIEVANCE_OFFICER') {
-        // Admin/Officers see all in their municipality
-        filter.municipalityId = req.user.municipalityId;
-      } else if (req.user.role === 'DEPARTMENT_HEAD' || req.user.role === 'DEPARTMENT_OFFICER') {
+      } else if (req.user.role === ROLES.MUNICIPAL_ADMIN || req.user.role === ROLES.SUPER_ADMIN) {
+        // Admin/Officers see all in their municipality (Super admin sees all if no ID passed)
+        if (req.user.municipalityId) filter.municipalityId = req.user.municipalityId;
+      } else if (req.user.role === ROLES.DEPARTMENT_OFFICER) {
         // Dept officers see all in their municipality AND department
         filter.municipalityId = req.user.municipalityId;
-        filter.departmentId = req.user.departmentId; // Assuming this is set on User or mapped.
-      } else if (req.user.role === 'WORKER') {
-         // Need complex logic for Workers to see assigned tasks. For now:
+        filter.departmentId = req.user.departmentId; 
+      } else if (req.user.role === ROLES.WARD_OFFICER) {
+        filter.municipalityId = req.user.municipalityId;
+        if (req.user.wardId) filter.wardId = req.user.wardId;
+      } else if (req.user.role === ROLES.WORKER) {
+         // Worker task API should be used for assigned tasks. For global view, restrict to municipality.
          filter.municipalityId = req.user.municipalityId;
       }
 
@@ -127,8 +132,8 @@ router.get(
   async (req, res, next) => {
     try {
       const filter = {};
-      if (req.user.role === 'CITIZEN') filter.citizenId = req.user._id;
-      if (req.user.municipalityId && req.user.role !== 'SYSTEM_ADMIN') {
+      if (req.user.role === ROLES.CITIZEN) filter.citizenId = req.user._id;
+      if (req.user.municipalityId && req.user.role !== ROLES.SUPER_ADMIN) {
          filter.municipalityId = req.user.municipalityId;
       }
 
@@ -162,7 +167,7 @@ router.get(
 router.patch(
   '/:id/status',
   authenticate,
-  authorizeRoles('SYSTEM_ADMIN', 'MUNICIPAL_ADMIN', 'GRIEVANCE_OFFICER', 'DEPARTMENT_HEAD', 'DEPARTMENT_OFFICER', 'WORKER'),
+  authorizeRoles(ROLES.SUPER_ADMIN, ROLES.MUNICIPAL_ADMIN, ROLES.DEPARTMENT_OFFICER, ROLES.WARD_OFFICER, ROLES.INSPECTOR),
   async (req, res, next) => {
     try {
       const filter = {};
@@ -195,22 +200,127 @@ router.patch(
 router.post(
   '/:id/assign',
   authenticate,
-  authorizeRoles('SYSTEM_ADMIN', 'MUNICIPAL_ADMIN', 'GRIEVANCE_OFFICER', 'DEPARTMENT_HEAD', 'DEPARTMENT_OFFICER'),
+  authorizeRoles(ROLES.SUPER_ADMIN, ROLES.MUNICIPAL_ADMIN, ROLES.DEPARTMENT_OFFICER, ROLES.WARD_OFFICER),
   async (req, res, next) => {
     try {
-      const filter = {};
-      if (req.user.municipalityId && req.user.role !== 'SYSTEM_ADMIN') {
-         filter.municipalityId = req.user.municipalityId;
-      }
-
-      const updatedComplaint = await complaintService.assignComplaint(
+      const assignment = await fieldOperationsService.assignTask(
         req.params.id,
-        req.user._id,
-        req.body, // { assignedToEmployeeId, assignedToTeamId, reason }
-        filter
+        req.body,
+        req.user
       );
+      res.json({ success: true, data: assignment });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-      res.json({ success: true, data: updatedComplaint });
+/**
+ * @route   POST /api/complaints/:id/reassign
+ * @desc    Reassign complaint to worker/team
+ * @access  Private (Dept Head/Officer)
+ */
+router.post(
+  '/:id/reassign',
+  authenticate,
+  authorizeRoles(ROLES.SUPER_ADMIN, ROLES.MUNICIPAL_ADMIN, ROLES.DEPARTMENT_OFFICER, ROLES.WARD_OFFICER),
+  async (req, res, next) => {
+    try {
+      // Logic for reassignment is handled gracefully by assignTask
+      const assignment = await fieldOperationsService.assignTask(
+        req.params.id,
+        req.body,
+        req.user
+      );
+      res.json({ success: true, data: assignment });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @route   POST /api/complaints/:id/start
+ * @desc    Worker starts work
+ * @access  Private (Worker)
+ */
+router.post(
+  '/:id/start',
+  authenticate,
+  authorizeRoles(ROLES.WORKER),
+  async (req, res, next) => {
+    try {
+      const complaint = await fieldOperationsService.startWork(req.params.id, req.user);
+      res.json({ success: true, data: complaint });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @route   POST /api/complaints/:id/submit-completion
+ * @desc    Worker submits completion
+ * @access  Private (Worker)
+ */
+router.post(
+  '/:id/submit-completion',
+  authenticate,
+  authorizeRoles(ROLES.WORKER),
+  async (req, res, next) => {
+    try {
+      const complaint = await fieldOperationsService.submitCompletion(
+        req.params.id,
+        req.body.note,
+        req.user
+      );
+      res.json({ success: true, data: complaint });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @route   POST /api/complaints/:id/approve-completion
+ * @desc    Officer approves completion
+ * @access  Private (Officer)
+ */
+router.post(
+  '/:id/approve-completion',
+  authenticate,
+  authorizeRoles(ROLES.SUPER_ADMIN, ROLES.MUNICIPAL_ADMIN, ROLES.DEPARTMENT_OFFICER, ROLES.WARD_OFFICER),
+  async (req, res, next) => {
+    try {
+      const complaint = await fieldOperationsService.approveCompletion(
+        req.params.id,
+        req.body.note,
+        req.user
+      );
+      res.json({ success: true, data: complaint });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @route   POST /api/complaints/:id/reject-completion
+ * @desc    Officer rejects completion
+ * @access  Private (Officer)
+ */
+router.post(
+  '/:id/reject-completion',
+  authenticate,
+  authorizeRoles(ROLES.SUPER_ADMIN, ROLES.MUNICIPAL_ADMIN, ROLES.DEPARTMENT_OFFICER, ROLES.WARD_OFFICER),
+  async (req, res, next) => {
+    try {
+      const complaint = await fieldOperationsService.rejectCompletion(
+        req.params.id,
+        req.body.reason,
+        req.user
+      );
+      res.json({ success: true, data: complaint });
     } catch (error) {
       next(error);
     }
@@ -231,7 +341,7 @@ router.post(
       const isInternal = req.body.isInternal || false;
       
       // Citizens cannot make internal comments
-      if (req.user.role === 'CITIZEN' && isInternal) {
+      if (req.user.role === ROLES.CITIZEN && isInternal) {
          return res.status(403).json({ success: false, message: 'Citizens cannot make internal comments' });
       }
 

@@ -14,6 +14,7 @@ import employeeRoutes from './routes/employee.routes.js';
 import workerTeamRoutes from './routes/workerTeam.routes.js';
 import complaintCategoryRoutes from './routes/complaintCategory.routes.js';
 import complaintRoutes from './routes/complaint.routes.js';
+import workerRoutes from './routes/worker.routes.js';
 import { notFoundHandler, globalErrorHandler } from './middlewares/error.middleware.js';
 
 const app = express();
@@ -61,6 +62,7 @@ app.use('/api/departments', departmentRoutes);
 app.use('/api/designations', designationRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/worker-teams', workerTeamRoutes);
+app.use('/api/worker', workerRoutes);
 
 // --------------- Error Handling ---------------
 

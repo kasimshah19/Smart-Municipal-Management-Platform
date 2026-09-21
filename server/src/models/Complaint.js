@@ -86,6 +86,7 @@ const complaintSchema = new mongoose.Schema(
         'VERIFIED',
         'ASSIGNED',
         'IN_PROGRESS',
+        'COMPLETION_SUBMITTED',
         'RESOLVED',
         'REJECTED',
         'CLOSED',
