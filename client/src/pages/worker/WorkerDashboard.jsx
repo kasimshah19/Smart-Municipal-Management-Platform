@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
-import { useAuth } from '../../hooks/useAuth';
-
+import { useSelector } from 'react-redux';
 const WorkerDashboard = () => {
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.auth);
   const [stats, setStats] = useState({
     TOTAL_ACTIVE: 0,
     ASSIGNED: 0,
