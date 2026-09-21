@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
-import { useAuth } from '../../hooks/useAuth';
-
+import { useSelector } from 'react-redux';
 const OfficerComplaintDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.auth);
   const [complaint, setComplaint] = useState(null);
   const [employees, setEmployees] = useState([]);
   const [teams, setTeams] = useState([]);

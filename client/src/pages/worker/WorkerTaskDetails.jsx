@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
-import { useAuth } from '../../hooks/useAuth';
-import ImageUpload from '../../components/common/ImageUpload';
-
+import { useSelector } from 'react-redux';
 const WorkerTaskDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.auth);
   const [task, setTask] = useState(null);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
@@ -173,10 +171,12 @@ const WorkerTaskDetails = () => {
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Evidence Images</label>
-                  <ImageUpload 
-                    images={evidenceImages} 
-                    setImages={setEvidenceImages}
-                    maxImages={3}
+                  <input 
+                    type="file" 
+                    multiple 
+                    accept="image/*"
+                    onChange={(e) => setEvidenceImages(Array.from(e.target.files))}
+                    className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
                   />
                 </div>
 

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
-import { FiMapPin, FiClock, FiAlertCircle } from 'react-router-dom';
-// I should use lucide-react if Fi icons aren't available, but let me check what's installed. 
-// Standard icons from react-icons are usually imported from 'react-icons/fi'. Let me use standard elements for now to avoid breaking.
+
 
 const WorkerTaskList = () => {
   const [tasks, setTasks] = useState([]);
