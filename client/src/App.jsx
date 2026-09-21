@@ -3,7 +3,6 @@ import Home from './pages/Home.jsx';
 import Login from './pages/auth/Login.jsx';
 import Register from './pages/auth/Register.jsx';
 import ForgotPassword from './pages/auth/ForgotPassword.jsx';
-import ComplaintDetails from './pages/citizen/ComplaintDetails';
 import WorkerDashboard from './pages/worker/WorkerDashboard';
 import WorkerTaskList from './pages/worker/WorkerTaskList';
 import WorkerTaskDetails from './pages/worker/WorkerTaskDetails';
