@@ -901,9 +901,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## Demo
+## Demo Credentials (RBAC)
 
-*Demo credentials and live interactive links will be provided here upon successful production deployment. For security reasons, production credentials are not included in this documentation.*
+The platform implements strict Role-Based Access Control (RBAC). For local development and testing, you can use the following default credentials.
+
+| Role | Email ID | Password | Access Level |
+| :--- | :--- | :--- | :--- |
+| **Super Admin** | `test_super_admin@test.com` | `Password123!` | Full system access, all municipalities, Gram Panchayats. |
+| **Municipal Admin** | `test_municipal_admin@test.com` | `Password123!` | Municipality-level config, analytics, and employee management. |
+| **Ward Officer** | `test_ward_officer@test.com` | `Password123!` | Ward-level complaint assignment, worker tracking. |
+| **Department Officer** | `test_department_officer@test.com`| `Password123!` | Department-specific SLA monitoring and reporting. |
+| **Inspector** | `test_inspector@test.com` | `Password123!` | Field verification and complaint quality check. |
+| **Worker** | `test_worker@test.com` | `Password123!` | Complaint resolution and evidence upload (mobile-friendly). |
+| **Citizen** | `test_citizen@test.com` | `Password123!` | Register complaints, track status, view public dashboards. |
+
+*Note: These credentials are automatically generated via test scripts for local development environments.*
 
 ---
 
