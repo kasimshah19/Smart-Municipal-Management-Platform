@@ -941,3 +941,14 @@ Content-Type: application/json
   "workerTeamId": "<team-object-id>"
 }
 ```
+
+---
+
+## Author
+
+**Kasim Shah**
+
+**Connect with me:**
+- **Portfolio:** [kasim-portfolio-umber.vercel.app](https://kasim-portfolio-umber.vercel.app/)
+- **LinkedIn:** [Kasim Shah](https://www.linkedin.com/in/kasim-shah-176175340/)
+- **GitHub:** [@kasimshah19](https://github.com/kasimshah19)
