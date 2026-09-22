@@ -25,7 +25,7 @@ const WorkerTaskDetails = () => {
   const fetchTaskDetails = async () => {
     try {
       setLoading(true);
-      const response = await api.get(/complaints/ + id);
+      const response = await api.get(`/complaints/${id}`);
       if (response.data.success) {
         setTask(response.data.data._doc || response.data.data);
         setEvidence(response.data.data.evidence || []);
@@ -40,7 +40,7 @@ const WorkerTaskDetails = () => {
   const handleStartWork = async () => {
     try {
       setActionLoading(true);
-      const response = await api.post(/complaints/ + id + /start);
+      const response = await api.post(`/complaints/${id}/start`);
       if (response.data.success) {
         fetchTaskDetails();
       }
@@ -64,7 +64,7 @@ const WorkerTaskDetails = () => {
       formData.append('type', 'BEFORE_WORK');
       formData.append('description', 'Before starting work');
 
-      const uploadRes = await api.post(/complaints/ + id + /evidence, formData, {
+      const uploadRes = await api.post(`/complaints/${id}/evidence`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       if (uploadRes.data.success) {
@@ -91,12 +91,12 @@ const WorkerTaskDetails = () => {
       formData.append('type', 'AFTER_WORK');
       formData.append('description', completionNote);
 
-      const uploadRes = await api.post(/complaints/ + id + /evidence, formData, {
+      const uploadRes = await api.post(`/complaints/${id}/evidence`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       if (!uploadRes.data.success) throw new Error('Failed to upload evidence');
 
-      const response = await api.post(/complaints/ + id + /submit-completion, { note: completionNote });
+      const response = await api.post(`/complaints/${id}/submit-completion`, { note: completionNote });
       if (response.data.success) {
         setCompletionNote('');
         setAfterImages([]);

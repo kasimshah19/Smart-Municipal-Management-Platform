@@ -82,6 +82,7 @@ const complaintSchema = new mongoose.Schema(
       type: String,
       enum: [
         'SUBMITTED',
+        'ACKNOWLEDGED',
         'UNDER_REVIEW',
         'VERIFIED',
         'ASSIGNED',
@@ -90,6 +91,8 @@ const complaintSchema = new mongoose.Schema(
         'RESOLVED',
         'REJECTED',
         'CLOSED',
+        'REOPENED',
+        'CANCELLED'
       ],
       default: 'SUBMITTED',
     },
@@ -109,6 +112,18 @@ const complaintSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    slaDueAt: {
+      type: Date,
+    },
+    acknowledgedAt: {
+      type: Date,
+    },
+    assignedAt: {
+      type: Date,
+    },
+    startedAt: {
+      type: Date,
+    },
     verifiedAt: {
       type: Date,
     },
@@ -117,6 +132,17 @@ const complaintSchema = new mongoose.Schema(
     },
     closedAt: {
       type: Date,
+    },
+    reopenedAt: {
+      type: Date,
+    },
+    reopenedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    reopenReason: {
+      type: String,
+      trim: true,
     },
     rejectionReason: {
       type: String,

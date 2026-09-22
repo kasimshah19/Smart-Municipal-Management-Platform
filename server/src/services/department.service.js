@@ -72,7 +72,27 @@ export const updateDepartmentStatus = async (id, isActive) => {
 };
 
 
+import Employee from '../models/Employee.js';
+import WorkerTeam from '../models/WorkerTeam.js';
+import Complaint from '../models/Complaint.js';
+
 export const deleteDepartment = async (id) => {
+  // Check dependencies before deletion
+  const employeesCount = await Employee.countDocuments({ departmentId: id });
+  if (employeesCount > 0) {
+    throw new Error('Cannot delete Department. It has associated Employees. Please deactivate it instead.');
+  }
+
+  const teamsCount = await WorkerTeam.countDocuments({ departmentId: id });
+  if (teamsCount > 0) {
+    throw new Error('Cannot delete Department. It has associated Worker Teams. Please deactivate it instead.');
+  }
+
+  const complaintsCount = await Complaint.countDocuments({ departmentId: id });
+  if (complaintsCount > 0) {
+    throw new Error('Cannot delete Department. It has associated Complaints. Please deactivate it instead.');
+  }
+
   return await Department.findByIdAndDelete(id);
 };
 

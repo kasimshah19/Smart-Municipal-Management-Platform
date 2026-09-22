@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveView } from '../store/uiSlice.js';
+import { logout, reset } from '../features/auth/authSlice';
 import { useCallback } from 'react';
 
 function Header() {
@@ -12,6 +12,11 @@ function Header() {
     const current = html.getAttribute('data-theme');
     html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
   }, []);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+  };
 
   const isAdmin = user && (user.role === 'SUPER_ADMIN' || user.role === 'MUNICIPAL_ADMIN');
 
@@ -40,40 +45,57 @@ function Header() {
 
         {/* Right controls */}
         <div className="flex items-center gap-3">
-          {/* Segmented control */}
-          <div
-            className="flex overflow-hidden"
-            style={{
-              borderRadius: '10px',
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
-            }}
-          >
-            {['citizen', 'officer'].map((view) => (
+          {/* User Role Display & Navigation */}
+          {user && (
+            <div className="flex items-center gap-3">
+              <div className="text-[13px] font-medium text-white/80">
+                {user.role.replace('_', ' ')}
+              </div>
+              
               <button
-                key={view}
-                onClick={() => dispatch(setActiveView(view))}
-                className="px-4 py-1.5 text-[13px] font-medium text-white transition-colors"
+                onClick={() => window.location.href = '/dashboard-router'}
+                className="px-3 py-1.5 text-[13px] font-medium text-white transition-colors"
                 style={{
-                  backgroundColor:
-                    activeView === view ? 'var(--primary)' : 'transparent',
+                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  borderRadius: '6px'
                 }}
               >
-                {view === 'citizen' ? 'Citizen' : 'Officer'}
+                Dashboard
               </button>
-            ))}
-            {isAdmin && (
+
+              {isAdmin && (
+                <>
+                  <button
+                    onClick={() => window.location.href = '/admin/structure'}
+                    className="px-3 py-1.5 text-[13px] font-medium text-white transition-colors"
+                    style={{
+                      backgroundColor: window.location.pathname === '/admin/structure' ? 'var(--primary)' : 'rgba(255, 255, 255, 0.08)',
+                      borderRadius: '6px'
+                    }}
+                  >
+                    Urban Admin
+                  </button>
+                  <button
+                    onClick={() => window.location.href = '/admin/gram-panchayats'}
+                    className="px-3 py-1.5 text-[13px] font-medium text-white transition-colors"
+                    style={{
+                      backgroundColor: window.location.pathname === '/admin/gram-panchayats' ? 'var(--primary)' : 'rgba(255, 255, 255, 0.08)',
+                      borderRadius: '6px'
+                    }}
+                  >
+                    Rural Admin
+                  </button>
+                </>
+              )}
+              
               <button
-                onClick={() => window.location.href = '/admin/structure'}
-                className="px-4 py-1.5 text-[13px] font-medium text-white transition-colors border-l"
-                style={{
-                  backgroundColor: window.location.pathname.startsWith('/admin') ? 'var(--primary)' : 'transparent',
-                  borderColor: 'rgba(255, 255, 255, 0.2)'
-                }}
+                onClick={onLogout}
+                className="px-3 py-1.5 text-[13px] font-medium text-red-300 transition-colors hover:text-red-100"
               >
-                Admin
+                Logout
               </button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Theme toggle */}
           <button

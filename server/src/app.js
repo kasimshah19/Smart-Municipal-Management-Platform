@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import env from './config/env.js';
 import healthRoutes from './routes/health.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
 import testRoutes from './routes/test.routes.js';
 import municipalityRoutes from './routes/municipality.routes.js';
 import wardRoutes from './routes/ward.routes.js';
@@ -15,6 +16,9 @@ import workerTeamRoutes from './routes/workerTeam.routes.js';
 import complaintCategoryRoutes from './routes/complaintCategory.routes.js';
 import complaintRoutes from './routes/complaint.routes.js';
 import workerRoutes from './routes/worker.routes.js';
+import analyticsRoutes from './routes/analytics.routes.js';
+import geographyRoutes from './routes/geography.routes.js';
+import gramPanchayatRoutes from './routes/gramPanchayat.routes.js';
 import { notFoundHandler, globalErrorHandler } from './middlewares/error.middleware.js';
 
 const app = express();
@@ -47,6 +51,7 @@ app.use(express.static('public'));
 
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 if (env.NODE_ENV === 'development') {
   app.use('/api/test', testRoutes);
@@ -61,8 +66,11 @@ app.use('/api/areas', areaRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/designations', designationRoutes);
 app.use('/api/employees', employeeRoutes);
-app.use('/api/worker-teams', workerTeamRoutes);
-app.use('/api/worker', workerRoutes);
+    app.use('/api/worker-teams', workerTeamRoutes);
+    app.use('/api/worker', workerRoutes);
+    app.use('/api/analytics', analyticsRoutes);
+    app.use('/api/geography', geographyRoutes);
+    app.use('/api/gram-panchayats', gramPanchayatRoutes);
 
 // --------------- Error Handling ---------------
 

@@ -1,0 +1,914 @@
+[
+  {
+    "name": "Murbad",
+    "district": "Thane",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shahapur",
+    "district": "Thane",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Wada",
+    "district": "Palghar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Vikramgad",
+    "district": "Palghar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mokhada",
+    "district": "Palghar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Talasari",
+    "district": "Palghar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Poladpur",
+    "district": "Raigad",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Tala",
+    "district": "Raigad",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mhasla",
+    "district": "Raigad",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mangaon",
+    "district": "Raigad",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pali (Sudhagad)",
+    "district": "Raigad",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Guhagar",
+    "district": "Ratnagiri",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dapoli",
+    "district": "Ratnagiri",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mandangad",
+    "district": "Ratnagiri",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Lanja",
+    "district": "Ratnagiri",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sangameshwar",
+    "district": "Ratnagiri",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kankavli",
+    "district": "Sindhudurg",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Devgad",
+    "district": "Sindhudurg",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Vaibhavwadi",
+    "district": "Sindhudurg",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dodamarg",
+    "district": "Sindhudurg",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kudal",
+    "district": "Sindhudurg",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Manchar (Ambegaon)",
+    "district": "Pune",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Wagholi (former)",
+    "district": "Pune",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Rajgurunagar (Khed)",
+    "district": "Pune",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Velhe",
+    "district": "Pune",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khandala",
+    "district": "Satara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Koregaon",
+    "district": "Satara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Patan",
+    "district": "Satara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Medha (Jaoli)",
+    "district": "Satara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Vaduj (Khatav)",
+    "district": "Satara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dahiwadi (Maan)",
+    "district": "Satara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mohol",
+    "district": "Solapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Madha",
+    "district": "Solapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Malshiras",
+    "district": "Solapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Natepute",
+    "district": "Solapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Hatkanangale",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shirol",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ajra",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chandgad",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Radhanagari",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gaganbawda",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Malkapur",
+    "district": "Kolhapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kavathe Mahankal",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Atpadi",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shirala",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kadegaon",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Palus",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khanapur",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jat",
+    "district": "Sangli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dindori",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Surgana",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Peint",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kalwan",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deola",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Trimbak",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chandwad",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Niphad",
+    "district": "Nashik",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sakri",
+    "district": "Dhule",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sindkheda",
+    "district": "Dhule",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Akkalkuwa",
+    "district": "Nandurbar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dhadgaon (Akrani)",
+    "district": "Nandurbar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bodwad",
+    "district": "Jalgaon",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Muktainagar",
+    "district": "Jalgaon",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhadgaon",
+    "district": "Jalgaon",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Nevasa",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Parner",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Karjat",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jamkhed",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shrigonda",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Akole",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shevgaon",
+    "district": "Ahilyanagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Phulambri",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Soegaon",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Badnapur",
+    "district": "Jalna",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ghansawangi",
+    "district": "Jalna",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jafrabad",
+    "district": "Jalna",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mantha",
+    "district": "Jalna",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Palam",
+    "district": "Parbhani",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Aundha Nagnath",
+    "district": "Hingoli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sengaon",
+    "district": "Hingoli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ardhapur",
+    "district": "Nanded",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mahur",
+    "district": "Nanded",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Himayatnagar",
+    "district": "Nanded",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Naigaon",
+    "district": "Nanded",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ashti",
+    "district": "Beed",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Patoda",
+    "district": "Beed",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shirur Kasar",
+    "district": "Beed",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Wadwani",
+    "district": "Beed",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kaij",
+    "district": "Beed",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Renapur",
+    "district": "Latur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shirur Anantpal",
+    "district": "Latur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chakur",
+    "district": "Latur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jalkot",
+    "district": "Latur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deoni",
+    "district": "Latur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Washi",
+    "district": "Dharashiv",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Lohara",
+    "district": "Dharashiv",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chikhaldara",
+    "district": "Amravati",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dharni",
+    "district": "Amravati",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Tiwsa",
+    "district": "Amravati",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Nandgaon Khandeshwar",
+    "district": "Amravati",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhatkuli",
+    "district": "Amravati",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Barshitakli",
+    "district": "Akola",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Malegaon",
+    "district": "Washim",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Manora",
+    "district": "Washim",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sangrampur",
+    "district": "Buldhana",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Motala",
+    "district": "Buldhana",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Babhulgaon",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ralegaon",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Maregaon",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Zari-Jamani",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kalamb",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mahagaon",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ner",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Arni",
+    "district": "Yavatmal",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Hingna",
+    "district": "Nagpur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mouda",
+    "district": "Nagpur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Parseoni",
+    "district": "Nagpur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kuhi",
+    "district": "Nagpur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhivapur",
+    "district": "Nagpur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Samudrapur",
+    "district": "Wardha",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ashti",
+    "district": "Wardha",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Karanja",
+    "district": "Wardha",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Seloo",
+    "district": "Wardha",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mohadi",
+    "district": "Bhandara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Lakhani",
+    "district": "Bhandara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Lakhandur",
+    "district": "Bhandara",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gondia (Rural transition parts)",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Goregaon",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Arjuni Morgaon",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Amgaon",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Salekasa",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sadak Arjuni",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deori",
+    "district": "Gondia",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chimur",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Nagbhid",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bramhapuri",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sindewahi",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Saoli",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pombhurna",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Korpana",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gondpipri",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jiwati",
+    "district": "Chandrapur",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Armori",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chamorshi",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dhanora",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kurkheda",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Korchi",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Aheri",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhamragad",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Etapalli",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sironcha",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mulchera",
+    "district": "Gadchiroli",
+    "type": "NAGAR_PANCHAYAT",
+    "sourceVerified": false
+  }
+]

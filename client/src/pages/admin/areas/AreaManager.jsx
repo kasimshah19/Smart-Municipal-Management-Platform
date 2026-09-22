@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import { MAHARASHTRA_DISTRICTS } from '../../../constants/maharashtraDistricts.js';
 
 function AreaManager() {
   const dispatch = useDispatch();
@@ -13,6 +14,12 @@ function AreaManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   
+  const [searchTerm, setSearchTerm] = useState('');
+  const [districtFilter, setDistrictFilter] = useState('');
+  const [municipalityFilter, setMunicipalityFilter] = useState('');
+  const [wardFilter, setWardFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+
   const [formData, setFormData] = useState({
     municipalityId: '',
     wardId: '',
@@ -133,6 +140,48 @@ function AreaManager() {
     color: 'var(--ink)',
   };
 
+  const filteredMunicipalities = districtFilter
+    ? municipalities.filter(m => m.district === districtFilter)
+    : municipalities;
+
+  // For the filter bar, we need all wards in the selected municipality if one is selected,
+  // but AreaManager only fetches wards for the FORM when `formData.municipalityId` changes.
+  // Actually, we can just filter `data` directly based on what's in the data item.
+  // `item.wardId` has `_id`, `name`, `wardNumber`. 
+  // We can derive municipality from `item.municipalityId`.
+  
+  const filteredData = data.filter(item => {
+    const matchesSearch = item.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          item.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          item.pincode?.includes(searchTerm);
+    
+    const itemMuniId = item.municipalityId?._id || item.municipalityId;
+    const itemMuni = municipalities.find(m => m._id === itemMuniId);
+    const itemWardId = item.wardId?._id || item.wardId;
+    
+    const matchesDistrict = districtFilter ? itemMuni?.district === districtFilter : true;
+    const matchesMunicipality = municipalityFilter ? itemMuniId === municipalityFilter : true;
+    const matchesWard = wardFilter ? itemWardId === wardFilter : true;
+    const matchesStatus = statusFilter ? (statusFilter === 'ACTIVE' ? item.isActive === true : item.isActive === false) : true;
+    
+    return matchesSearch && matchesDistrict && matchesMunicipality && matchesWard && matchesStatus;
+  });
+
+  // Extract unique wards from the loaded areas for the ward filter dropdown
+  const availableWardsForFilter = Array.from(new Set(
+    data
+      .filter(item => !municipalityFilter || (item.municipalityId?._id || item.municipalityId) === municipalityFilter)
+      .map(item => item.wardId)
+      .filter(Boolean)
+  )).reduce((acc, current) => {
+    const x = acc.find(item => item._id === current._id);
+    if (!x) {
+      return acc.concat([current]);
+    } else {
+      return acc;
+    }
+  }, []);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -146,6 +195,67 @@ function AreaManager() {
         >
           + Add Area
         </button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 mb-6">
+        <input 
+          type="text" 
+          placeholder="Search areas..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="px-3 py-2 text-[14px] outline-none w-48"
+          style={inputStyles}
+        />
+        <select
+          value={districtFilter}
+          onChange={(e) => {
+            setDistrictFilter(e.target.value);
+            setMunicipalityFilter('');
+            setWardFilter('');
+          }}
+          className="px-3 py-2 text-[14px] outline-none"
+          style={inputStyles}
+        >
+          <option value="">All Districts</option>
+          {MAHARASHTRA_DISTRICTS.map(dist => (
+            <option key={dist} value={dist}>{dist}</option>
+          ))}
+        </select>
+        <select
+          value={municipalityFilter}
+          onChange={(e) => {
+            setMunicipalityFilter(e.target.value);
+            setWardFilter('');
+          }}
+          className="px-3 py-2 text-[14px] outline-none w-48 truncate"
+          style={inputStyles}
+        >
+          <option value="">All Municipalities</option>
+          {filteredMunicipalities.map(m => (
+            <option key={m._id} value={m._id}>{m.name}</option>
+          ))}
+        </select>
+        <select
+          value={wardFilter}
+          onChange={(e) => setWardFilter(e.target.value)}
+          className="px-3 py-2 text-[14px] outline-none w-32 truncate"
+          style={inputStyles}
+        >
+          <option value="">All Wards</option>
+          {availableWardsForFilter.map(w => (
+            <option key={w._id} value={w._id}>Ward {w.wardNumber}</option>
+          ))}
+        </select>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="px-3 py-2 text-[14px] outline-none"
+          style={inputStyles}
+        >
+          <option value="">All Status</option>
+          <option value="ACTIVE">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
       </div>
 
       {loading ? (
@@ -166,8 +276,8 @@ function AreaManager() {
               </tr>
             </thead>
             <tbody>
-              {data.length > 0 ? (
-                data.map(item => (
+              {filteredData.length > 0 ? (
+                filteredData.map(item => (
                   <tr key={item._id} className="group" style={{ borderBottom: '1px solid var(--line)' }}>
                     <td className="py-4">
                       <div className="font-medium" style={{ color: 'var(--ink)' }}>{item.name}</div>

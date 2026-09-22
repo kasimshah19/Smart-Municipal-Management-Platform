@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import MainLayout from '../../layouts/MainLayout.jsx';
 
 import MunicipalityManager from './municipality/MunicipalityManager.jsx';
+import DivisionManager from './geography/DivisionManager.jsx';
+import DistrictManager from './geography/DistrictManager.jsx';
+import TalukaManager from './geography/TalukaManager.jsx';
 import WardManager from './wards/WardManager.jsx';
 import AreaManager from './areas/AreaManager.jsx';
 import DepartmentManager from './departments/DepartmentManager.jsx';
@@ -10,7 +13,10 @@ import EmployeeManager from './employees/EmployeeManager.jsx';
 import WorkerTeamManager from './worker-teams/WorkerTeamManager.jsx';
 
 const ENTITIES = [
-  { key: 'municipalities', label: 'Municipalities', component: MunicipalityManager },
+  { key: 'divisions', label: 'Revenue Divisions', component: DivisionManager },
+  { key: 'districts', label: 'Districts', component: DistrictManager },
+  { key: 'talukas', label: 'Talukas', component: TalukaManager },
+  { key: 'municipalities', label: 'Local Bodies', component: MunicipalityManager },
   { key: 'wards', label: 'Wards', component: WardManager },
   { key: 'areas', label: 'Areas', component: AreaManager },
   { key: 'departments', label: 'Departments', component: DepartmentManager },
@@ -28,10 +34,10 @@ function StructureManagement() {
     <MainLayout>
       <div className="mb-6">
         <h1 className="text-2xl font-bold" style={{ color: 'var(--ink)' }}>
-          Municipal Structure Management
+          Local Body Structure Management
         </h1>
         <p style={{ color: 'var(--ink)', opacity: 0.7 }}>
-          Manage the core configuration and hierarchy of the municipality.
+          Manage the core configuration and hierarchy of the local body.
         </p>
       </div>
 

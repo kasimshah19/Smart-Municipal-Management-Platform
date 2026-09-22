@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchComplaints } from '../../store/complaintsSlice.js';
 import ComplaintCard from './ComplaintCard.jsx';
+import QuickActions from '../dashboard/QuickActions';
+import RecentActivity from '../dashboard/RecentActivity';
 
 const STATUS_FILTERS = [
   { key: '', label: 'All' },
@@ -24,9 +26,25 @@ function CitizenDashboard() {
     dispatch(fetchComplaints(params));
   }, [dispatch, activeFilter]);
 
+  const citizenActions = [
+    { label: 'Report Issue', path: '/citizen/report' },
+    { label: 'My Complaints', path: '/citizen/complaints' },
+    { label: 'My Profile', path: '/profile' }
+  ];
+
+  const recentActivity = useMemo(() => {
+    if (!items || items.length === 0) return [];
+    return items.slice(0, 3).map(item => ({
+      title: `Complaint ${item.status.replace('_', ' ')}`,
+      description: item.title,
+      time: new Date(item.updatedAt || item.createdAt).toLocaleDateString(),
+      icon: item.status === 'RESOLVED' ? '✅' : (item.status === 'IN_PROGRESS' ? '🚧' : '📝'),
+      iconBg: item.status === 'RESOLVED' ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'
+    }));
+  }, [items]);
+
   return (
     <div className="flex flex-col gap-6">
-      {/* Header with CTA */}
       <div className="flex items-center justify-between">
         <h2 className="text-[20px] font-bold" style={{ color: 'var(--ink)' }}>
           Your Complaints
@@ -42,6 +60,27 @@ function CitizenDashboard() {
           <span className="text-[16px]">+</span>
           Report Problem
         </button>
+      </div>
+
+      {/* KPI Cards */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col items-center justify-center">
+          <span className="text-gray-500 text-sm font-medium">Total Reported</span>
+          <span className="text-3xl font-bold text-gray-900 mt-1">{pagination?.total || 0}</span>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col items-center justify-center">
+          <span className="text-gray-500 text-sm font-medium">Active</span>
+          <span className="text-3xl font-bold text-blue-600 mt-1">{items.filter(i => ['SUBMITTED', 'ACKNOWLEDGED', 'ASSIGNED', 'IN_PROGRESS'].includes(i.status)).length}</span>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col items-center justify-center">
+          <span className="text-gray-500 text-sm font-medium">Resolved</span>
+          <span className="text-3xl font-bold text-green-600 mt-1">{items.filter(i => ['RESOLVED', 'CLOSED'].includes(i.status)).length}</span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
+        <RecentActivity activity={recentActivity} loading={isLoading} />
+        <QuickActions actions={citizenActions} />
       </div>
 
       {/* Status Filter Tabs */}

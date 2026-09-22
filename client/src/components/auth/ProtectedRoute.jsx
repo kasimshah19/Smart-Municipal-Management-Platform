@@ -1,19 +1,32 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const ProtectedRoute = ({ children }) => {
+const ROLE_HOME = {
+  SUPER_ADMIN: '/admin/dashboard',
+  MUNICIPAL_ADMIN: '/dashboard',
+  DEPARTMENT_OFFICER: '/department/dashboard',
+  WARD_OFFICER: '/ward/dashboard',
+  WORKER: '/worker/dashboard',
+  CITIZEN: '/citizen/dashboard',
+};
+
+const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user } = useSelector((state) => state.auth);
   const location = useLocation();
 
   if (!user) {
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
-    // than dropping them off on the home page.
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // If allowedRoles is specified, check if user's role is in the allowed list
+  if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+    // Redirect to user's own dashboard instead of showing unauthorized content
+    const homePath = ROLE_HOME[user.role] || '/login';
+    return <Navigate to={homePath} replace />;
   }
 
   return children;
 };
 
 export default ProtectedRoute;
+

@@ -1,0 +1,1214 @@
+[
+  {
+    "name": "Kulgaon-Badlapur",
+    "district": "Thane",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ambernath",
+    "district": "Thane",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Palghar",
+    "district": "Palghar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dahanu",
+    "district": "Palghar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jawhar",
+    "district": "Palghar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Alibag",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Karjat",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khopoli",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mahad",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Matheran",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pen",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Roha",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Uran",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shrivardhan",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Murud-Janjira",
+    "district": "Raigad",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ratnagiri",
+    "district": "Ratnagiri",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chiplun",
+    "district": "Ratnagiri",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khed",
+    "district": "Ratnagiri",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Rajapur",
+    "district": "Ratnagiri",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sawantwadi",
+    "district": "Sindhudurg",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Vengurla",
+    "district": "Sindhudurg",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Malvan",
+    "district": "Sindhudurg",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Baramati",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Daund",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Lonavala",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Talegaon Dabhade",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shirur",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Alandi",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Saswad",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jejuri",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Junnar",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhor",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Indapur",
+    "district": "Pune",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Satara",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Karad",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Phaltan",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Wai",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mahabaleshwar",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Panchgani",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Rahimatpur",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mhaswad",
+    "district": "Satara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Barshi",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pandharpur",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Akkalkot",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Karmala",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kurduwadi",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sangola",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mangalwedha",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Maindargi",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dudhani",
+    "district": "Solapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jaysingpur",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kagal",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gadhinglaj",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kurundwad",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Murgud",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Panhala",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Peth Vadgaon",
+    "district": "Kolhapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Islampur (Urun-Islampur)",
+    "district": "Sangli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Vita",
+    "district": "Sangli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ashta",
+    "district": "Sangli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Tasgaon",
+    "district": "Sangli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sinnar",
+    "district": "Nashik",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Manmad",
+    "district": "Nashik",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Yeola",
+    "district": "Nashik",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Nandgaon",
+    "district": "Nashik",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Satana (Baglan)",
+    "district": "Nashik",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhagur",
+    "district": "Nashik",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shirpur-Warwade",
+    "district": "Dhule",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dondaicha-Varwade",
+    "district": "Dhule",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shahada",
+    "district": "Nandurbar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Taloda",
+    "district": "Nandurbar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Navapur",
+    "district": "Nandurbar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhusawal",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Amalner",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chalisgaon",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chopda",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pachora",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Yawal",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Raver",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Savda",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Faizpur",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Parola",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Erandol",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dharangaon",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jamner",
+    "district": "Jalgaon",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sangamner",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kopargaon",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shrirampur",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Rahuri",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deolali Pravara",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pathardi",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Rahata",
+    "district": "Ahilyanagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kannad",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Paithan",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Vaijapur",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gangapur",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khuldabad",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sillod",
+    "district": "Chhatrapati Sambhajinagar",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhokardan",
+    "district": "Jalna",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ambad",
+    "district": "Jalna",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Partur",
+    "district": "Jalna",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gangakhed",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pathri",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Selu",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Manwath",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Purna",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sonpeth",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jintur",
+    "district": "Parbhani",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Hingoli",
+    "district": "Hingoli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Basmath",
+    "district": "Hingoli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kalamnuri",
+    "district": "Hingoli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deglur",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dharmabad",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Biloli",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kundalwadi",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mudkhed",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mukhed",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Umri",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Hadgaon",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kinwat",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Loha",
+    "district": "Nanded",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Beed",
+    "district": "Beed",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Majalgaon",
+    "district": "Beed",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Parli Vaijnath",
+    "district": "Beed",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ambejogai",
+    "district": "Beed",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Georai",
+    "district": "Beed",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dharur",
+    "district": "Beed",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Udgir",
+    "district": "Latur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ausa",
+    "district": "Latur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ahmedpur",
+    "district": "Latur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Nilanga",
+    "district": "Latur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dharashiv",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Tuljapur",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Omerga",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kalamb",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Paranda",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Murum",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhoom",
+    "district": "Dharashiv",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Achalpur",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Anjangaon Surji",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Warud",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Morshi",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Daryapur",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chandurbazar",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chandur Railway",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Dhamangaon Railway",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shendurjana Ghat",
+    "district": "Amravati",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Akot",
+    "district": "Akola",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Balapur",
+    "district": "Akola",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Murtizapur",
+    "district": "Akola",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Telhara",
+    "district": "Akola",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Patur",
+    "district": "Akola",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Washim",
+    "district": "Washim",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Karanja Lad",
+    "district": "Washim",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mangrulpir",
+    "district": "Washim",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Risod",
+    "district": "Washim",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khamgaon",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Malkapur",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Shegaon",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Chikhli",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mehkar",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Nandura",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Jalgaon Jamod",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deulgaon Raja",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sindkhed Raja",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Lonar",
+    "district": "Buldhana",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Yavatmal",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pusad",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Wani",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Umarkhed",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Digras",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Darwha",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ghatanji",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pandharkawada (Kelapur)",
+    "district": "Yavatmal",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kamptee",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Umred",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Katol",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Kalmeshwar",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ramtek",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Khapa",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mohpa",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Saoner",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Narkhed",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mowad",
+    "district": "Nagpur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Wardha",
+    "district": "Wardha",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Hinganghat",
+    "district": "Wardha",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Arvi",
+    "district": "Wardha",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Deoli",
+    "district": "Wardha",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pulgaon",
+    "district": "Wardha",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sindi",
+    "district": "Wardha",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhandara",
+    "district": "Bhandara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Tumsar",
+    "district": "Bhandara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Pauni",
+    "district": "Bhandara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Sakoli",
+    "district": "Bhandara",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Tirora",
+    "district": "Gondia",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Ballarpur",
+    "district": "Chandrapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Warora",
+    "district": "Chandrapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Bhadravati",
+    "district": "Chandrapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Rajura",
+    "district": "Chandrapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Mul",
+    "district": "Chandrapur",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Gadchiroli",
+    "district": "Gadchiroli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  },
+  {
+    "name": "Desaiganj (Wadsa)",
+    "district": "Gadchiroli",
+    "type": "MUNICIPAL_COUNCIL",
+    "sourceVerified": false
+  }
+]

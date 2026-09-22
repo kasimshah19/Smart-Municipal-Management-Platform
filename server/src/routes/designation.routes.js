@@ -4,7 +4,8 @@ import {
   getDesignations,
   getDesignationById,
   updateDesignation,
-  updateDesignationStatus
+  updateDesignationStatus,
+  deleteDesignation
 } from '../controllers/designation.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
 import { authorizeRoles } from '../middlewares/role.middleware.js';
@@ -19,7 +20,7 @@ router.get('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'WARD_OFFICE
 router.put('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN'), updateDesignation);
 router.patch('/:id/status', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN'), updateDesignationStatus);
 
-router.delete('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN'), designationController.deleteDesignation);
+router.delete('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN'), deleteDesignation);
 
 export default router;
 

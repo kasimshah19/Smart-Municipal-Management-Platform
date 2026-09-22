@@ -1,6 +1,7 @@
 import express from 'express';
 import fieldOperationsService from '../services/fieldOperations.service.js';
-import { authenticate, authorizeRoles } from '../middlewares/auth.middleware.js';
+import { authenticate } from '../middlewares/auth.middleware.js';
+import { authorizeRoles } from '../middlewares/role.middleware.js';
 import { ROLES } from '../constants/roles.js';
 
 const router = express.Router();

@@ -16,6 +16,7 @@ const complaintUpdateSchema = new mongoose.Schema(
       type: String,
       enum: [
         'SUBMITTED',
+        'ACKNOWLEDGED',
         'UNDER_REVIEW',
         'VERIFIED',
         'ASSIGNED',
@@ -24,12 +25,15 @@ const complaintUpdateSchema = new mongoose.Schema(
         'RESOLVED',
         'REJECTED',
         'CLOSED',
+        'REOPENED',
+        'CANCELLED'
       ],
     },
     newStatus: {
       type: String,
       enum: [
         'SUBMITTED',
+        'ACKNOWLEDGED',
         'UNDER_REVIEW',
         'VERIFIED',
         'ASSIGNED',
@@ -38,6 +42,8 @@ const complaintUpdateSchema = new mongoose.Schema(
         'RESOLVED',
         'REJECTED',
         'CLOSED',
+        'REOPENED',
+        'CANCELLED'
       ],
       required: true,
     },

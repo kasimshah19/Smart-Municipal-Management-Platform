@@ -75,7 +75,33 @@ export const updateWardStatus = async (id, isActive) => {
 };
 
 
+import Area from '../models/Area.js';
+import Employee from '../models/Employee.js';
+import WorkerTeam from '../models/WorkerTeam.js';
+import Complaint from '../models/Complaint.js';
+
 export const deleteWard = async (id) => {
+  // Check dependencies before deletion
+  const areasCount = await Area.countDocuments({ wardId: id });
+  if (areasCount > 0) {
+    throw new Error('Cannot delete Ward. It has associated Areas. Please deactivate it instead.');
+  }
+
+  const complaintsCount = await Complaint.countDocuments({ wardId: id });
+  if (complaintsCount > 0) {
+    throw new Error('Cannot delete Ward. It has associated Complaints. Please deactivate it instead.');
+  }
+
+  const employeesCount = await Employee.countDocuments({ assignedWardIds: id });
+  if (employeesCount > 0) {
+    throw new Error('Cannot delete Ward. It is assigned to Employees. Please deactivate it instead.');
+  }
+
+  const teamsCount = await WorkerTeam.countDocuments({ assignedWardIds: id });
+  if (teamsCount > 0) {
+    throw new Error('Cannot delete Ward. It is assigned to Worker Teams. Please deactivate it instead.');
+  }
+
   return await Ward.findByIdAndDelete(id);
 };
 

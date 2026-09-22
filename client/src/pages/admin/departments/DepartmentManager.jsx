@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import { MAHARASHTRA_DISTRICTS } from '../../../constants/maharashtraDistricts.js';
 
 const DEPT_TYPES = [
   'SANITATION', 'WATER_SUPPLY', 'ROADS', 'ELECTRICAL', 'DRAINAGE', 
@@ -17,6 +18,11 @@ function DepartmentManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   
+  const [searchTerm, setSearchTerm] = useState('');
+  const [districtFilter, setDistrictFilter] = useState('');
+  const [municipalityFilter, setMunicipalityFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+
   const [formData, setFormData] = useState({
     municipalityId: '',
     name: '',
@@ -124,6 +130,25 @@ function DepartmentManager() {
     color: 'var(--ink)',
   };
 
+  const filteredMunicipalities = districtFilter
+    ? municipalities.filter(m => m.district === districtFilter)
+    : municipalities;
+
+  const filteredData = data.filter(item => {
+    const matchesSearch = item.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          item.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          item.type?.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const itemMuniId = item.municipalityId?._id || item.municipalityId;
+    const itemMuni = municipalities.find(m => m._id === itemMuniId);
+    
+    const matchesDistrict = districtFilter ? itemMuni?.district === districtFilter : true;
+    const matchesMunicipality = municipalityFilter ? itemMuniId === municipalityFilter : true;
+    const matchesStatus = statusFilter ? (statusFilter === 'ACTIVE' ? item.isActive === true : item.isActive === false) : true;
+    
+    return matchesSearch && matchesDistrict && matchesMunicipality && matchesStatus;
+  });
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -137,6 +162,52 @@ function DepartmentManager() {
         >
           + Add Department
         </button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 mb-6">
+        <input 
+          type="text" 
+          placeholder="Search departments..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="px-3 py-2 text-[14px] outline-none w-64"
+          style={inputStyles}
+        />
+        <select
+          value={districtFilter}
+          onChange={(e) => {
+            setDistrictFilter(e.target.value);
+            setMunicipalityFilter('');
+          }}
+          className="px-3 py-2 text-[14px] outline-none"
+          style={inputStyles}
+        >
+          <option value="">All Districts</option>
+          {MAHARASHTRA_DISTRICTS.map(dist => (
+            <option key={dist} value={dist}>{dist}</option>
+          ))}
+        </select>
+        <select
+          value={municipalityFilter}
+          onChange={(e) => setMunicipalityFilter(e.target.value)}
+          className="px-3 py-2 text-[14px] outline-none w-64 truncate"
+          style={inputStyles}
+        >
+          <option value="">All Municipalities</option>
+          {filteredMunicipalities.map(m => (
+            <option key={m._id} value={m._id}>{m.name}</option>
+          ))}
+        </select>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="px-3 py-2 text-[14px] outline-none"
+          style={inputStyles}
+        >
+          <option value="">All Status</option>
+          <option value="ACTIVE">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
       </div>
 
       {loading ? (
@@ -157,8 +228,8 @@ function DepartmentManager() {
               </tr>
             </thead>
             <tbody>
-              {data.length > 0 ? (
-                data.map(item => (
+              {filteredData.length > 0 ? (
+                filteredData.map(item => (
                   <tr key={item._id} className="group" style={{ borderBottom: '1px solid var(--line)' }}>
                     <td className="py-4">
                       <div className="font-medium" style={{ color: 'var(--ink)' }}>{item.name}</div>

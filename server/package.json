@@ -7,14 +7,19 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "seed:admin": "node scripts/seed-super-admin.js"
+    "seed:admin": "node scripts/seed-super-admin.js",
+    "import:geography": "node src/scripts/importMaharashtraAdministrativeGeography.js",
+    "import:geography:dry-run": "node src/scripts/importMaharashtraAdministrativeGeography.js --dry-run --verbose",
+    "import:gram-panchayats": "node src/scripts/importMaharashtraGramPanchayats.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
+    "csv-parser": "^3.2.1",
+    "dotenv": "^16.6.1",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^7.6.0",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0",
     "multer": "^2.4.0",

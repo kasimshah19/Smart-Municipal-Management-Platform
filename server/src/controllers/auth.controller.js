@@ -2,7 +2,10 @@ import * as authService from '../services/auth.service.js';
 
 export const register = async (req, res) => {
   try {
-    const user = await authService.registerUser(req.body);
+    // Prevent privilege escalation: Strip sensitive scope fields from public registration
+    const { role, municipalityId, wardId, departmentId, ...safeUserData } = req.body;
+    
+    const user = await authService.registerUser(safeUserData);
     res.status(201).json({
       success: true,
       message: 'Registration successful. Please check your email to verify your account.',

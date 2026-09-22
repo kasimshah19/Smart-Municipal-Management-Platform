@@ -94,8 +94,8 @@ class FieldOperationsService {
     const complaint = await Complaint.findById(complaintId);
     if (!complaint) throw new ApiError(404, 'Complaint not found');
 
-    if (['CLOSED', 'REJECTED', 'RESOLVED'].includes(complaint.status)) {
-      throw new ApiError(400, 'Cannot assign a closed, rejected, or resolved complaint');
+    if (['CLOSED', 'REJECTED', 'RESOLVED', 'CANCELLED'].includes(complaint.status)) {
+      throw new ApiError(400, 'Cannot assign a closed, rejected, resolved, or cancelled complaint');
     }
 
     await this.validateOfficerScope(user, complaint);
@@ -147,6 +147,7 @@ class FieldOperationsService {
       // Update complaint
       const previousStatus = complaint.status;
       complaint.status = 'ASSIGNED';
+      complaint.assignedAt = new Date();
       complaint.currentAssignmentId = newAssignment._id;
       await complaint.save({ session });
 
@@ -183,19 +184,21 @@ class FieldOperationsService {
     const complaint = await Complaint.findById(complaintId).populate('currentAssignmentId');
     if (!complaint) throw new ApiError(404, 'Complaint not found');
 
-    if (complaint.status !== 'ASSIGNED') {
-      throw new ApiError(400, 'Complaint must be in ASSIGNED status to start work');
+    if (!['ASSIGNED', 'REOPENED'].includes(complaint.status)) {
+      throw new ApiError(400, 'Complaint must be in ASSIGNED or REOPENED status to start work');
     }
 
     await this.validateWorkerScope(user, complaint.currentAssignmentId);
 
+    const previousStatus = complaint.status;
     complaint.status = 'IN_PROGRESS';
+    complaint.startedAt = new Date();
     await complaint.save();
 
     await ComplaintUpdate.create({
       complaintId: complaint._id,
       updatedByUserId: user.userId,
-      previousStatus: 'ASSIGNED',
+      previousStatus: previousStatus,
       newStatus: 'IN_PROGRESS',
       note: 'Work started',
     });

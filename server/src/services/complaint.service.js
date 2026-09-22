@@ -7,6 +7,7 @@ import ComplaintEvidence from '../models/ComplaintEvidence.js';
 import ComplaintComment from '../models/ComplaintComment.js';
 import Ward from '../models/Ward.js';
 import Area from '../models/Area.js';
+import { calculateSlaDueDate } from '../constants/sla.js';
 
 class ComplaintService {
   /**
@@ -55,10 +56,25 @@ class ComplaintService {
       const area = await Area.findOne({ _id: data.areaId, wardId: data.wardId });
       if (!area) throw new Error('Area does not belong to the selected ward');
 
-      // 3. Generate ID
+      // 3. Duplicate Detection (within last 48 hours for same area & category)
+      const duplicateWindow = new Date(Date.now() - 48 * 60 * 60 * 1000);
+      const duplicate = await Complaint.findOne({
+        areaId: data.areaId,
+        categoryId: category._id,
+        createdAt: { $gt: duplicateWindow }
+      });
+      let duplicateWarning = false;
+      if (duplicate) {
+        duplicateWarning = true;
+      }
+
+      // 4. Generate ID
       const complaintId = await this._generateComplaintId(municipalityCode || 'MUC');
 
-      // 4. Construct
+      // 5. Construct
+      const priority = category.defaultPriority || 'MEDIUM';
+      const slaDueAt = calculateSlaDueDate(priority);
+
       const newComplaint = new Complaint({
         complaintId,
         citizenId,
@@ -70,7 +86,8 @@ class ComplaintService {
         areaId: data.areaId,
         location: data.location, // GeoJSON
         departmentId: category.departmentId, // Derived from Category routing
-        priority: category.defaultPriority || 'MEDIUM',
+        priority: priority,
+        slaDueAt: slaDueAt,
         status: 'SUBMITTED',
         isAnonymous: data.isAnonymous || false,
       });
@@ -88,7 +105,12 @@ class ComplaintService {
       await updateLog.save({ session });
 
       await session.commitTransaction();
-      return newComplaint;
+      
+      const responseData = newComplaint.toJSON();
+      if (duplicateWarning) {
+        responseData.warning = "Similar complaint already exists in this area.";
+      }
+      return responseData;
 
     } catch (error) {
       await session.abortTransaction();
@@ -164,12 +186,15 @@ class ComplaintService {
 
       // Status State Machine Logic
       const validTransitions = {
-        'SUBMITTED': ['UNDER_REVIEW'],
-        'UNDER_REVIEW': ['VERIFIED', 'REJECTED'],
-        'VERIFIED': ['ASSIGNED'],
-        'ASSIGNED': ['IN_PROGRESS'],
-        'IN_PROGRESS': ['RESOLVED'],
-        'RESOLVED': ['CLOSED'],
+        'SUBMITTED': ['ACKNOWLEDGED', 'UNDER_REVIEW', 'ASSIGNED', 'CANCELLED'],
+        'ACKNOWLEDGED': ['UNDER_REVIEW', 'ASSIGNED', 'CANCELLED'],
+        'UNDER_REVIEW': ['VERIFIED', 'REJECTED', 'CANCELLED'],
+        'VERIFIED': ['ASSIGNED', 'CANCELLED'],
+        'ASSIGNED': ['IN_PROGRESS', 'CANCELLED'],
+        'IN_PROGRESS': ['COMPLETION_SUBMITTED', 'CANCELLED'],
+        'COMPLETION_SUBMITTED': ['RESOLVED', 'IN_PROGRESS'],
+        'RESOLVED': ['REOPENED', 'CLOSED'],
+        'REOPENED': ['IN_PROGRESS', 'ASSIGNED', 'CANCELLED'],
       };
 
       // Super Admins/Municipal Admins can technically bypass some linear flow for corrections, 
@@ -188,10 +213,18 @@ class ComplaintService {
       }
 
       // Update Dates
+      if (newStatus === 'ACKNOWLEDGED') complaint.acknowledgedAt = Date.now();
+      if (newStatus === 'ASSIGNED') complaint.assignedAt = Date.now();
+      if (newStatus === 'IN_PROGRESS') complaint.startedAt = Date.now();
       if (newStatus === 'VERIFIED') complaint.verifiedAt = Date.now();
       if (newStatus === 'RESOLVED') complaint.resolvedAt = Date.now();
       if (newStatus === 'CLOSED') complaint.closedAt = Date.now();
       if (newStatus === 'REJECTED') complaint.rejectionReason = options.rejectionReason;
+      if (newStatus === 'REOPENED') {
+        complaint.reopenedAt = Date.now();
+        complaint.reopenedBy = updatedByUserId;
+        complaint.reopenReason = options.note;
+      }
 
       complaint.status = newStatus;
       await complaint.save({ session });
@@ -312,6 +345,45 @@ class ComplaintService {
     return await ComplaintUpdate.find({ complaintId })
       .populate('updatedByUserId', 'firstName lastName')
       .sort({ createdAt: 1 });
+  }
+
+  /**
+   * Reopen Complaint
+   */
+  async reopenComplaint(complaintId, citizenId, reason) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+      const complaint = await Complaint.findOne({ _id: complaintId, citizenId }).session(session);
+      if (!complaint) throw new Error('Complaint not found or access denied');
+      if (complaint.status !== 'RESOLVED') throw new Error('Only RESOLVED complaints can be reopened');
+
+      const previousStatus = complaint.status;
+      complaint.status = 'REOPENED';
+      complaint.reopenedAt = Date.now();
+      complaint.reopenedBy = citizenId;
+      complaint.reopenReason = reason;
+
+      await complaint.save({ session });
+
+      const updateLog = new ComplaintUpdate({
+        complaintId: complaint._id,
+        updatedByUserId: citizenId,
+        previousStatus,
+        newStatus: 'REOPENED',
+        note: reason || 'Citizen reopened the complaint',
+      });
+      await updateLog.save({ session });
+
+      await session.commitTransaction();
+      return complaint;
+    } catch (error) {
+      await session.abortTransaction();
+      throw error;
+    } finally {
+      session.endSession();
+    }
   }
 }
 

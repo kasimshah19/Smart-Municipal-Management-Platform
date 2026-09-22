@@ -1,0 +1,8 @@
+[
+  { "name": "Konkan", "code": "KONKAN", "marathiName": "कोकण" },
+  { "name": "Pune", "code": "PUNE", "marathiName": "पुणे" },
+  { "name": "Nashik", "code": "NASHIK", "marathiName": "नाशिक" },
+  { "name": "Chhatrapati Sambhajinagar", "code": "CSN", "marathiName": "छत्रपती संभाजीनगर" },
+  { "name": "Amravati", "code": "AMRAVATI", "marathiName": "अमरावती" },
+  { "name": "Nagpur", "code": "NAGPUR", "marathiName": "नागपूर" }
+]

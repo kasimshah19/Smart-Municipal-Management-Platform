@@ -1,7 +1,8 @@
 import express from 'express';
 import complaintService from '../services/complaint.service.js';
 import fieldOperationsService from '../services/fieldOperations.service.js';
-import { authenticate, authorizeRoles } from '../middlewares/auth.middleware.js';
+import { authenticate } from '../middlewares/auth.middleware.js';
+import { authorizeRoles } from '../middlewares/role.middleware.js';
 import uploadEvidence from '../middlewares/uploadEvidence.js';
 import ComplaintEvidence from '../models/ComplaintEvidence.js';
 import { ROLES } from '../constants/roles.js';
@@ -136,6 +137,12 @@ router.get(
       if (req.user.municipalityId && req.user.role !== ROLES.SUPER_ADMIN) {
          filter.municipalityId = req.user.municipalityId;
       }
+      if (req.user.role === ROLES.WARD_OFFICER && req.user.wardId) {
+         filter.wardId = req.user.wardId;
+      }
+      if (req.user.role === ROLES.DEPARTMENT_OFFICER && req.user.departmentId) {
+         filter.departmentId = req.user.departmentId;
+      }
 
       const complaint = await complaintService.getComplaintById(req.params.id, filter);
       
@@ -153,6 +160,29 @@ router.get(
           evidence
         }
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @route   POST /api/complaints/:id/reopen
+ * @desc    Citizen reopens a resolved complaint
+ * @access  Private (Citizen)
+ */
+router.post(
+  '/:id/reopen',
+  authenticate,
+  authorizeRoles(ROLES.CITIZEN),
+  async (req, res, next) => {
+    try {
+      const complaint = await complaintService.reopenComplaint(
+        req.params.id,
+        req.user._id,
+        req.body.reason
+      );
+      res.json({ success: true, data: complaint });
     } catch (error) {
       next(error);
     }

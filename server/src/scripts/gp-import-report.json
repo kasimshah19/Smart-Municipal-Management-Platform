@@ -1,0 +1,13 @@
+{
+  "sourceFile": "D:\\Smart Municipal Management Platform\\server\\src\\scripts\\data\\maharashtra_gram_panchayats.csv",
+  "dryRun": false,
+  "totalRowsProcessed": 28472,
+  "villagePanchayats": 28087,
+  "otherTypes": 385,
+  "dbRecordsBefore": 28087,
+  "unresolvedDistricts": 0,
+  "unresolvedTalukas": 3974,
+  "inserted": 0,
+  "updated": 0,
+  "unchanged": 28087
+}

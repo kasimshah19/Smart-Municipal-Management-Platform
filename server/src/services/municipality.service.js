@@ -1,4 +1,9 @@
 import Municipality from '../models/Municipality.js';
+import Ward from '../models/Ward.js';
+import Department from '../models/Department.js';
+import Profile from '../models/Profile.js';
+import Complaint from '../models/Complaint.js';
+import District from '../models/District.js';
 
 export const createMunicipality = async (data) => {
   const municipality = new Municipality(data);
@@ -23,6 +28,44 @@ export const getMunicipalities = async (query = {}) => {
   
   if (query.isActive !== undefined) {
     filter.isActive = query.isActive === 'true';
+  }
+
+  if (query.districtId) {
+    const districtObj = await District.findById(query.districtId);
+    if (districtObj) {
+      filter.district = districtObj.name;
+    } else {
+      return { data: [], pagination: { page, limit, total: 0, totalPages: 0 } };
+    }
+  } else if (query.district) {
+    filter.district = query.district;
+  }
+
+  if (query.divisionId) {
+    const divisionDistricts = await District.find({ divisionId: query.divisionId });
+    if (divisionDistricts.length > 0) {
+      const districtNames = divisionDistricts.map(d => d.name);
+      if (filter.district) {
+        // If district is already set, ensure it falls within the requested division
+        if (typeof filter.district === 'string') {
+          if (!districtNames.includes(filter.district)) {
+            return { data: [], pagination: { page, limit, total: 0, totalPages: 0 } };
+          }
+        }
+      } else {
+        filter.district = { $in: districtNames };
+      }
+    } else {
+      return { data: [], pagination: { page, limit, total: 0, totalPages: 0 } };
+    }
+  }
+
+  if (query.talukaId) {
+    filter.talukaId = query.talukaId;
+  }
+
+  if (query.type) {
+    filter.type = query.type;
   }
 
   const municipalities = await Municipality.find(filter)
@@ -62,8 +105,19 @@ export const updateMunicipalityStatus = async (id, isActive) => {
   );
 };
 
-
 export const deleteMunicipality = async (id) => {
+  // Check dependencies before hard delete
+  const [wardCount, deptCount, profileCount, complaintCount] = await Promise.all([
+    Ward.countDocuments({ municipalityId: id }),
+    Department.countDocuments({ municipalityId: id }),
+    Profile.countDocuments({ municipalityId: id }),
+    Complaint.countDocuments({ municipalityId: id })
+  ]);
+  
+  if (wardCount > 0 || deptCount > 0 || profileCount > 0 || complaintCount > 0) {
+    throw new Error('Cannot delete this municipality because it has dependent records (Wards, Departments, Users, or Complaints). Please deactivate it instead.');
+  }
+
   return await Municipality.findByIdAndDelete(id);
 };
 

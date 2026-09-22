@@ -59,6 +59,19 @@ const userSchema = new mongoose.Schema(
     emailVerificationExpires: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
+    // Administrative Scopes
+    municipalityId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Municipality',
+    },
+    wardId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Ward',
+    },
+    departmentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Department',
+    },
   },
   {
     timestamps: true,
@@ -85,4 +98,6 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-export const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+export { User };
+export default User;

@@ -12,6 +12,14 @@ import ReportComplaint from './pages/citizen/ReportComplaint';
 import CitizenComplaintDetails from './pages/citizen/CitizenComplaintDetails';
 import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
 import StructureManagement from './pages/admin/StructureManagement.jsx';
+import GramPanchayatManager from './pages/admin/gram-panchayats/GramPanchayatManager.jsx';
+import OfficerDashboard from './components/officer/OfficerDashboard.jsx';
+import CitizenDashboard from './components/citizen/CitizenDashboard.jsx';
+import AdminDashboard from './pages/dashboard/AdminDashboard.jsx';
+import DepartmentOfficerDashboard from './pages/dashboard/DepartmentOfficerDashboard.jsx';
+import WardOfficerDashboard from './pages/dashboard/WardOfficerDashboard.jsx';
+import DashboardRouter from './pages/dashboard/DashboardRouter.jsx';
+import MainLayout from './layouts/MainLayout.jsx';
 
 function App() {
   return (
@@ -35,12 +43,25 @@ function App() {
           } 
         />
 
+        <Route 
+          path="/citizen/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={['CITIZEN']}>
+              <MainLayout>
+                <CitizenDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } 
+        />
+
         {/* ── Worker Routes ── */}
         <Route 
           path="/worker/dashboard" 
           element={
             <ProtectedRoute allowedRoles={['WORKER']}>
-              <WorkerDashboard />
+              <MainLayout>
+                <WorkerDashboard />
+              </MainLayout>
             </ProtectedRoute>
           } 
         />
@@ -63,6 +84,36 @@ function App() {
 
         {/* ── Officer Routes ── */}
         <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={['MUNICIPAL_ADMIN']}>
+              <MainLayout>
+                <OfficerDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/department/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={['DEPARTMENT_OFFICER']}>
+              <MainLayout>
+                <DepartmentOfficerDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/ward/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={['WARD_OFFICER']}>
+              <MainLayout>
+                <WardOfficerDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
           path="/officer/complaints" 
           element={
             <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'DEPARTMENT_OFFICER', 'WARD_OFFICER']}>
@@ -81,10 +132,30 @@ function App() {
 
         {/* ── Admin Routes ── */}
         <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={['SUPER_ADMIN']}>
+              <MainLayout>
+                <AdminDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
           path="/admin/structure" 
           element={
             <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MUNICIPAL_ADMIN']}>
               <StructureManagement />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/gram-panchayats" 
+          element={
+            <ProtectedRoute allowedRoles={['SUPER_ADMIN']}>
+              <MainLayout>
+                <GramPanchayatManager />
+              </MainLayout>
             </ProtectedRoute>
           } 
         />
@@ -96,16 +167,16 @@ function App() {
         
         {/* ── Protected Dashboard Route ── */}
         <Route 
-          path="/dashboard/*" 
+          path="/dashboard-router" 
           element={
             <ProtectedRoute>
-              <Home />
+              <DashboardRouter />
             </ProtectedRoute>
           } 
         />
         
-        {/* Redirect root to dashboard (which redirects to login if unauth) */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        {/* Redirect root to dashboard-router (which redirects to login if unauth) */}
+        <Route path="/" element={<Navigate to="/dashboard-router" replace />} />
       </Routes>
     </Router>
   );

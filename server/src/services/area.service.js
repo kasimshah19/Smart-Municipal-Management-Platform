@@ -105,7 +105,15 @@ export const updateAreaStatus = async (id, isActive) => {
 };
 
 
+import Complaint from '../models/Complaint.js';
+
 export const deleteArea = async (id) => {
+  // Check dependencies before deletion
+  const complaintsCount = await Complaint.countDocuments({ areaId: id });
+  if (complaintsCount > 0) {
+    throw new Error('Cannot delete Area. It has associated Complaints. Please deactivate it instead.');
+  }
+
   return await Area.findByIdAndDelete(id);
 };
 
