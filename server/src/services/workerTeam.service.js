@@ -108,3 +108,9 @@ export const updateWorkerTeamStatus = async (id, isActive) => {
     .populate('municipalityId', 'name code')
     .populate('departmentId', 'name code');
 };
+
+
+export const deleteWorkerTeam = async (id) => {
+  return await WorkerTeam.findByIdAndDelete(id);
+};
+

@@ -125,3 +125,17 @@ export const updateAreaStatus = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const deleteArea = async (req, res) => {
+  try {
+    const area = await areaService.deleteArea(req.params.id);
+    if (!area) {
+      return res.status(404).json({ success: false, message: 'Area not found' });
+    }
+    res.status(200).json({ success: true, message: 'Area deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+

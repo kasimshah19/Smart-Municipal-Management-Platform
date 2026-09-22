@@ -6,25 +6,56 @@
 :root {
   --bg: #F4F7FB;
   --surface: #FFFFFF;
+  --surface-raised: #F8FAFC;
   --ink: #0F172A;
   --muted: #64748B;
   --line: #E2E8F0;
   --navy: #0B1F3A;
   --primary: #2563EB;
+  --primary-light: #DBEAFE;
   --accent: #14B8A6;
   --on-accent: #062B27;
   --accent-text: #0F766E;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+  --success: #22C55E;
+  --success-light: #DCFCE7;
+  --warning: #F59E0B;
+  --warning-light: #FEF3C7;
 
-  /* Status — light */
+  /* Status — light (all 8 statuses) */
   --status-submitted-dot: #2563EB;
   --status-submitted-bg: #DBEAFE;
   --status-submitted-text: #1E3A8A;
+
+  --status-under-review-dot: #8B5CF6;
+  --status-under-review-bg: #EDE9FE;
+  --status-under-review-text: #5B21B6;
+
+  --status-verified-dot: #06B6D4;
+  --status-verified-bg: #CFFAFE;
+  --status-verified-text: #155E75;
+
+  --status-assigned-dot: #F97316;
+  --status-assigned-bg: #FFF7ED;
+  --status-assigned-text: #9A3412;
+
   --status-inprogress-dot: #F59E0B;
   --status-inprogress-bg: #FEF3C7;
   --status-inprogress-text: #78350F;
+
   --status-resolved-dot: #22C55E;
   --status-resolved-bg: #DCFCE7;
   --status-resolved-text: #14532D;
+
+  --status-rejected-dot: #EF4444;
+  --status-rejected-bg: #FEE2E2;
+  --status-rejected-text: #7F1D1D;
+
+  --status-closed-dot: #6B7280;
+  --status-closed-bg: #F3F4F6;
+  --status-closed-text: #374151;
+
   --status-urgent-dot: #EF4444;
   --status-urgent-bg: #FEE2E2;
   --status-urgent-text: #7F1D1D;
@@ -36,20 +67,38 @@
 :root[data-theme="dark"] {
   --bg: #0A1220;
   --surface: #111C31;
+  --surface-raised: #182440;
   --ink: #E6EDF7;
   --muted: #94A3B8;
   --line: #1F2D48;
   --navy: #06132A;
   --primary: #3B82F6;
+  --primary-light: #1E3A5F;
   --accent: #2DD4BF;
   --accent-text: #5EEAD4;
+  --danger: #F87171;
+  --danger-light: #451A1A;
+  --success: #4ADE80;
+  --success-light: #132A1E;
+  --warning: #FBBF24;
+  --warning-light: #3D2E0A;
 
   --status-submitted-bg: #1E3A8A;
   --status-submitted-text: #DBEAFE;
+  --status-under-review-bg: #4C1D95;
+  --status-under-review-text: #EDE9FE;
+  --status-verified-bg: #164E63;
+  --status-verified-text: #CFFAFE;
+  --status-assigned-bg: #7C2D12;
+  --status-assigned-text: #FFF7ED;
   --status-inprogress-bg: #78350F;
   --status-inprogress-text: #FEF3C7;
   --status-resolved-bg: #14532D;
   --status-resolved-text: #DCFCE7;
+  --status-rejected-bg: #7F1D1D;
+  --status-rejected-text: #FEE2E2;
+  --status-closed-bg: #374151;
+  --status-closed-text: #F3F4F6;
   --status-urgent-bg: #7F1D1D;
   --status-urgent-text: #FEE2E2;
 }
@@ -62,20 +111,38 @@
   :root:not([data-theme="light"]) {
     --bg: #0A1220;
     --surface: #111C31;
+    --surface-raised: #182440;
     --ink: #E6EDF7;
     --muted: #94A3B8;
     --line: #1F2D48;
     --navy: #06132A;
     --primary: #3B82F6;
+    --primary-light: #1E3A5F;
     --accent: #2DD4BF;
     --accent-text: #5EEAD4;
+    --danger: #F87171;
+    --danger-light: #451A1A;
+    --success: #4ADE80;
+    --success-light: #132A1E;
+    --warning: #FBBF24;
+    --warning-light: #3D2E0A;
 
     --status-submitted-bg: #1E3A8A;
     --status-submitted-text: #DBEAFE;
+    --status-under-review-bg: #4C1D95;
+    --status-under-review-text: #EDE9FE;
+    --status-verified-bg: #164E63;
+    --status-verified-text: #CFFAFE;
+    --status-assigned-bg: #7C2D12;
+    --status-assigned-text: #FFF7ED;
     --status-inprogress-bg: #78350F;
     --status-inprogress-text: #FEF3C7;
     --status-resolved-bg: #14532D;
     --status-resolved-text: #DCFCE7;
+    --status-rejected-bg: #7F1D1D;
+    --status-rejected-text: #FEE2E2;
+    --status-closed-bg: #374151;
+    --status-closed-text: #F3F4F6;
     --status-urgent-bg: #7F1D1D;
     --status-urgent-text: #FEE2E2;
   }
@@ -88,14 +155,22 @@
 @theme {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-navy: var(--navy);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
   --color-accent-text: var(--accent-text);
+  --color-danger: var(--danger);
+  --color-danger-light: var(--danger-light);
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
 
   --font-family-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -149,4 +224,69 @@ body {
 @keyframes toast-out {
   from { opacity: 1; transform: translateY(0); }
   to   { opacity: 0; transform: translateY(12px); }
+}
+
+/* =============================================
+   WIZARD / STEPPER ANIMATIONS
+   ============================================= */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes check-bounce {
+  0%   { transform: scale(0); }
+  50%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out;
+}
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out;
+}
+
+/* =============================================
+   DRAG & DROP ZONE
+   ============================================= */
+.drop-zone {
+  border: 2px dashed var(--line);
+  border-radius: 14px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.drop-zone.drag-over {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+/* =============================================
+   CUSTOM SCROLLBAR
+   ============================================= */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted);
 }

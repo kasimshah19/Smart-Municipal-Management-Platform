@@ -1,16 +1,21 @@
-import { useDispatch } from 'react-redux';
-import { updateStatus } from '../../store/complaintsSlice.js';
 import { showToast } from '../../store/uiSlice.js';
+import { useDispatch } from 'react-redux';
 import StatusPill from '../StatusPill.jsx';
 import { useNavigate } from 'react-router-dom';
+import complaintService from '../../services/complaintService.js';
 
-function ComplaintTable({ complaints }) {
+function ComplaintTable({ complaints, onRefresh }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleStatusChange = (id, newStatus) => {
-    dispatch(updateStatus({ id, status: newStatus }));
-    dispatch(showToast(`Complaint ${id} marked as ${newStatus.replace('-', ' ')}`));
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      await complaintService.updateStatus(id, { status: newStatus });
+      dispatch(showToast(`Status updated to ${newStatus.replace('_', ' ')}`));
+      if (onRefresh) onRefresh();
+    } catch (err) {
+      dispatch(showToast(err.response?.data?.message || 'Failed to update status'));
+    }
   };
 
   if (complaints.length === 0) {
@@ -39,21 +44,27 @@ function ComplaintTable({ complaints }) {
         <tbody>
           {complaints.map((c) => (
             <tr 
-              key={c.id || c._id} 
-              className="group transition-colors hover:bg-gray-50 cursor-pointer"
+              key={c._id || c.id} 
+              className="group transition-colors cursor-pointer"
               style={{ borderBottom: '1px solid var(--line)' }}
-              onClick={() => navigate(`/officer/complaints/${c.id || c._id}`)}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--surface-raised)')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+              onClick={() => navigate(`/officer/complaints/${c._id || c.id}`)}
             >
-              <td className="py-3 pr-4 font-medium">{c.id || c._id}</td>
-              <td className="py-3 pr-4">{c.type}</td>
-              <td className="py-3 pr-4 max-w-[200px] truncate">{c.location}</td>
+              <td className="py-3 pr-4 font-medium font-mono" style={{ color: 'var(--primary)' }}>
+                {c.complaintId || c.id}
+              </td>
+              <td className="py-3 pr-4">{c.categoryId?.name || c.category || c.type}</td>
+              <td className="py-3 pr-4 max-w-[200px] truncate">
+                {c.location?.address || c.wardId?.name || c.ward || '—'}
+              </td>
               <td className="py-3 pr-4">
                 <StatusPill status={c.status} />
               </td>
               <td className="py-3 pr-4" onClick={(e) => e.stopPropagation()}>
                 <select
                   value={c.status}
-                  onChange={(e) => handleStatusChange(c.id || c._id, e.target.value)}
+                  onChange={(e) => handleStatusChange(c._id || c.id, e.target.value)}
                   className="px-2 py-1 text-[12px] font-medium outline-none transition-colors"
                   style={{
                     backgroundColor: 'var(--bg)',
@@ -63,10 +74,13 @@ function ComplaintTable({ complaints }) {
                   }}
                 >
                   <option value="SUBMITTED">Submitted</option>
+                  <option value="UNDER_REVIEW">Under Review</option>
+                  <option value="VERIFIED">Verified</option>
                   <option value="ASSIGNED">Assigned</option>
-                  <option value="IN_PROGRESS">In progress</option>
-                  <option value="COMPLETION_SUBMITTED">Review</option>
+                  <option value="IN_PROGRESS">In Progress</option>
                   <option value="RESOLVED">Resolved</option>
+                  <option value="REJECTED">Rejected</option>
+                  <option value="CLOSED">Closed</option>
                 </select>
               </td>
             </tr>

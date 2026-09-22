@@ -7,6 +7,9 @@ import WorkerDashboard from './pages/worker/WorkerDashboard';
 import WorkerTaskList from './pages/worker/WorkerTaskList';
 import WorkerTaskDetails from './pages/worker/WorkerTaskDetails';
 import OfficerComplaintDetails from './pages/officer/OfficerComplaintDetails';
+import OfficerComplaintsList from './pages/officer/OfficerComplaintsList';
+import ReportComplaint from './pages/citizen/ReportComplaint';
+import CitizenComplaintDetails from './pages/citizen/CitizenComplaintDetails';
 import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
 import StructureManagement from './pages/admin/StructureManagement.jsx';
 
@@ -14,7 +17,25 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Worker Routes */}
+        {/* ── Citizen Routes ── */}
+        <Route 
+          path="/citizen/report" 
+          element={
+            <ProtectedRoute allowedRoles={['CITIZEN']}>
+              <ReportComplaint />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/citizen/complaints/:id" 
+          element={
+            <ProtectedRoute allowedRoles={['CITIZEN']}>
+              <CitizenComplaintDetails />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* ── Worker Routes ── */}
         <Route 
           path="/worker/dashboard" 
           element={
@@ -40,22 +61,25 @@ function App() {
           } 
         />
 
-        {/* Public Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        
-        {/* Protected Dashboard Route */}
+        {/* ── Officer Routes ── */}
         <Route 
-          path="/dashboard/*" 
+          path="/officer/complaints" 
           element={
-            <ProtectedRoute>
-              <Home />
+            <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'DEPARTMENT_OFFICER', 'WARD_OFFICER']}>
+              <OfficerComplaintsList />
             </ProtectedRoute>
           } 
         />
-        
-        {/* Admin Routes */}
+        <Route 
+          path="/officer/complaints/:id" 
+          element={
+            <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'DEPARTMENT_OFFICER', 'WARD_OFFICER']}>
+              <OfficerComplaintDetails />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* ── Admin Routes ── */}
         <Route 
           path="/admin/structure" 
           element={
@@ -65,12 +89,17 @@ function App() {
           } 
         />
 
-        {/* Officer Routes */}
+        {/* ── Public Routes ── */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        
+        {/* ── Protected Dashboard Route ── */}
         <Route 
-          path="/officer/complaints/:id" 
+          path="/dashboard/*" 
           element={
-            <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'DEPARTMENT_OFFICER', 'WARD_OFFICER']}>
-              <OfficerComplaintDetails />
+            <ProtectedRoute>
+              <Home />
             </ProtectedRoute>
           } 
         />

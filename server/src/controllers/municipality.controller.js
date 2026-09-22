@@ -120,3 +120,17 @@ export const updateMunicipalityStatus = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const deleteMunicipality = async (req, res) => {
+  try {
+    const municipality = await municipalityService.deleteMunicipality(req.params.id);
+    if (!municipality) {
+      return res.status(404).json({ success: false, message: 'Municipality not found' });
+    }
+    res.status(200).json({ success: true, message: 'Municipality deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+

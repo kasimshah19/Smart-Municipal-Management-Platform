@@ -1,84 +1,192 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import complaintService from '../services/complaintService.js';
+
+// ────────────────────────── Async Thunks ──────────────────────────
+
+export const fetchComplaints = createAsyncThunk(
+  'complaints/fetchAll',
+  async (params = {}, thunkAPI) => {
+    try {
+      const data = await complaintService.getComplaints(params);
+      return data;
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Failed to fetch complaints';
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const fetchComplaintById = createAsyncThunk(
+  'complaints/fetchById',
+  async (id, thunkAPI) => {
+    try {
+      const data = await complaintService.getComplaintById(id);
+      return data;
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Failed to fetch complaint';
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const createComplaint = createAsyncThunk(
+  'complaints/create',
+  async (complaintData, thunkAPI) => {
+    try {
+      const data = await complaintService.submitComplaint(complaintData);
+      return data;
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Failed to submit complaint';
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const uploadComplaintEvidence = createAsyncThunk(
+  'complaints/uploadEvidence',
+  async ({ complaintId, files }, thunkAPI) => {
+    try {
+      const data = await complaintService.uploadEvidence(complaintId, files);
+      return data;
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Failed to upload evidence';
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const fetchCategories = createAsyncThunk(
+  'complaints/fetchCategories',
+  async (municipalityId, thunkAPI) => {
+    try {
+      const data = await complaintService.getCategories(municipalityId);
+      return data;
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Failed to fetch categories';
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// ────────────────────────── Slice ──────────────────────────
 
 const initialState = {
-  items: [
-    {
-      id: 'MC-2044',
-      title: 'Open drain overflowing near school',
-      ward: 'Ward 9',
-      category: 'Drainage',
-      status: 'submitted',
-      priority: 'urgent',
-      isCitizenOwn: false,
-    },
-    {
-      id: 'MC-2041',
-      title: 'Streetlight not working',
-      ward: 'Ward 12',
-      category: 'Streetlight',
-      status: 'in-progress',
-      priority: 'normal',
-      isCitizenOwn: true,
-    },
-    {
-      id: 'MC-2038',
-      title: 'Garbage not collected for 4 days',
-      ward: 'Ward 7',
-      category: 'Garbage',
-      status: 'submitted',
-      priority: 'normal',
-      isCitizenOwn: true,
-    },
-    {
-      id: 'MC-2036',
-      title: 'Deep pothole at market junction',
-      ward: 'Ward 5',
-      category: 'Road and potholes',
-      status: 'in-progress',
-      priority: 'urgent',
-      isCitizenOwn: false,
-    },
-    {
-      id: 'MC-2029',
-      title: 'Water pipe leaking on main road',
-      ward: 'Ward 3',
-      category: 'Water supply',
-      status: 'resolved',
-      priority: 'normal',
-      isCitizenOwn: true,
-    },
-  ],
-  nextId: 2045,
+  // List
+  items: [],
+  pagination: null,
+  isLoading: false,
+  error: null,
+
+  // Single detail
+  current: null,
+  isDetailLoading: false,
+  detailError: null,
+
+  // Create
+  isCreating: false,
+  createError: null,
+  lastCreated: null,
+
+  // Evidence upload
+  isUploading: false,
+  uploadError: null,
+
+  // Categories
+  categories: [],
+  isCategoriesLoading: false,
 };
 
 const complaintsSlice = createSlice({
   name: 'complaints',
   initialState,
   reducers: {
-    addComplaint: (state, action) => {
-      const { title, category, location, description } = action.payload;
-      const id = `MC-${state.nextId}`;
-      state.items.unshift({
-        id,
-        title,
-        ward: location,
-        category,
-        status: 'submitted',
-        priority: 'normal',
-        description,
-        isCitizenOwn: true,
+    clearCurrentComplaint: (state) => {
+      state.current = null;
+      state.detailError = null;
+    },
+    clearCreateState: (state) => {
+      state.createError = null;
+      state.lastCreated = null;
+    },
+    clearError: (state) => {
+      state.error = null;
+      state.detailError = null;
+      state.createError = null;
+      state.uploadError = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      // ── Fetch List ──
+      .addCase(fetchComplaints.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchComplaints.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload.results || [];
+        state.pagination = action.payload.pagination || null;
+      })
+      .addCase(fetchComplaints.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // ── Fetch Detail ──
+      .addCase(fetchComplaintById.pending, (state) => {
+        state.isDetailLoading = true;
+        state.detailError = null;
+      })
+      .addCase(fetchComplaintById.fulfilled, (state, action) => {
+        state.isDetailLoading = false;
+        state.current = action.payload.data || action.payload;
+      })
+      .addCase(fetchComplaintById.rejected, (state, action) => {
+        state.isDetailLoading = false;
+        state.detailError = action.payload;
+      })
+
+      // ── Create ──
+      .addCase(createComplaint.pending, (state) => {
+        state.isCreating = true;
+        state.createError = null;
+        state.lastCreated = null;
+      })
+      .addCase(createComplaint.fulfilled, (state, action) => {
+        state.isCreating = false;
+        state.lastCreated = action.payload.data || action.payload;
+      })
+      .addCase(createComplaint.rejected, (state, action) => {
+        state.isCreating = false;
+        state.createError = action.payload;
+      })
+
+      // ── Upload Evidence ──
+      .addCase(uploadComplaintEvidence.pending, (state) => {
+        state.isUploading = true;
+        state.uploadError = null;
+      })
+      .addCase(uploadComplaintEvidence.fulfilled, (state) => {
+        state.isUploading = false;
+      })
+      .addCase(uploadComplaintEvidence.rejected, (state, action) => {
+        state.isUploading = false;
+        state.uploadError = action.payload;
+      })
+
+      // ── Categories ──
+      .addCase(fetchCategories.pending, (state) => {
+        state.isCategoriesLoading = true;
+      })
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.isCategoriesLoading = false;
+        state.categories = action.payload.data || [];
+      })
+      .addCase(fetchCategories.rejected, (state) => {
+        state.isCategoriesLoading = false;
       });
-      state.nextId += 1;
-    },
-    updateStatus: (state, action) => {
-      const { id, status } = action.payload;
-      const complaint = state.items.find((c) => c.id === id);
-      if (complaint) {
-        complaint.status = status;
-      }
-    },
   },
 });
 
-export const { addComplaint, updateStatus } = complaintsSlice.actions;
+export const { clearCurrentComplaint, clearCreateState, clearError } = complaintsSlice.actions;
 export default complaintsSlice.reducer;

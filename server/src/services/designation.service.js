@@ -70,3 +70,9 @@ export const updateDesignationStatus = async (id, isActive) => {
     { new: true }
   ).populate('municipalityId', 'name code');
 };
+
+
+export const deleteDesignation = async (id) => {
+  return await Designation.findByIdAndDelete(id);
+};
+

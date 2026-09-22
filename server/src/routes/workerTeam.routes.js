@@ -20,4 +20,7 @@ router.get('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'WARD_OFFICE
 router.put('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'DEPARTMENT_OFFICER'), updateWorkerTeam);
 router.patch('/:id/status', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN', 'DEPARTMENT_OFFICER'), updateWorkerTeamStatus);
 
+router.delete('/:id', authorizeRoles('SUPER_ADMIN', 'MUNICIPAL_ADMIN'), workerTeamController.deleteWorkerTeam);
+
 export default router;
+

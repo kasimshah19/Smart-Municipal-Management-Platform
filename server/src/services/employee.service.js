@@ -119,3 +119,9 @@ export const updateEmployeeStatus = async (id, isActive) => {
     .populate('departmentId', 'name code')
     .populate('designationId', 'name code level');
 };
+
+
+export const deleteEmployee = async (id) => {
+  return await Employee.findByIdAndDelete(id);
+};
+

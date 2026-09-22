@@ -61,3 +61,9 @@ export const updateMunicipalityStatus = async (id, isActive) => {
     { new: true }
   );
 };
+
+
+export const deleteMunicipality = async (id) => {
+  return await Municipality.findByIdAndDelete(id);
+};
+

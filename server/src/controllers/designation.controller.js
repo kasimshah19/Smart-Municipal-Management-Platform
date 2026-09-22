@@ -125,3 +125,17 @@ export const updateDesignationStatus = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const deleteDesignation = async (req, res) => {
+  try {
+    const designation = await designationService.deleteDesignation(req.params.id);
+    if (!designation) {
+      return res.status(404).json({ success: false, message: 'Designation not found' });
+    }
+    res.status(200).json({ success: true, message: 'Designation deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+

@@ -3,16 +3,20 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
 import { useSelector } from 'react-redux';
+
 const WorkerTaskDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const [task, setTask] = useState(null);
+  const [evidence, setEvidence] = useState([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   const [error, setError] = useState(null);
+  
+  const [beforeImages, setBeforeImages] = useState([]);
+  const [afterImages, setAfterImages] = useState([]);
   const [completionNote, setCompletionNote] = useState('');
-  const [evidenceImages, setEvidenceImages] = useState([]);
 
   useEffect(() => {
     fetchTaskDetails();
@@ -21,9 +25,10 @@ const WorkerTaskDetails = () => {
   const fetchTaskDetails = async () => {
     try {
       setLoading(true);
-      const response = await api.get(`/complaints/${id}`);
+      const response = await api.get(/complaints/ + id);
       if (response.data.success) {
-        setTask(response.data.data);
+        setTask(response.data.data._doc || response.data.data);
+        setEvidence(response.data.data.evidence || []);
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to load task details');
@@ -35,9 +40,9 @@ const WorkerTaskDetails = () => {
   const handleStartWork = async () => {
     try {
       setActionLoading(true);
-      const response = await api.post(`/complaints/${id}/start`);
+      const response = await api.post(/complaints/ + id + /start);
       if (response.data.success) {
-        setTask(response.data.data);
+        fetchTaskDetails();
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to start work');
@@ -46,33 +51,56 @@ const WorkerTaskDetails = () => {
     }
   };
 
-  const handleSubmitCompletion = async (e) => {
+  const handleUploadBefore = async (e) => {
     e.preventDefault();
-    if (!completionNote) {
-      setError('Please provide a completion note');
+    if (beforeImages.length === 0) {
+      setError('Please select before images');
       return;
     }
     try {
       setActionLoading(true);
-      // First upload evidence if there are images
-      let evidenceUrls = [];
-      if (evidenceImages.length > 0) {
-        const formData = new FormData();
-        evidenceImages.forEach((img) => formData.append('images', img));
-        formData.append('type', 'RESOLUTION');
-        formData.append('description', completionNote);
+      const formData = new FormData();
+      beforeImages.forEach((img) => formData.append('files', img));
+      formData.append('type', 'BEFORE_WORK');
+      formData.append('description', 'Before starting work');
 
-        const uploadRes = await api.post(`/complaints/${id}/evidence`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        if (!uploadRes.data.success) throw new Error('Failed to upload evidence');
+      const uploadRes = await api.post(/complaints/ + id + /evidence, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      if (uploadRes.data.success) {
+        setBeforeImages([]);
+        fetchTaskDetails();
       }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to upload before evidence');
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
-      const response = await api.post(`/complaints/${id}/submit-completion`, { note: completionNote });
+  const handleSubmitCompletion = async (e) => {
+    e.preventDefault();
+    if (!completionNote || afterImages.length === 0) {
+      setError('Please provide a completion note and after images');
+      return;
+    }
+    try {
+      setActionLoading(true);
+      const formData = new FormData();
+      afterImages.forEach((img) => formData.append('files', img));
+      formData.append('type', 'AFTER_WORK');
+      formData.append('description', completionNote);
+
+      const uploadRes = await api.post(/complaints/ + id + /evidence, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      if (!uploadRes.data.success) throw new Error('Failed to upload evidence');
+
+      const response = await api.post(/complaints/ + id + /submit-completion, { note: completionNote });
       if (response.data.success) {
-        setTask(response.data.data);
         setCompletionNote('');
-        setEvidenceImages([]);
+        setAfterImages([]);
+        fetchTaskDetails();
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'Failed to submit completion');
@@ -92,6 +120,8 @@ const WorkerTaskDetails = () => {
   }
 
   if (!task) return null;
+
+  const hasBeforeEvidence = evidence.some(e => e.type === 'BEFORE_WORK');
 
   return (
     <MainLayout>
@@ -137,7 +167,6 @@ const WorkerTaskDetails = () => {
           </div>
         </div>
 
-        {/* Worker Actions */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Task Actions</h2>
           
@@ -154,9 +183,39 @@ const WorkerTaskDetails = () => {
             </div>
           )}
 
-          {task.status === 'IN_PROGRESS' && (
+          {task.status === 'IN_PROGRESS' && !hasBeforeEvidence && (
             <div>
-              <p className="text-gray-600 mb-6">Once you have completed the work, submit the completion details and evidence for review.</p>
+              <div className="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-100">
+                <h3 className="text-blue-800 font-semibold mb-2">Step 1: Upload Before Photo</h3>
+                <p className="text-blue-600 text-sm">Please upload a photo showing the current state of the issue before you begin repairs.</p>
+              </div>
+              <form onSubmit={handleUploadBefore} className="space-y-6">
+                <div>
+                  <input 
+                    type="file" 
+                    multiple 
+                    accept="image/*"
+                    onChange={(e) => setBeforeImages(Array.from(e.target.files))}
+                    className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={actionLoading || beforeImages.length === 0}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors disabled:opacity-50"
+                >
+                  {actionLoading ? 'Uploading...' : 'Upload Before Evidence'}
+                </button>
+              </form>
+            </div>
+          )}
+
+          {task.status === 'IN_PROGRESS' && hasBeforeEvidence && (
+            <div>
+              <div className="bg-green-50 p-4 rounded-lg mb-6 border border-green-100">
+                <h3 className="text-green-800 font-semibold mb-2">Step 2: Complete Work</h3>
+                <p className="text-green-600 text-sm">Upload after photos and submit completion details.</p>
+              </div>
               <form onSubmit={handleSubmitCompletion} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Completion Note *</label>
@@ -170,19 +229,19 @@ const WorkerTaskDetails = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Evidence Images</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">After Evidence Images *</label>
                   <input 
                     type="file" 
                     multiple 
                     accept="image/*"
-                    onChange={(e) => setEvidenceImages(Array.from(e.target.files))}
+                    onChange={(e) => setAfterImages(Array.from(e.target.files))}
                     className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  disabled={actionLoading || !completionNote}
+                  disabled={actionLoading || !completionNote || afterImages.length === 0}
                   className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors disabled:opacity-50"
                 >
                   {actionLoading ? 'Submitting...' : 'Submit Work for Review'}

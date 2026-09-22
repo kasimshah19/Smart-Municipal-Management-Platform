@@ -61,7 +61,7 @@ const OfficerComplaintDetails = () => {
       
       const response = await api.post(`/complaints/${id}/assign`, payload);
       if (response.data.success) {
-        setComplaint(response.data.data);
+        fetchData();
         alert('Assigned successfully');
       }
     } catch (err) {
@@ -83,7 +83,7 @@ const OfficerComplaintDetails = () => {
       
       const response = await api.post(`/complaints/${id}/${endpoint}`, payload);
       if (response.data.success) {
-        setComplaint(response.data.data);
+        fetchData();
         alert(`Completion ${isApproved ? 'Approved' : 'Rejected'} successfully`);
         setReviewNote('');
       }
@@ -106,6 +106,14 @@ const OfficerComplaintDetails = () => {
 
   if (!complaint) return null;
 
+  // For proper access to fields, complaint might be structured as complaint._doc depending on backend spread
+  const taskData = complaint._doc || complaint;
+  const evidence = complaint.evidence || [];
+
+  const beforeEvidence = evidence.filter(e => e.type === 'BEFORE_WORK');
+  const afterEvidence = evidence.filter(e => e.type === 'AFTER_WORK');
+  const complaintEvidence = evidence.filter(e => e.type === 'COMPLAINT_PHOTO');
+
   return (
     <MainLayout>
       <div className="max-w-5xl mx-auto px-4 py-8">
@@ -118,16 +126,16 @@ const OfficerComplaintDetails = () => {
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-2xl font-bold">{complaint.title}</h1>
-              <p className="text-gray-500">ID: {complaint._id}</p>
+              <h1 className="text-2xl font-bold">{taskData.title}</h1>
+              <p className="text-gray-500">ID: {taskData._id}</p>
             </div>
             <span className="px-3 py-1 bg-gray-100 rounded-full font-medium text-sm">
-              {complaint.status}
+              {taskData.status}
             </span>
           </div>
           
           <div className="mt-4 text-gray-700">
-            <p>{complaint.description}</p>
+            <p>{taskData.description}</p>
           </div>
         </div>
 
@@ -135,7 +143,7 @@ const OfficerComplaintDetails = () => {
           {/* Assignment UI */}
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <h2 className="text-lg font-bold mb-4">Task Assignment</h2>
-            {complaint.status === 'SUBMITTED' || complaint.status === 'VERIFIED' || complaint.status === 'ASSIGNED' ? (
+            {taskData.status === 'SUBMITTED' || taskData.status === 'VERIFIED' || taskData.status === 'ASSIGNED' ? (
               <form onSubmit={handleAssign} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Assign To</label>
@@ -196,7 +204,7 @@ const OfficerComplaintDetails = () => {
                   disabled={actionLoading}
                   className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
                 >
-                  {actionLoading ? 'Assigning...' : (complaint.status === 'ASSIGNED' ? 'Reassign' : 'Assign Task')}
+                  {actionLoading ? 'Assigning...' : (taskData.status === 'ASSIGNED' ? 'Reassign' : 'Assign Task')}
                 </button>
               </form>
             ) : (
@@ -205,12 +213,47 @@ const OfficerComplaintDetails = () => {
           </div>
 
           {/* Completion Review UI */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h2 className="text-lg font-bold mb-4">Completion Review</h2>
-            {complaint.status === 'COMPLETION_SUBMITTED' ? (
+          <div className="bg-white rounded-lg shadow-sm border p-6 flex flex-col gap-6">
+            <h2 className="text-lg font-bold">Completion Review</h2>
+
+            {/* Evidence Gallery */}
+            <div className="space-y-4">
+              {complaintEvidence.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2">Original Complaint Evidence</h3>
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {complaintEvidence.map(img => (
+                      <img key={img._id} src={`http://localhost:5000${img.url}`} alt="Complaint" className="h-24 w-24 object-cover rounded shadow-sm border" />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {beforeEvidence.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2">Before Work Evidence</h3>
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {beforeEvidence.map(img => (
+                      <img key={img._id} src={`http://localhost:5000${img.url}`} alt="Before" className="h-24 w-24 object-cover rounded shadow-sm border" />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {afterEvidence.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2">After Work Evidence</h3>
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {afterEvidence.map(img => (
+                      <img key={img._id} src={`http://localhost:5000${img.url}`} alt="After" className="h-24 w-24 object-cover rounded shadow-sm border" />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {taskData.status === 'COMPLETION_SUBMITTED' ? (
               <div className="space-y-4">
-                <div className="bg-yellow-50 p-4 rounded text-yellow-800">
-                  Worker has submitted this task for review. Please check evidence and approve or reject.
+                <div className="bg-yellow-50 p-4 rounded text-yellow-800 border border-yellow-200">
+                  Worker has submitted this task for review. Please check the before/after evidence above and approve or reject.
                 </div>
                 
                 <div>
@@ -228,14 +271,14 @@ const OfficerComplaintDetails = () => {
                   <button
                     onClick={() => handleReview(true)}
                     disabled={actionLoading || !reviewNote}
-                    className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                    className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:opacity-50"
                   >
                     Approve
                   </button>
                   <button
                     onClick={() => handleReview(false)}
                     disabled={actionLoading || !reviewNote}
-                    className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700"
+                    className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:opacity-50"
                   >
                     Reject
                   </button>

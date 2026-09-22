@@ -73,3 +73,9 @@ export const updateWardStatus = async (id, isActive) => {
     { new: true }
   ).populate('municipalityId', 'name code');
 };
+
+
+export const deleteWard = async (id) => {
+  return await Ward.findByIdAndDelete(id);
+};
+

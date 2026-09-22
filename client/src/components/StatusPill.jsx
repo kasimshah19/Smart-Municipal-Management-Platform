@@ -1,4 +1,59 @@
 const STATUS_CONFIG = {
+  SUBMITTED: {
+    label: 'Submitted',
+    dotVar: '--status-submitted-dot',
+    bgVar: '--status-submitted-bg',
+    textVar: '--status-submitted-text',
+  },
+  UNDER_REVIEW: {
+    label: 'Under Review',
+    dotVar: '--status-under-review-dot',
+    bgVar: '--status-under-review-bg',
+    textVar: '--status-under-review-text',
+  },
+  VERIFIED: {
+    label: 'Verified',
+    dotVar: '--status-verified-dot',
+    bgVar: '--status-verified-bg',
+    textVar: '--status-verified-text',
+  },
+  ASSIGNED: {
+    label: 'Assigned',
+    dotVar: '--status-assigned-dot',
+    bgVar: '--status-assigned-bg',
+    textVar: '--status-assigned-text',
+  },
+  IN_PROGRESS: {
+    label: 'In Progress',
+    dotVar: '--status-inprogress-dot',
+    bgVar: '--status-inprogress-bg',
+    textVar: '--status-inprogress-text',
+  },
+  COMPLETION_SUBMITTED: {
+    label: 'Review Pending',
+    dotVar: '--status-inprogress-dot',
+    bgVar: '--status-inprogress-bg',
+    textVar: '--status-inprogress-text',
+  },
+  RESOLVED: {
+    label: 'Resolved',
+    dotVar: '--status-resolved-dot',
+    bgVar: '--status-resolved-bg',
+    textVar: '--status-resolved-text',
+  },
+  REJECTED: {
+    label: 'Rejected',
+    dotVar: '--status-rejected-dot',
+    bgVar: '--status-rejected-bg',
+    textVar: '--status-rejected-text',
+  },
+  CLOSED: {
+    label: 'Closed',
+    dotVar: '--status-closed-dot',
+    bgVar: '--status-closed-bg',
+    textVar: '--status-closed-text',
+  },
+  // Legacy lowercase keys for backward compat
   submitted: {
     label: 'Submitted',
     dotVar: '--status-submitted-dot',
@@ -6,7 +61,7 @@ const STATUS_CONFIG = {
     textVar: '--status-submitted-text',
   },
   'in-progress': {
-    label: 'In progress',
+    label: 'In Progress',
     dotVar: '--status-inprogress-dot',
     bgVar: '--status-inprogress-bg',
     textVar: '--status-inprogress-text',

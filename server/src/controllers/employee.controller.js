@@ -125,3 +125,17 @@ export const updateEmployeeStatus = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const deleteEmployee = async (req, res) => {
+  try {
+    const employee = await employeeService.deleteEmployee(req.params.id);
+    if (!employee) {
+      return res.status(404).json({ success: false, message: 'Employee not found' });
+    }
+    res.status(200).json({ success: true, message: 'Employee deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+

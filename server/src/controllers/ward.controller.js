@@ -126,3 +126,17 @@ export const updateWardStatus = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const deleteWard = async (req, res) => {
+  try {
+    const ward = await wardService.deleteWard(req.params.id);
+    if (!ward) {
+      return res.status(404).json({ success: false, message: 'Ward not found' });
+    }
+    res.status(200).json({ success: true, message: 'Ward deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+

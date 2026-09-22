@@ -103,3 +103,9 @@ export const updateAreaStatus = async (id, isActive) => {
     .populate('municipalityId', 'name code')
     .populate('wardId', 'name wardNumber');
 };
+
+
+export const deleteArea = async (id) => {
+  return await Area.findByIdAndDelete(id);
+};
+

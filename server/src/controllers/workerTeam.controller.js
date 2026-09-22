@@ -125,3 +125,17 @@ export const updateWorkerTeamStatus = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const deleteWorkerTeam = async (req, res) => {
+  try {
+    const workerTeam = await workerTeamService.deleteWorkerTeam(req.params.id);
+    if (!workerTeam) {
+      return res.status(404).json({ success: false, message: 'WorkerTeam not found' });
+    }
+    res.status(200).json({ success: true, message: 'WorkerTeam deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
