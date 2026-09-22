@@ -27,7 +27,11 @@
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
   <img src="https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white" alt="JSON" />
 </div>
-> A role-based digital platform for municipal complaint management, workforce coordination, SLA monitoring, analytics, and Maharashtra administrative/local-body management.
+> A comprehensive, role-based e-Governance platform designed to digitize and streamline municipal operations across Maharashtra.
+> 
+> **The Problem:** Traditional municipal administration suffers from fragmented communication, lack of structured data, delayed grievance redressal, and zero visibility into workforce accountability. Managing geographically distinct urban local bodies (Municipalities) and massive rural networks (Gram Panchayats) on a single platform is historically error-prone due to data inconsistencies.
+> 
+> **The Solution:** The Smart Municipal Management Platform bridges this gap by offering a centralized, highly secure (JWT + RBAC) system. It features automated SLA-based complaint escalation, real-time analytics dashboards for stakeholders, and a meticulously reconciled geographic database covering 395+ Urban Local Bodies and 28,000+ Gram Panchayats. By enforcing strict data integrity using Local Government Directory (LGD) codes, the platform ensures that citizens, ward officers, and super admins can seamlessly interact, track issues, and manage civic infrastructure with 100% transparency.
 
 ## Live Demo
 
