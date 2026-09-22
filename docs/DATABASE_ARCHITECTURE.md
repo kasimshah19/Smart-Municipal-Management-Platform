@@ -1,103 +1,109 @@
-# Smart Municipal Management Platform - Database Architecture
+# Database Architecture
 
-This document outlines the MongoDB/Mongoose database architecture designed for scalability, clear data ownership, and strict separation of concerns.
+The Smart Municipal Management Platform uses **MongoDB** as its primary data store, with **Mongoose** acting as the Object Data Modeling (ODM) layer. The database schema is carefully designed to accommodate the complex administrative structures of Maharashtra while ensuring high performance, referential integrity (via constraints and LGD mapping), and secure role-based access control (RBAC).
 
-## 1. Database Specifications
-- **Database Engine:** MongoDB Atlas
-- **Database Name:** `smart_municipal`
-- **ORM:** Mongoose (Node.js)
+## 1. Geographic & Administrative Hierarchy
 
-## 2. Security & Design Rules
-1. **Never store plaintext passwords:** Always hash using `bcryptjs` and omit via `select: false`.
-2. **Never expose connection strings:** Keep `MONGODB_URI` securely in `server/.env`.
-3. **Reference Strategy:** Use Mongoose `ObjectId` references for scalable entity relationships instead of unnecessarily massive embedded arrays (e.g., storing all a user's complaints inside the User document).
-4. **Data Ownership:**
-   - **User** handles authentication, roles, and identity.
-   - **Profile** handles personal details and organizational attributes.
-   - **Employee** acts as the definitive source of truth for municipal workers' hierarchical configuration, linked securely to the base user.
-5. **Phase Compatibility:** Public registration forces the `CITIZEN` role. Privileged accounts (e.g., `WARD_OFFICER`, `MUNICIPAL_ADMIN`, `SUPER_ADMIN`) are created strictly via administration workflows or secure seeding scripts.
+One of the platform's core architectural decisions is the strict segregation of Urban and Rural local bodies, aligning with Indian administrative structures. Both hierarchies rely heavily on **Local Government Directory (LGD) Codes** for absolute deterministic integrity.
 
-## 3. Implementation Phases Roadmap
+### 1.1 Urban Local Bodies (ULBs)
+Urban management focuses on municipalities and their internal sub-divisions.
+- **`Municipality`**: Represents Municipal Corporations (Mahanagarpalika), Municipal Councils (Nagar Parishad), and Nagar Panchayats. 
+  - Contains `lgdCode`, `name`, `type`, `district`, and demographic data.
+- **`Ward`**: A sub-division within a Municipality. Used heavily for RBAC scope isolation (e.g., `Ward Officer` access).
+  - Contains `municipalityId` (ref: Municipality), `wardNumber`, `name`.
+- **`Area`**: A specific locality within a Ward, used for pinpointing complaints.
 
-- Phase 1 — Foundation
-- Phase 2 — Authentication + RBAC
-- Phase 3 — Municipality Structure
-- Phase 4 — Civic Complaint Management
-- Phase 5 — Assignment + Field Operations
-- Phase 6 — SLA + Escalation + Notifications
-- Phase 7 — Maps + AI + Smart Features
-- Phase 8 — Municipal Citizen Services
-- Phase 9 — Property + Tax + Revenue
-- Phase 10 — Analytics + Security + Deployment
+### 1.2 Rural Local Bodies (RLBs)
+Rural management follows the standard cascading state administrative structure.
+- **`Division`**: Administrative division (e.g., Pune Division, Konkan Division).
+- **`District`**: Zilla Parishad level. Contains `divisionId`.
+- **`Taluka`**: Panchayat Samiti level (Block/Tehsil). Contains `districtId`.
+- **`GramPanchayat`**: The village-level local body. Contains `talukaId`, `districtId`, `lgdCode`, `villageName`.
+  - *Note: Gram Panchayat endpoints are heavily restricted and segregated from urban endpoints.*
 
-## 4. Collections List
+---
 
-### 🟢 IMPLEMENTED NOW (Phases 1-3)
+## 2. Identity & Access Management (IAM)
 
-- **`users`**
-  - **Purpose:** Core identity, authentication credentials (hashed), RBAC, and account status.
-  - **Key Indexes:** `email` (unique), `phone`, `role`, `isActive`.
+- **`User`**: The central authentication model. Handles credentials, JWT token generation, password hashing (bcrypt), and account status.
+  - Fields: `email`, `password`, `role` (enum: SUPER_ADMIN, MUNICIPAL_ADMIN, WARD_OFFICER, CITIZEN, etc.), `isActive`.
+  - *Security*: Passwords are never returned in queries (`select: false`).
+- **`Profile`**: Extended user details linked 1-to-1 with `User`. Stores demographic information, address, and profile pictures.
 
-- **`profiles`**
-  - **Purpose:** Segregates user personal details and future municipal hierarchy data from authentication credentials.
-  - **Key Indexes:** `userId` (unique), `municipalityId`, `wardId`, `departmentId`.
+---
 
-- **`municipalities`**
-  - **Purpose:** Central entity representing a specific regional municipal body.
-  - **Key Indexes:** `code` (unique).
+## 3. Organizational Structure & Workforce
 
-- **`wards`**
-  - **Purpose:** Geographical and electoral division of a municipality.
-  - **Key Indexes:** `municipalityId_code` (unique), `municipalityId_wardNumber` (unique).
+Municipalities manage their own workforce, departments, and teams.
+- **`Department`**: e.g., Water Supply, Solid Waste Management. Linked to a `Municipality`.
+- **`Designation`**: Titles for employees within departments.
+- **`Employee`**: Links a `User` to a `Municipality`, `Department`, and `Designation`. Allows tracking of staff across the platform.
+- **`WorkerTeam`**: Field operation units. Contains a `supervisor` (User) and an array of `members` (Users). Assigned to specific `Wards` and `Municipalities`.
 
-- **`areas`**
-  - **Purpose:** Sub-division of a ward for precise location routing.
-  - **Key Indexes:** `municipalityId_code` (unique), `wardId`.
+---
 
-- **`departments`**
-  - **Purpose:** Organizational structure for municipal operations (e.g. Sanitation, Roads).
-  - **Key Indexes:** `municipalityId_code` (unique).
+## 4. Complaint & Grievance Management System
 
-- **`designations`**
-  - **Purpose:** Titles/ranks mapped within the municipality (e.g. Ward Officer).
-  - **Key Indexes:** `municipalityId_code` (unique).
+The core operational feature of the platform. The schema design allows for deep tracking of SLA breaches, updates, and assignments.
 
-- **`employees`**
-  - **Purpose:** Link a `User` identity to specific `Department` and `Designation` assignments. Unifies "Worker", "Staff", and "Officer".
-  - **Key Indexes:** `municipalityId_employeeCode` (unique), `userId` (unique).
+- **`Complaint`**: The primary entity.
+  - **References**: `citizen` (User), `municipalityId`, `wardId`, `categoryId`.
+  - **Data**: `description`, `location` (GeoJSON Point), `status` (OPEN, ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED, REJECTED), `priority`.
+  - **SLA**: Tracks `slaDeadline` and `isSlaBreached`.
+- **`ComplaintCategory`**: Defines complaint types (e.g., "Potholes"), expected SLA resolution times (in hours), and assigned departments.
+- **`ComplaintAssignment`**: Tracks which `WorkerTeam` or `User` is currently assigned to resolve the complaint.
+- **`ComplaintUpdate` / `ComplaintComment`**: Audit trail entities. Tracks every status change, internal note, or public comment made on a complaint.
+- **`ComplaintEvidence`**: Stores pre-resolution and post-resolution photos/documents (e.g., Cloudinary URLs) linked to the complaint.
 
-- **`worker_teams`**
-  - **Purpose:** Grouping employees/workers for task assignments.
-  - **Key Indexes:** `municipalityId_code` (unique).
+---
 
-### 🟡 PLANNED FOR FUTURE PHASES (Civic & Internal Modules)
+## 5. Entity-Relationship Diagram (Simplified)
 
-#### Core Operations (Phase 4+)
-- **`complaints`**: Citizen grievances. References User, Ward, Category.
-- **`complaint_categories`**: Types of complaints (Garbage, Road, etc).
-- **`complaint_assignments`**: Worker/Officer allocation to complaints.
-- **`complaint_updates`**: Status changes and logs.
-- **`complaint_evidence`**: Images and attachments.
-- **`complaint_comments`**: Internal team communication.
-- **`sla_rules`** & **`escalations`**: Automated SLA enforcement for delayed resolutions.
-- **`feedback`**: Citizen ratings for resolved complaints.
+```mermaid
+erDiagram
+    %% IAM
+    User ||--o| Profile : "has"
+    User ||--o{ Employee : "acts as"
+    
+    %% Urban Geography
+    Municipality ||--o{ Ward : "contains"
+    Ward ||--o{ Area : "contains"
+    
+    %% Rural Geography
+    Division ||--o{ District : "contains"
+    District ||--o{ Taluka : "contains"
+    Taluka ||--o{ GramPanchayat : "contains"
+    
+    %% Organization
+    Municipality ||--o{ Department : "has"
+    Department ||--o{ Employee : "employs"
+    Municipality ||--o{ WorkerTeam : "has"
+    User }|--o{ WorkerTeam : "is member of"
 
-#### Auxiliary Operations
-- **`assets`** & **`asset_maintenance`**: Municipal resources and upkeep logs.
-- **`citizen_services`** & **`service_requests`**: Requests for certificates, NOCs, and permissions.
-- **`properties`**, **`property_taxes`**, **`tax_payments`**: Tax administration.
-- **`documents`**: Centralized storage references.
-- **`notifications`**: System alerts.
-- **`audit_logs`**: Security trails.
-- **`system_settings`**: Global configuration.
+    %% Complaints
+    User ||--o{ Complaint : "raises"
+    Municipality ||--o{ Complaint : "receives"
+    ComplaintCategory ||--o{ Complaint : "classifies"
+    Complaint ||--o{ ComplaintUpdate : "has trail"
+    Complaint ||--o{ ComplaintAssignment : "assigned to"
+    WorkerTeam ||--o{ ComplaintAssignment : "handles"
+```
 
-## 5. Entity Relationship Overview
-Future scalability is heavily reliant on this normalized structure.
-- `users` → `profiles` (1-to-1)
-- `users` → `employees` (1-to-1 or 1-to-0)
-- `municipalities` → `departments` (1-to-many)
-- `municipalities` → `wards` → `areas` (1-to-many geographical hierarchy)
-- `users` → `complaints` (1-to-many via references in Complaint)
-- `complaints` → `complaint_updates` (1-to-many via references in Updates)
+---
 
-*Architecture strictly prohibits massive unbounded arrays inside primary documents to prevent 16MB document size limit breaches.*
+## 6. Local Government Directory (LGD) Integration
+
+To prevent data duplication and ensure mapping accuracy across Maharashtra's 36 districts, 350+ Talukas, and 28,000+ Gram Panchayats, the platform strictly enforces unique constraints on the `lgdCode` field (Int32 BSON type).
+- **Idempotent Imports**: Seed scripts utilize `updateOne` with `upsert: true` matching on `lgdCode` to ensure database updates are safely repeatable without duplication.
+- **Cross-Platform Sync**: By using standard LGD codes, the platform's data can cross-reference with official Government of India datasets.
+
+---
+
+## 7. Indexing and Performance Optimization
+
+To handle potentially millions of complaint records and thousands of concurrent users, the database utilizes strategic indexing:
+- **Geo-Spatial Indexes**: `2dsphere` indexes on `Complaint.location` for proximity-based querying (e.g., "find complaints within 5km").
+- **Compound Indexes**: Commonly queried fields are combined. For example, `{ municipalityId: 1, status: 1 }` on the `Complaint` collection powers the municipal dashboards efficiently.
+- **Unique Indexes**: Applied to `email` (Users) and `lgdCode` (Municipalities, Gram Panchayats) to enforce data integrity at the database level.
+- **Pagination**: All list endpoints utilize cursor-based or `skip`/`limit` pagination to prevent memory overflow on large datasets.
