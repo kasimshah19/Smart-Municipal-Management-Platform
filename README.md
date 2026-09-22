@@ -952,3 +952,8 @@ Content-Type: application/json
 - **Portfolio:** [kasim-portfolio-umber.vercel.app](https://kasim-portfolio-umber.vercel.app/)
 - **LinkedIn:** [Kasim Shah](https://www.linkedin.com/in/kasim-shah-176175340/)
 - **GitHub:** [@kasimshah19](https://github.com/kasimshah19)
+
+---
+<div align="center">
+  <p>&copy; 2026 Smart Municipal Management Platform &mdash; All rights reserved.</p>
+</div>
