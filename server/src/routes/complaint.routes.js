@@ -201,7 +201,7 @@ router.patch(
   async (req, res, next) => {
     try {
       const filter = {};
-      if (req.user.municipalityId && req.user.role !== 'SYSTEM_ADMIN') {
+      if (req.user.municipalityId && req.user.role !== ROLES.SUPER_ADMIN) {
          filter.municipalityId = req.user.municipalityId;
       }
 

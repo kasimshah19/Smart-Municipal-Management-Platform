@@ -124,7 +124,10 @@ router.get('/:pincode', pincodeLimiter, async (req, res) => {
       });
     }
 
-    const offices = await Pincode.find({ pincode: pincode.trim() }).select('-__v');
+    const offices = await Pincode.find({ pincode: pincode.trim() })
+      .select('-__v')
+      .limit(100)
+      .lean();
 
     if (!offices || offices.length === 0) {
       return res.status(404).json({

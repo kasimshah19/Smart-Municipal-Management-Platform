@@ -222,7 +222,7 @@ function PanchayatSamitiManager() {
             className="px-3 py-2 text-[14px] outline-none"
             style={inputStyles}
           />
-          <div className="w-48">
+          <div className="w-full sm:w-48">
             <SearchableSelect
               name="districtFilter"
               options={districts.map(dist => ({ value: dist._id, label: dist.name }))}
@@ -235,7 +235,7 @@ function PanchayatSamitiManager() {
               placeholder="All Districts"
             />
           </div>
-          <div className="w-48">
+          <div className="w-full sm:w-48">
             <SearchableSelect
               name="talukaFilter"
               options={talukas
@@ -250,7 +250,7 @@ function PanchayatSamitiManager() {
               isDisabled={!districtFilter}
             />
           </div>
-          <div className="w-48">
+          <div className="w-full sm:w-48">
             <SearchableSelect
               name="statusFilter"
               options={[
@@ -266,7 +266,7 @@ function PanchayatSamitiManager() {
             />
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
           <button
             onClick={handleSearchClick}
             className="px-4 py-1.5 text-sm font-medium rounded-lg text-white"

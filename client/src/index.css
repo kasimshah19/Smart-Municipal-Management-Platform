@@ -290,3 +290,75 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: var(--muted);
 }
+
+/* =============================================
+   MOBILE NAVIGATION DRAWER ANIMATION
+   ============================================= */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.25s ease-out;
+}
+
+/* =============================================
+   SAFE AREA SUPPORT (for PWA standalone mode)
+   ============================================= */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-area-x {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* =============================================
+   PWA UPDATE BANNER
+   ============================================= */
+.pwa-update-banner {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background-color: var(--navy);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 14px;
+  animation: toast-in 0.3s ease-out;
+  max-width: calc(100vw - 2rem);
+}
+.pwa-update-banner button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* =============================================
+   OFFLINE INDICATOR
+   ============================================= */
+.offline-banner {
+  background-color: var(--warning);
+  color: #78350F;
+  text-align: center;
+  padding: 0.375rem 1rem;
+  font-size: 13px;
+  font-weight: 600;
+}

@@ -29,11 +29,15 @@ function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-md' }) {
       <div 
         className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
+        aria-hidden="true"
       />
       
       {/* Modal panel */}
       <div 
         ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
         className={`relative w-full ${maxWidth} transform overflow-hidden rounded-2xl p-6 text-left shadow-xl transition-all animate-scale-in`}
         style={{
           backgroundColor: 'var(--surface)',
@@ -41,11 +45,12 @@ function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-md' }) {
         }}
       >
         <div className="flex items-center justify-between mb-5">
-          <h3 className="text-xl font-bold" style={{ color: 'var(--ink)' }}>
+          <h3 id="modal-title" className="text-xl font-bold" style={{ color: 'var(--ink)' }}>
             {title}
           </h3>
           <button
             onClick={onClose}
+            aria-label="Close modal"
             className="flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
             style={{ color: 'var(--muted)' }}
           >

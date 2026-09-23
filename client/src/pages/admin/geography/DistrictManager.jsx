@@ -124,7 +124,7 @@ function DistrictManager() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
         <h2 className="text-lg font-bold" style={{ color: 'var(--ink)' }}>
           Districts
         </h2>
@@ -146,7 +146,7 @@ function DistrictManager() {
           className="px-3 py-2 text-[14px] outline-none w-1/3"
           style={inputStyles}
         />
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="divisionFilter"
             options={divisions.map(div => ({ value: div._id, label: div.name }))}
@@ -155,7 +155,7 @@ function DistrictManager() {
             placeholder="All Divisions"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="statusFilter"
             options={[

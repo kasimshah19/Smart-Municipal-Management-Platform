@@ -37,11 +37,13 @@ export default function PincodeExplorer() {
   // Debounce search input
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1); // Reset to page 1 on new search
+      if (debouncedSearch !== search) {
+        setDebouncedSearch(search);
+        setPage(1); // Reset to page 1 on new search
+      }
     }, 500);
     return () => clearTimeout(handler);
-  }, [search]);
+  }, [search, debouncedSearch]);
 
   // Fetch Data
   useEffect(() => {
@@ -84,7 +86,7 @@ export default function PincodeExplorer() {
 
       {/* Controls */}
       <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-wrap gap-4 items-center" aria-label="Filters">
-        <div className="flex-1 min-w-[200px]">
+        <div className="w-full sm:flex-1 sm:min-w-[200px]">
           <input
             type="text"
             placeholder="Search by Pincode or Office Name..."
@@ -103,7 +105,7 @@ export default function PincodeExplorer() {
             placeholder="All Districts"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="officeType"
             options={[
@@ -116,7 +118,7 @@ export default function PincodeExplorer() {
             placeholder="All Types"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="deliveryStatus"
             options={[
@@ -185,7 +187,7 @@ export default function PincodeExplorer() {
             <span className="text-sm text-gray-500">
               Page {page} of {totalPages}
             </span>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={page === 1}

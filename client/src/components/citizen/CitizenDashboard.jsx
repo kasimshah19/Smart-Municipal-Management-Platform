@@ -45,7 +45,7 @@ function CitizenDashboard() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <h2 className="text-[20px] font-bold" style={{ color: 'var(--ink)' }}>
           Your Complaints
         </h2>
@@ -63,7 +63,7 @@ function CitizenDashboard() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex flex-col items-center justify-center">
           <span className="text-gray-500 text-sm font-medium">Total Reported</span>
           <span className="text-3xl font-bold text-gray-900 mt-1">{pagination?.total || 0}</span>
@@ -92,7 +92,7 @@ function CitizenDashboard() {
           <button
             key={filter.key}
             onClick={() => setActiveFilter(filter.key)}
-            className="px-4 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition-colors"
+            className="px-3 sm:px-4 py-2 rounded-lg text-[13px] font-medium transition-colors"
             style={{
               backgroundColor: activeFilter === filter.key ? 'var(--primary)' : 'transparent',
               color: activeFilter === filter.key ? '#fff' : 'var(--muted)',

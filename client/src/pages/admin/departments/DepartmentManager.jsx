@@ -152,7 +152,7 @@ function DepartmentManager() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
         <h2 className="text-lg font-bold" style={{ color: 'var(--ink)' }}>
           Departments
         </h2>

@@ -25,7 +25,7 @@ const BASELINE = {
   talukas: 359,
   gramPanchayats: 28087,
   municipalities: 420,
-  pincodes: 13762
+  pincodes: 13760
 };
 
 async function checkCounts() {
@@ -37,6 +37,7 @@ async function checkCounts() {
     talukas: await Taluka.countDocuments(),
     municipalities: await Municipality.countDocuments(),
     gramPanchayats: await GramPanchayat.countDocuments(),
+    // Expected count (13,760) represents unique compound identities (pincode + officeName + officeType)
     pincodes: await Pincode.countDocuments()
   };
 

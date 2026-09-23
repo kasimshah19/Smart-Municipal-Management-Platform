@@ -57,7 +57,7 @@ export function TrendsBarChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
@@ -81,7 +81,7 @@ export function CategoryBarChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -105,7 +105,7 @@ export function DepartmentWorkloadChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
           layout="vertical"
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -129,7 +129,7 @@ export function WardWorkloadChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="wardNumber" />
@@ -153,7 +153,7 @@ export function WorkerWorkloadChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -177,7 +177,7 @@ export function MunicipalityWorkloadChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -201,7 +201,7 @@ export function DistrictWorkloadChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="district" />
@@ -225,7 +225,7 @@ export function AreaWorkloadChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 20, right: 10, left: -15, bottom: 5 }}
           layout="vertical"
         >
           <CartesianGrid strokeDasharray="3 3" />

@@ -183,11 +183,11 @@ function MunicipalityManager() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
         <h2 className="text-lg font-bold" style={{ color: 'var(--ink)' }}>
           Local Bodies
         </h2>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
           <button 
             onClick={() => handleOpenModal(null, LOCAL_BODY_TYPES.MUNICIPAL_CORPORATION.value)}
             className="px-4 py-2 rounded-lg font-medium text-sm text-white transition-opacity hover:opacity-90"
@@ -212,16 +212,16 @@ function MunicipalityManager() {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4 mb-4">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-4">
         <input
           type="text"
           placeholder="Search by name or code..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none flex-1 min-w-[200px]"
+          className="px-3 py-2 text-[14px] outline-none w-full sm:flex-1 sm:min-w-[200px]"
           style={inputStyles}
         />
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="typeFilter"
             options={LOCAL_BODY_TYPE_OPTIONS.map(opt => ({ value: opt.value, label: opt.label }))}
@@ -230,7 +230,7 @@ function MunicipalityManager() {
             placeholder="All Types"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="divisionFilter"
             options={divisions.map(div => ({ value: div._id, label: div.name }))}
@@ -243,7 +243,7 @@ function MunicipalityManager() {
             placeholder="All Divisions"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="districtFilter"
             options={districts
@@ -258,7 +258,7 @@ function MunicipalityManager() {
             isDisabled={!!divisionFilter && districts.filter(d => d.divisionId?._id === divisionFilter || d.divisionId === divisionFilter).length === 0}
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="talukaFilter"
             options={talukas
@@ -270,7 +270,7 @@ function MunicipalityManager() {
             isDisabled={!districtFilter}
           />
         </div>
-        <div className="w-40">
+        <div className="w-full sm:w-40">
           <SearchableSelect
             name="statusFilter"
             options={[

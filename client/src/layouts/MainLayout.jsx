@@ -7,7 +7,7 @@ function MainLayout({ children }) {
     <div className="flex min-h-screen flex-col font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
       <Header />
       
-      <main className="flex-1 w-full max-w-[1040px] mx-auto px-5 py-8">
+      <main className="flex-1 w-full max-w-[1040px] mx-auto px-3 sm:px-5 py-4 sm:py-8">
         {children}
       </main>
 

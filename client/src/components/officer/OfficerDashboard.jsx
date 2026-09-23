@@ -81,7 +81,7 @@ export default function OfficerDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="mb-6 flex justify-between items-center">
+      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
           <h1 className="text-2xl font-bold" style={{ color: 'var(--ink)' }}>
             Municipal Admin Dashboard

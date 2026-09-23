@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
 import env from './config/env.js';
 import healthRoutes from './routes/health.routes.js';
@@ -27,6 +29,22 @@ import { notFoundHandler, globalErrorHandler } from './middlewares/error.middlew
 const app = express();
 
 // --------------- Middleware ---------------
+
+// Security Headers
+app.use(helmet());
+
+// Global Rate Limiting
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300, // limit each IP to 300 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: 'Too many requests, please try again later.'
+  }
+});
+app.use('/api/', globalLimiter);
 
 // Request logging (development only)
 if (env.NODE_ENV === 'development') {

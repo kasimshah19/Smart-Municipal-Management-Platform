@@ -185,7 +185,7 @@ function AreaManager() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
         <h2 className="text-lg font-bold" style={{ color: 'var(--ink)' }}>
           Areas / Localities
         </h2>
@@ -207,7 +207,7 @@ function AreaManager() {
           className="px-3 py-2 text-[14px] outline-none w-48"
           style={inputStyles}
         />
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="districtFilter"
             options={MAHARASHTRA_DISTRICTS.map(dist => ({ value: dist, label: dist }))}
@@ -220,7 +220,7 @@ function AreaManager() {
             placeholder="All Districts"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="municipalityFilter"
             options={filteredMunicipalities.map(m => ({ value: m._id, label: m.name }))}
@@ -232,7 +232,7 @@ function AreaManager() {
             placeholder="All Municipalities"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full sm:w-48">
           <SearchableSelect
             name="wardFilter"
             options={availableWardsForFilter.map(w => ({ value: w._id, label: `Ward ${w.wardNumber}` }))}

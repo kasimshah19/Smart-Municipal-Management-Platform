@@ -105,11 +105,11 @@ const WorkerDashboard = () => {
               </div>
             </div>
 
-            <div className="mb-6 flex justify-between items-end">
+            <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
               <h2 className="text-xl font-bold text-gray-900">Today's Active Tasks</h2>
               <div className="flex gap-4">
-                <Link to="/worker/tasks?filter=nearby" className="text-gray-500 hover:text-gray-700 font-medium">Nearby Tasks</Link>
-                <Link to="/worker/tasks" className="text-primary-600 hover:text-primary-700 font-medium">View All Tasks &rarr;</Link>
+                <Link to="/worker/tasks?filter=nearby" className="text-gray-500 hover:text-gray-700 font-medium text-sm">Nearby Tasks</Link>
+                <Link to="/worker/tasks" className="text-primary-600 hover:text-primary-700 font-medium text-sm">View All Tasks &rarr;</Link>
               </div>
             </div>
 

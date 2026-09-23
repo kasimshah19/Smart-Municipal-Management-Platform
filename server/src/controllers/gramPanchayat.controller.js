@@ -22,8 +22,9 @@ export const getGramPanchayats = async (req, res, next) => {
     // RBAC Scope Check removed. SUPER_ADMIN is the only allowed role, so they have global access.
     // Ensure limit is strictly bounded to prevent pagination abuse
     const parsedLimit = Math.min(parseInt(limit) || 50, 100);
+    const parsedPage = Math.max(parseInt(page) || 1, 1);
 
-    const skip = (parseInt(page) - 1) * parsedLimit;
+    const skip = (parsedPage - 1) * parsedLimit;
     const total = await GramPanchayat.countDocuments(query);
     const gramPanchayats = await GramPanchayat.find(query)
       .skip(skip)
@@ -36,7 +37,7 @@ export const getGramPanchayats = async (req, res, next) => {
       data: gramPanchayats,
       pagination: {
         total,
-        page: parseInt(page),
+        page: parsedPage,
         limit: parsedLimit,
         pages: Math.ceil(total / parsedLimit)
       }

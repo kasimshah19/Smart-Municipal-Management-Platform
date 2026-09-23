@@ -76,18 +76,18 @@ function OfficerComplaintsList() {
     <MainLayout>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <h1 className="text-[22px] font-bold" style={{ color: 'var(--ink)' }}>
             Complaints Management
           </h1>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <input
               type="text"
               placeholder="Search by ID..."
               value={searchId}
               onChange={(e) => setSearchId(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="px-3 py-2 text-[13px] outline-none w-[180px]"
+              className="px-3 py-2 text-[13px] outline-none flex-1 sm:flex-none sm:w-[180px]"
               style={inputStyles}
             />
             <button
@@ -108,7 +108,7 @@ function OfficerComplaintsList() {
             border: '1px solid var(--line)',
           }}
         >
-          <div className="w-48">
+          <div className="w-full sm:w-48">
             <SearchableSelect
               name="status"
               options={STATUS_OPTIONS.map(opt => ({ value: opt.key, label: opt.label }))}
@@ -118,7 +118,7 @@ function OfficerComplaintsList() {
             />
           </div>
 
-          <div className="w-48">
+          <div className="w-full sm:w-48">
             <SearchableSelect
               name="priority"
               options={PRIORITY_OPTIONS.map(opt => ({ value: opt.key, label: opt.label }))}
@@ -221,7 +221,7 @@ function OfficerComplaintsList() {
           {/* Pagination */}
           {pagination && pagination.totalPages > 1 && (
             <div
-              className="flex items-center justify-between px-4 py-3"
+              className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3"
               style={{ borderTop: '1px solid var(--line)' }}
             >
               <span className="text-[12px]" style={{ color: 'var(--muted)' }}>

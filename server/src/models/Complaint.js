@@ -165,15 +165,15 @@ const complaintSchema = new mongoose.Schema(
 );
 
 // Indexes
-complaintSchema.index({ citizenId: 1 });
-complaintSchema.index({ municipalityId: 1 });
-complaintSchema.index({ wardId: 1 });
+complaintSchema.index({ citizenId: 1, createdAt: -1 });
+complaintSchema.index({ municipalityId: 1, createdAt: -1 });
+complaintSchema.index({ municipalityId: 1, status: 1, createdAt: -1 });
+complaintSchema.index({ municipalityId: 1, departmentId: 1, createdAt: -1 });
+complaintSchema.index({ wardId: 1, createdAt: -1 });
 complaintSchema.index({ areaId: 1 });
-complaintSchema.index({ departmentId: 1 });
 complaintSchema.index({ categoryId: 1 });
 complaintSchema.index({ status: 1 });
 complaintSchema.index({ priority: 1 });
-complaintSchema.index({ createdAt: -1 });
 complaintSchema.index({ location: '2dsphere' });
 complaintSchema.index({ currentAssignmentId: 1 });
 

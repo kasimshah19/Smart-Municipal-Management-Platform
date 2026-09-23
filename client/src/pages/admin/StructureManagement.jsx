@@ -48,12 +48,12 @@ function StructureManagement() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 overflow-x-auto pb-4 mb-4 border-b" style={{ borderColor: 'var(--line)' }}>
+      <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-4 mb-4 border-b hide-scrollbar" style={{ borderColor: 'var(--line)' }}>
         {ENTITIES.map(entity => (
           <button
             key={entity.key}
             onClick={() => setActiveTab(entity)}
-            className="px-4 py-2 font-medium text-sm whitespace-nowrap transition-colors rounded-lg"
+            className="px-4 py-2 font-medium text-sm whitespace-nowrap transition-colors rounded-lg snap-start"
             style={{
               backgroundColor: activeTab.key === entity.key ? 'var(--primary)' : 'transparent',
               color: activeTab.key === entity.key ? 'white' : 'var(--ink)',
