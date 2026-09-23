@@ -361,11 +361,27 @@ To prevent data contamination and enforce strict jurisdictional boundaries, the 
 
 ### Urban Architecture (Operational Workflow)
 **Hierarchy:** `State` → `District` → **`Municipality`** → `Ward` → `Area`
-Municipalities are the core operational units for the platform's complaint lifecycle. They contain their own Wards, Departments, Areas, and active Complaint workflows. A `MUNICIPAL_ADMIN` is scoped entirely to their specific `Municipality` document and cannot access data from other municipalities or rural areas.
+Urban local bodies are governed by preserving the existing Municipality model, supporting forms such as Municipal Corporation, Municipal Council, and Nagar Panchayat. Municipalities are the core operational units for the platform's complaint lifecycle. They contain their own Wards, Departments, Areas, and active Complaint workflows. A `MUNICIPAL_ADMIN` is scoped entirely to their specific `Municipality` document and cannot access data from other municipalities or rural areas.
 
 ### Rural Architecture (Master Data)
 **Hierarchy:** `State` → `Division` → `District` → **`Taluka`** → **`Gram Panchayat`**
-Gram Panchayats are tracked as statewide master data, reflecting the distinct administrative reality of rural Maharashtra. They are structurally distinct from Municipalities. **There is no generic "LocalBody" model.** Conflating a massive Municipal Corporation with a tiny Gram Panchayat into a single collection would severely degrade indexing performance, complicate API security boundaries, and require numerous nullable fields. The explicit separation ensures optimized querying and ironclad RBAC enforcement.
+Gram Panchayats are tracked as statewide master data, reflecting the distinct administrative reality of rural Maharashtra. They are structurally distinct from Municipalities. **There is no generic "LocalBody" model.** The project preserves the existing Municipality model for urban local bodies and keeps rural Gram Panchayat data handled separately. Conflating a massive Municipal Corporation with a tiny Gram Panchayat into a single collection would severely degrade indexing performance, complicate API security boundaries, and require numerous nullable fields. The explicit separation ensures optimized querying and ironclad RBAC enforcement.
+
+```mermaid
+flowchart TD
+    A[Maharashtra] --> B[Revenue Division]
+    B --> C[District]
+    C --> D[Taluka]
+    D --> E[Gram Panchayat]
+
+    C --> F[Urban Local Body]
+    F --> G[Municipal Corporation]
+    F --> H[Municipal Council]
+    F --> I[Nagar Panchayat]
+```
+
+### Division Denormalization
+Phase 13A verified that Division ID is stored directly on Gram Panchayat records. It is derived and denormalized for efficient querying, but it must remain consistent with the hierarchy: `Gram Panchayat` → `Taluka` → `District` → `Division`. The integrity validation rule mandates that `GP.divisionId` must match the Division derived from its Taluka/District hierarchy, preventing arbitrary independent Division assignment.
 
 ---
 
@@ -374,12 +390,24 @@ Gram Panchayats are tracked as statewide master data, reflecting the distinct ad
 The platform implements a highly accurate geographic hierarchy for the State of Maharashtra, sourced from official directories:
 
 - **6 Divisions** (Konkan, Pune, Nashik, Aurangabad, Amravati, Nagpur)
-- **36 Districts**
+- **36 Districts** (including current canonical names such as Ahilyanagar, Chhatrapati Sambhajinagar, Dharashiv)
 - **350+ Talukas**
 - **395 Urban Municipalities** (Municipal Corporations, Municipal Councils, Nagar Panchayats)
 - **28,087 Gram Panchayats** (Rural Local Bodies)
 
 *Note: The exact counts of rural and urban local bodies are sourced directly from external integration scripts and represent the imported state of the system snapshot. These numbers may fluctuate as government classifications change.*
+
+### Cross-District Taluka Collisions
+Taluka names are NOT globally unique across the state. Verified examples of cross-district name collisions include:
+- Karjat
+- Khed
+- Shirur
+- Malegaon
+- Kalamb
+- Ashti
+- Karanja
+
+For example, Khed in Pune and Khed in Ratnagiri are completely different geographic entities. The application resolves these through reference IDs (e.g., `districtId` + `talukaId`), rather than name-only lookup. This reference-based identity mechanism prevents mismatched assignments when identical names appear in different districts.
 
 ---
 
@@ -387,8 +415,11 @@ The platform implements a highly accurate geographic hierarchy for the State of 
 
 The platform leverages standardized government data to ensure accuracy and interoperability.
 
-- **Government Open Data Platform India**: [https://www.data.gov.in/](https://www.data.gov.in/)
 - **Local Government Directory — Government of India**: [https://lgdirectory.gov.in/welcome.do](https://lgdirectory.gov.in/welcome.do)
+  The LGD is used as an authoritative government directory and source for local-government and location-reference data. LGD codes are strictly source identifiers. Internally generated application codes are completely distinct from LGD codes (LGD Code vs. Application/Internal Code).
+
+- **Government Open Data Platform India**: [https://www.data.gov.in/](https://www.data.gov.in/)
+  Served as a supporting/reference source for cross-verifying administrative structures, distinct from directly integrated datasets.
 
 **Data Source Disclaimer**:
 The Local Government Directory (LGD) is used strictly as an external reference for standardized local-government and geographic master data. The official LGD website describes LGD as a unified directory covering states, rural, and urban local governments, with LGD codes utilized as standard location identifiers for e-governance interoperability.
@@ -401,14 +432,18 @@ The Local Government Directory (LGD) is used strictly as an external reference f
 
 ```mermaid
 flowchart LR
-    Source["CSV/JSON Source Files"]
-    Validate["Validation & Parsing Script"]
-    Normalize["Normalization (String matching, cleansing)"]
-    Reconcile["Geographic Reconciliation"]
-    Bulk["Mongoose BulkWrite"]
-    DB[(MongoDB)]
+    Source["Source data"]
+    Import["CSV / imported master data"]
+    Validate["Validation"]
+    Preserve["LGD identity preservation"]
+    Reconcile["Taluka reconciliation"]
+    DistVal["District validation"]
+    DivVal["Division validation"]
+    DB[(Database)]
+    API["Paginated API"]
+    Front["Frontend"]
 
-    Source --> Validate --> Normalize --> Reconcile --> Bulk --> DB
+    Source --> Import --> Validate --> Preserve --> Reconcile --> DistVal --> DivVal --> DB --> API --> Front
 ```
 
 The platform includes robust Node.js ingestion scripts designed to process large datasets (like the 28,000+ Gram Panchayats) efficiently.
@@ -431,19 +466,51 @@ A critical architectural distinction is made between Official LGD codes and Inte
 
 ---
 
-## Gram Panchayat Reconciliation
+## Gram Panchayat Reconciliation & Phase 13A Results
 
-The integration of 28,087 rural Gram Panchayats from LGD CSV data required complex mapping to internal `talukaId` structures. Because text-based names often mismatch due to spelling variations or formatting, a deterministic, multi-pass reconciliation script (`reconcile_talukas.js`) was utilized to resolve orphaned records.
+The integration of rural Gram Panchayats from LGD CSV data required complex mapping to internal `talukaId` structures using a deterministic, multi-pass reconciliation script (`reconcile_talukas.js`).
 
-**Verified Execution History:**
+**Verified Execution History (Reconciliation):**
 - 3974 Gram Panchayats initially unresolved.
-- Pass 1 (Exact match after aggressive string cleansing): 180 mapped → 3794 remaining.
-- Pass 2 (Fuzzy matching/alias resolution): 1766 mapped → 2028 remaining.
-- Pass 3 (Secondary alias mapping): 1575 mapped → 453 remaining.
-- Pass 4 (Manual override mapping): 453 mapped → 0 remaining.
+- Pass 1 (Exact match after aggressive string cleansing): 180 mapped
+- Pass 2 (Fuzzy matching/alias resolution): 1766 mapped
+- Pass 3 (Secondary alias mapping): 1575 mapped
+- Pass 4 (Manual override mapping): 453 mapped
 - **Total: 3974 successfully processed.**
 
-The reconciliation script successfully resolved the previously unresolved Taluka references based on deterministic mapping rules. A subsequent rigorous Phase 13 Integrity Audit validated the geographic consistency and completely purged BSON-type indexing duplicates (where LGD codes were mixed between Numbers and Strings), guaranteeing a 100% clean rural dataset.
+### Phase 13A Final Rural Geography Results
+
+The final verified Phase 13A geographic integrity results:
+- **Authentic Gram Panchayat records**: 28,087
+- **Taluka ID assigned**: 28,087 / 28,087
+- **Taluka Name assigned**: 28,087 / 28,087
+- **District ID assigned**: 28,087 / 28,087
+- **Division ID assigned**: 28,087 / 28,087
+- **Valid Taluka references**: 28,087
+- **Broken Taluka references**: 0
+- **Missing Taluka names**: 0
+- **Mismatched Taluka names**: 0
+- **Invalid hierarchy links**: 0
+- **Incomplete hierarchy links**: 0
+- **Duplicate Gram Panchayat records**: 0
+- **Duplicate Taluka records within the same district context**: 0
+- **Fuzzy matches**: 0
+- **LGD identity modifications**: 0
+- **Urban Municipality records**: 395
+
+**Note on Synthetic Test Record**:
+An earlier audit count of 28,088 included one synthetic security-test record (GP name: `TEST GP INJECTION`, LGD code: `999999`). This was not an authentic Maharashtra Gram Panchayat; it was created by the Phase 12 security verification script to test mass-assignment protection. The synthetic record was removed using a targeted cleanup operation, leaving exactly 28,087 authentic Gram Panchayat records.
+
+### Data Matching Quality
+
+The verified matching distribution for the 28,087 authentic records is as follows:
+- **Exact matches**: 24,113
+- **Normalized matches**: 260
+- **Alias matches**: 3,714
+- **Fuzzy matches**: 0
+- **Total**: 28,087
+
+All 28,087 records in the integrated LGD master dataset have deterministic `Taluka` → `District` → `Division` mappings in the audited dataset. This does not guarantee permanent real-world geographic accuracy forever, as future government administrative reorganizations will require refreshed authoritative source data.
 
 ---
 
@@ -577,18 +644,21 @@ Security is baked into the platform at every layer.
 
 ---
 
-## Security Testing
+## Phase 12 Security Hardening & Testing
 
-Rigorous security tests were executed during Phase 12 verification to validate the RBAC and scoping logic.
+Rigorous security tests were executed during Phase 12 verification to validate the RBAC and scoping logic. Gram Panchayat administrative management is restricted solely to the `SUPER_ADMIN` role according to the current implementation.
 
 | Test | Result |
 | :--- | :--- |
 | Anonymous access to Gram Panchayat API | **PASS — 401 Unauthorized** |
 | `CITIZEN` role access to GP API | **PASS — 403 Forbidden** |
-| `MUNICIPAL_ADMIN` role access to GP API | **PASS — 403 Forbidden** |
+| `MUNICIPAL_ADMIN` role access to GP API | **PASS — 403 Forbidden for rural geography** |
 | `SUPER_ADMIN` role access to GP API | **PASS — 200 OK** |
-| Pagination abuse (Requesting Limit > 100) | **PASS — Safely truncated to 100** |
-| Mass assignment (Attempting role injection) | **PASS — Malicious fields stripped** |
+| Pagination abuse (Requesting Limit > 100) | **PASS — maximum limit = 100** |
+| Mass assignment (Attempting role injection) | **PASS — malicious fields ignored** |
+
+### Security Test Artifact Cleanup
+Security verification uses synthetic data where required. The `verify_phase12.js` script creates a synthetic GP using the LGD code `999999` to test mass assignment protection. The script performs deterministic cleanup at the end of the test so that test artifacts do not remain in the operational database.
 
 ---
 
