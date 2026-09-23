@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 function DivisionManager() {
   const dispatch = useDispatch();
@@ -129,16 +130,18 @@ function DivisionManager() {
           className="px-3 py-2 text-[14px] outline-none w-1/3"
           style={inputStyles}
         />
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Status</option>
-          <option value="ACTIVE">Active</option>
-          <option value="INACTIVE">Inactive</option>
-        </select>
+        <div className="w-48">
+          <SearchableSelect
+            name="statusFilter"
+            options={[
+              { value: "ACTIVE", label: "Active" },
+              { value: "INACTIVE", label: "Inactive" }
+            ]}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            placeholder="All Status"
+          />
+        </div>
       </div>
 
       {loading ? (

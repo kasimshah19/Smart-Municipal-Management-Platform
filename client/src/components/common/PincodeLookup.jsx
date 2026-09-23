@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { pincodeService } from '../../services/pincodeService';
+import SearchableSelect from './SearchableSelect.jsx';
 
 /**
  * Reusable component for 6-digit Pincode lookup.
@@ -118,19 +119,16 @@ export default function PincodeLookup({ onOfficeSelected, initialPincode = '' })
           <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>
             Select Postal Office
           </label>
-          <select
+          <SearchableSelect
+            name="officeId"
+            options={offices.map(office => ({
+              value: office._id,
+              label: `${office.officeName} (${office.officeType} - ${office.deliveryStatus})`
+            }))}
             value={selectedOfficeId}
             onChange={handleOfficeSelection}
-            className="w-full px-3 py-2 text-[14px] outline-none transition-colors focus:border-[var(--primary)]"
-            style={inputStyles}
-          >
-            <option value="">-- Select a Postal Office --</option>
-            {offices.map((office) => (
-              <option key={office._id} value={office._id}>
-                {office.officeName} ({office.officeType} - {office.deliveryStatus})
-              </option>
-            ))}
-          </select>
+            placeholder="-- Select a Postal Office --"
+          />
         </div>
       )}
     </div>

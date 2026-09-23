@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
 import { MAHARASHTRA_DISTRICTS } from '../../../constants/maharashtraDistricts.js';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 function WardManager() {
   const dispatch = useDispatch();
@@ -162,31 +163,25 @@ function WardManager() {
           className="px-3 py-2 text-[14px] outline-none w-64"
           style={inputStyles}
         />
-        <select
-          value={districtFilter}
-          onChange={(e) => {
-            setDistrictFilter(e.target.value);
-            setMunicipalityFilter('');
-          }}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Districts</option>
-          {MAHARASHTRA_DISTRICTS.map(dist => (
-            <option key={dist} value={dist}>{dist}</option>
-          ))}
-        </select>
-        <select
-          value={municipalityFilter}
-          onChange={(e) => setMunicipalityFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none w-64 truncate"
-          style={inputStyles}
-        >
-          <option value="">All Municipalities</option>
-          {filteredMunicipalities.map(m => (
-            <option key={m._id} value={m._id}>{m.name}</option>
-          ))}
-        </select>
+        <div className="w-64">
+          <SearchableSelect
+            options={MAHARASHTRA_DISTRICTS.map(d => ({ value: d, label: d }))}
+            value={districtFilter}
+            onChange={(e) => {
+              setDistrictFilter(e.target.value);
+              setMunicipalityFilter('');
+            }}
+            placeholder="All Districts"
+          />
+        </div>
+        <div className="w-64">
+          <SearchableSelect
+            options={filteredMunicipalities.map(m => ({ value: m._id, label: m.name }))}
+            value={municipalityFilter}
+            onChange={(e) => setMunicipalityFilter(e.target.value)}
+            placeholder="All Municipalities"
+          />
+        </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
@@ -278,18 +273,14 @@ function WardManager() {
           
           <div className="flex flex-col gap-1">
             <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Municipality *</label>
-            <select
-              required
+            <SearchableSelect
+              name="municipalityId"
+              options={municipalities.map(m => ({ value: m._id, label: m.name }))}
               value={formData.municipalityId}
               onChange={(e) => setFormData({...formData, municipalityId: e.target.value})}
-              className="px-3 py-2 text-[14px] outline-none"
-              style={inputStyles}
-            >
-              <option value="" disabled>Select Municipality</option>
-              {municipalities.map(m => (
-                <option key={m._id} value={m._id}>{m.name}</option>
-              ))}
-            </select>
+              placeholder="Select Municipality"
+              isClearable={false}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">

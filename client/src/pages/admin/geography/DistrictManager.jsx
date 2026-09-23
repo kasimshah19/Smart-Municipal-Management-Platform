@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 function DistrictManager() {
   const dispatch = useDispatch();
@@ -145,27 +146,27 @@ function DistrictManager() {
           className="px-3 py-2 text-[14px] outline-none w-1/3"
           style={inputStyles}
         />
-        <select
-          value={divisionFilter}
-          onChange={(e) => setDivisionFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Divisions</option>
-          {divisions.map(div => (
-            <option key={div._id} value={div._id}>{div.name}</option>
-          ))}
-        </select>
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Status</option>
-          <option value="ACTIVE">Active</option>
-          <option value="INACTIVE">Inactive</option>
-        </select>
+        <div className="w-48">
+          <SearchableSelect
+            name="divisionFilter"
+            options={divisions.map(div => ({ value: div._id, label: div.name }))}
+            value={divisionFilter}
+            onChange={(e) => setDivisionFilter(e.target.value)}
+            placeholder="All Divisions"
+          />
+        </div>
+        <div className="w-48">
+          <SearchableSelect
+            name="statusFilter"
+            options={[
+              { value: "ACTIVE", label: "Active" },
+              { value: "INACTIVE", label: "Inactive" }
+            ]}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            placeholder="All Status"
+          />
+        </div>
       </div>
 
       {loading ? (
@@ -279,18 +280,14 @@ function DistrictManager() {
           
           <div className="flex flex-col gap-1">
             <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Division *</label>
-            <select
-              required
+            <SearchableSelect
+              name="divisionId"
+              options={divisions.map(div => ({ value: div._id, label: div.name }))}
               value={formData.divisionId}
               onChange={(e) => setFormData({...formData, divisionId: e.target.value})}
-              className="px-3 py-2 text-[14px] outline-none"
-              style={inputStyles}
-            >
-              <option value="" disabled>Select Division</option>
-              {divisions.map(div => (
-                <option key={div._id} value={div._id}>{div.name}</option>
-              ))}
-            </select>
+              placeholder="Select Division"
+              isClearable={false}
+            />
           </div>
 
           <div className="flex flex-col gap-1">

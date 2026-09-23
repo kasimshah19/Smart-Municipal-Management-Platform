@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 function ZillaParishadManager() {
   const dispatch = useDispatch();
@@ -187,33 +188,33 @@ function ZillaParishadManager() {
             className="px-3 py-2 text-[14px] outline-none"
             style={inputStyles}
           />
-          <select
-            value={districtFilter}
-            onChange={(e) => {
-              setDistrictFilter(e.target.value);
-              setPage(1);
-            }}
-            className="px-3 py-2 text-[14px] outline-none"
-            style={inputStyles}
-          >
-            <option value="">All Districts</option>
-            {districts.map(dist => (
-              <option key={dist._id} value={dist._id}>{dist.name}</option>
-            ))}
-          </select>
-          <select
-            value={statusFilter}
-            onChange={(e) => {
-              setStatusFilter(e.target.value);
-              setPage(1);
-            }}
-            className="px-3 py-2 text-[14px] outline-none"
-            style={inputStyles}
-          >
-            <option value="">All Status</option>
-            <option value="ACTIVE">Active</option>
-            <option value="INACTIVE">Inactive</option>
-          </select>
+          <div className="w-48">
+            <SearchableSelect
+              name="districtFilter"
+              options={districts.map(dist => ({ value: dist._id, label: dist.name }))}
+              value={districtFilter}
+              onChange={(e) => {
+                setDistrictFilter(e.target.value);
+                setPage(1);
+              }}
+              placeholder="All Districts"
+            />
+          </div>
+          <div className="w-48">
+            <SearchableSelect
+              name="statusFilter"
+              options={[
+                { value: "ACTIVE", label: "Active" },
+                { value: "INACTIVE", label: "Inactive" }
+              ]}
+              value={statusFilter}
+              onChange={(e) => {
+                setStatusFilter(e.target.value);
+                setPage(1);
+              }}
+              placeholder="All Status"
+            />
+          </div>
         </div>
         <div className="flex gap-2">
           <button
@@ -379,18 +380,14 @@ function ZillaParishadManager() {
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>District *</label>
-              <select
-                required
+              <SearchableSelect
+                name="districtId"
+                options={districts.map(dist => ({ value: dist._id, label: dist.name }))}
                 value={formData.districtId}
                 onChange={(e) => setFormData({...formData, districtId: e.target.value})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-              >
-                <option value="" disabled>Select District</option>
-                {districts.map(dist => (
-                  <option key={dist._id} value={dist._id}>{dist.name}</option>
-                ))}
-              </select>
+                placeholder="Select District"
+                isClearable={false}
+              />
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
 import { useSelector } from 'react-redux';
+import SearchableSelect from '../../components/common/SearchableSelect.jsx';
 const OfficerComplaintDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -147,45 +148,44 @@ const OfficerComplaintDetails = () => {
               <form onSubmit={handleAssign} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Assign To</label>
-                  <select
-                    className="w-full border rounded p-2"
+                  <SearchableSelect
+                    name="type"
+                    options={[
+                      { value: 'EMPLOYEE', label: 'Individual Worker' },
+                      { value: 'TEAM', label: 'Worker Team' }
+                    ]}
                     value={assignment.type}
                     onChange={(e) => setAssignment({...assignment, type: e.target.value})}
-                  >
-                    <option value="EMPLOYEE">Individual Worker</option>
-                    <option value="TEAM">Worker Team</option>
-                  </select>
+                    isClearable={false}
+                  />
                 </div>
 
                 {assignment.type === 'EMPLOYEE' ? (
                   <div>
                     <label className="block text-sm font-medium mb-1">Select Worker</label>
-                    <select
-                      required
-                      className="w-full border rounded p-2"
+                    <SearchableSelect
+                      name="assignedToEmployeeId"
+                      options={employees.map(emp => ({ 
+                        value: emp._id, 
+                        label: `${emp.user?.firstName} ${emp.user?.lastName} (ID: ${emp.employeeId})` 
+                      }))}
                       value={assignment.assignedToEmployeeId}
                       onChange={(e) => setAssignment({...assignment, assignedToEmployeeId: e.target.value})}
-                    >
-                      <option value="">-- Choose Worker --</option>
-                      {employees.map(emp => (
-                        <option key={emp._id} value={emp._id}>{emp.user?.firstName} {emp.user?.lastName} (ID: {emp.employeeId})</option>
-                      ))}
-                    </select>
+                      placeholder="-- Choose Worker --"
+                      isClearable={false}
+                    />
                   </div>
                 ) : (
                   <div>
                     <label className="block text-sm font-medium mb-1">Select Team</label>
-                    <select
-                      required
-                      className="w-full border rounded p-2"
+                    <SearchableSelect
+                      name="assignedToTeamId"
+                      options={teams.map(team => ({ value: team._id, label: team.name }))}
                       value={assignment.assignedToTeamId}
                       onChange={(e) => setAssignment({...assignment, assignedToTeamId: e.target.value})}
-                    >
-                      <option value="">-- Choose Team --</option>
-                      {teams.map(team => (
-                        <option key={team._id} value={team._id}>{team.name}</option>
-                      ))}
-                    </select>
+                      placeholder="-- Choose Team --"
+                      isClearable={false}
+                    />
                   </div>
                 )}
 

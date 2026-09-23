@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { pincodeService } from '../../../services/pincodeService';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 export default function PincodeExplorer() {
   const dispatch = useDispatch();
@@ -93,41 +94,39 @@ export default function PincodeExplorer() {
             aria-label="Search pincodes"
           />
         </div>
-        <div className="w-48">
-          <select
+        <div className="w-64">
+          <SearchableSelect
+            name="postalDistrictName"
+            options={districts.map(d => ({ value: d, label: d }))}
             value={postalDistrictName}
             onChange={(e) => { setPostalDistrictName(e.target.value); setPage(1); }}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-500 bg-white"
-            aria-label="Filter by Postal District"
-          >
-            <option value="">All Districts</option>
-            {districts.map(d => <option key={d} value={d}>{d}</option>)}
-          </select>
+            placeholder="All Districts"
+          />
         </div>
-        <div className="w-32">
-          <select
+        <div className="w-48">
+          <SearchableSelect
+            name="officeType"
+            options={[
+              { value: 'HO', label: 'HO (Head)' },
+              { value: 'SO', label: 'SO (Sub)' },
+              { value: 'BO', label: 'BO (Branch)' }
+            ]}
             value={officeType}
             onChange={(e) => { setOfficeType(e.target.value); setPage(1); }}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-500 bg-white"
-            aria-label="Filter by Office Type"
-          >
-            <option value="">All Types</option>
-            <option value="HO">HO (Head)</option>
-            <option value="SO">SO (Sub)</option>
-            <option value="BO">BO (Branch)</option>
-          </select>
+            placeholder="All Types"
+          />
         </div>
-        <div className="w-40">
-          <select
+        <div className="w-48">
+          <SearchableSelect
+            name="deliveryStatus"
+            options={[
+              { value: 'Delivery', label: 'Delivery' },
+              { value: 'Non-Delivery', label: 'Non-Delivery' }
+            ]}
             value={deliveryStatus}
             onChange={(e) => { setDeliveryStatus(e.target.value); setPage(1); }}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-500 bg-white"
-            aria-label="Filter by Delivery Status"
-          >
-            <option value="">All Statuses</option>
-            <option value="Delivery">Delivery</option>
-            <option value="Non-Delivery">Non-Delivery</option>
-          </select>
+            placeholder="All Statuses"
+          />
         </div>
       </div>
 

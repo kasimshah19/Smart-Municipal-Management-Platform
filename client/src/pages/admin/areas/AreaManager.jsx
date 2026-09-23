@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
 import { MAHARASHTRA_DISTRICTS } from '../../../constants/maharashtraDistricts.js';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 function AreaManager() {
   const dispatch = useDispatch();
@@ -206,56 +207,52 @@ function AreaManager() {
           className="px-3 py-2 text-[14px] outline-none w-48"
           style={inputStyles}
         />
-        <select
-          value={districtFilter}
-          onChange={(e) => {
-            setDistrictFilter(e.target.value);
-            setMunicipalityFilter('');
-            setWardFilter('');
-          }}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Districts</option>
-          {MAHARASHTRA_DISTRICTS.map(dist => (
-            <option key={dist} value={dist}>{dist}</option>
-          ))}
-        </select>
-        <select
-          value={municipalityFilter}
-          onChange={(e) => {
-            setMunicipalityFilter(e.target.value);
-            setWardFilter('');
-          }}
-          className="px-3 py-2 text-[14px] outline-none w-48 truncate"
-          style={inputStyles}
-        >
-          <option value="">All Municipalities</option>
-          {filteredMunicipalities.map(m => (
-            <option key={m._id} value={m._id}>{m.name}</option>
-          ))}
-        </select>
-        <select
-          value={wardFilter}
-          onChange={(e) => setWardFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none w-32 truncate"
-          style={inputStyles}
-        >
-          <option value="">All Wards</option>
-          {availableWardsForFilter.map(w => (
-            <option key={w._id} value={w._id}>Ward {w.wardNumber}</option>
-          ))}
-        </select>
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Status</option>
-          <option value="ACTIVE">Active</option>
-          <option value="INACTIVE">Inactive</option>
-        </select>
+        <div className="w-48">
+          <SearchableSelect
+            name="districtFilter"
+            options={MAHARASHTRA_DISTRICTS.map(dist => ({ value: dist, label: dist }))}
+            value={districtFilter}
+            onChange={(e) => {
+              setDistrictFilter(e.target.value);
+              setMunicipalityFilter('');
+              setWardFilter('');
+            }}
+            placeholder="All Districts"
+          />
+        </div>
+        <div className="w-48">
+          <SearchableSelect
+            name="municipalityFilter"
+            options={filteredMunicipalities.map(m => ({ value: m._id, label: m.name }))}
+            value={municipalityFilter}
+            onChange={(e) => {
+              setMunicipalityFilter(e.target.value);
+              setWardFilter('');
+            }}
+            placeholder="All Municipalities"
+          />
+        </div>
+        <div className="w-48">
+          <SearchableSelect
+            name="wardFilter"
+            options={availableWardsForFilter.map(w => ({ value: w._id, label: `Ward ${w.wardNumber}` }))}
+            value={wardFilter}
+            onChange={(e) => setWardFilter(e.target.value)}
+            placeholder="All Wards"
+          />
+        </div>
+        <div className="w-40">
+          <SearchableSelect
+            name="statusFilter"
+            options={[
+              { value: "ACTIVE", label: "Active" },
+              { value: "INACTIVE", label: "Inactive" }
+            ]}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            placeholder="All Status"
+          />
+        </div>
       </div>
 
       {loading ? (
@@ -343,37 +340,29 @@ function AreaManager() {
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Municipality *</label>
-              <select
-                required
+              <SearchableSelect
+                name="municipalityId"
+                options={municipalities.map(m => ({ value: m._id, label: m.name }))}
                 value={formData.municipalityId}
                 onChange={(e) => {
                   setFormData({...formData, municipalityId: e.target.value, wardId: ''});
                 }}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-              >
-                <option value="" disabled>Select Municipality</option>
-                {municipalities.map(m => (
-                  <option key={m._id} value={m._id}>{m.name}</option>
-                ))}
-              </select>
+                placeholder="Select Municipality"
+                isClearable={false}
+              />
             </div>
             
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Ward *</label>
-              <select
-                required
+              <SearchableSelect
+                name="wardId"
+                options={wards.map(w => ({ value: w._id, label: `Ward ${w.wardNumber} - ${w.name}` }))}
                 value={formData.wardId}
                 onChange={(e) => setFormData({...formData, wardId: e.target.value})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-                disabled={!formData.municipalityId}
-              >
-                <option value="" disabled>Select Ward</option>
-                {wards.map(w => (
-                  <option key={w._id} value={w._id}>Ward {w.wardNumber} - {w.name}</option>
-                ))}
-              </select>
+                placeholder="Select Ward"
+                isDisabled={!formData.municipalityId}
+                isClearable={false}
+              />
             </div>
           </div>
 

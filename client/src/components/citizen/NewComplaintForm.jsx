@@ -4,6 +4,7 @@ import { addComplaint } from '../../store/complaintsSlice.js';
 import { showToast } from '../../store/uiSlice.js';
 import PincodeLookup from '../common/PincodeLookup.jsx';
 import PostalInfoCard from '../common/PostalInfoCard.jsx';
+import SearchableSelect from '../common/SearchableSelect.jsx';
 
 const CATEGORIES = [
   'Pothole / Road Damage',
@@ -77,18 +78,14 @@ function NewComplaintForm() {
           <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>
             Category
           </label>
-          <select
+          <SearchableSelect
+            name="type"
+            options={CATEGORIES.map(cat => ({ value: cat, label: cat }))}
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="px-3 py-2 text-[14px] outline-none transition-colors focus:border-primary"
-            style={inputStyles}
-          >
-            {CATEGORIES.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
+            placeholder="Select Category"
+            isClearable={false}
+          />
         </div>
 
         <div className="flex flex-col gap-1.5">

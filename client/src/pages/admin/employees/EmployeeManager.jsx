@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 const EMPLOYEE_TYPES = ['OFFICER', 'WORKER', 'STAFF'];
 
@@ -269,8 +270,9 @@ function EmployeeManager() {
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Municipality *</label>
-              <select
-                required
+              <SearchableSelect
+                name="municipalityId"
+                options={municipalities.map(m => ({ value: m._id, label: m.name }))}
                 value={formData.municipalityId}
                 onChange={(e) => setFormData({
                   ...formData, 
@@ -279,65 +281,49 @@ function EmployeeManager() {
                   designationId: '',
                   assignedWardIds: []
                 })}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-              >
-                <option value="" disabled>Select Municipality</option>
-                {municipalities.map(m => (
-                  <option key={m._id} value={m._id}>{m.name}</option>
-                ))}
-              </select>
+                placeholder="Select Municipality"
+                isClearable={false}
+              />
             </div>
             
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Employee Type *</label>
-              <select
-                required
+              <SearchableSelect
+                name="employeeType"
+                options={EMPLOYEE_TYPES.map(t => ({ value: t, label: t }))}
                 value={formData.employeeType}
                 onChange={(e) => setFormData({...formData, employeeType: e.target.value})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-              >
-                {EMPLOYEE_TYPES.map(t => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
-              </select>
+                placeholder="Select Employee Type"
+                isClearable={false}
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Department *</label>
-              <select
-                required
+              <SearchableSelect
+                name="departmentId"
+                options={filteredDepartments.map(d => ({ value: d._id, label: d.name }))}
                 value={formData.departmentId}
                 onChange={(e) => setFormData({...formData, departmentId: e.target.value})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-                disabled={!formData.municipalityId}
-              >
-                <option value="" disabled>Select Department</option>
-                {filteredDepartments.map(d => (
-                  <option key={d._id} value={d._id}>{d.name}</option>
-                ))}
-              </select>
+                placeholder="Select Department"
+                isDisabled={!formData.municipalityId}
+                isClearable={false}
+              />
             </div>
             
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Designation *</label>
-              <select
-                required
+              <SearchableSelect
+                name="designationId"
+                options={filteredDesignations.map(d => ({ value: d._id, label: d.name }))}
                 value={formData.designationId}
                 onChange={(e) => setFormData({...formData, designationId: e.target.value})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-                disabled={!formData.municipalityId}
-              >
-                <option value="" disabled>Select Designation</option>
-                {filteredDesignations.map(d => (
-                  <option key={d._id} value={d._id}>{d.name}</option>
-                ))}
-              </select>
+                placeholder="Select Designation"
+                isDisabled={!formData.municipalityId}
+                isClearable={false}
+              />
             </div>
           </div>
 
@@ -378,22 +364,17 @@ function EmployeeManager() {
 
           <div className="flex flex-col gap-1">
             <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Assigned Wards (Multi-select)</label>
-            <select
-              multiple
+            <SearchableSelect
+              name="assignedWardIds"
+              options={filteredWards.map(w => ({ value: w._id, label: `Ward ${w.wardNumber} - ${w.name}` }))}
               value={formData.assignedWardIds}
               onChange={(e) => {
-                const options = [...e.target.selectedOptions];
-                const values = options.map(option => option.value);
-                setFormData({...formData, assignedWardIds: values});
+                setFormData({...formData, assignedWardIds: e.target.value});
               }}
-              className="px-3 py-2 text-[14px] outline-none"
-              style={{ ...inputStyles, height: '80px' }}
-              disabled={!formData.municipalityId}
-            >
-              {filteredWards.map(w => (
-                <option key={w._id} value={w._id}>Ward {w.wardNumber} - {w.name}</option>
-              ))}
-            </select>
+              placeholder="Select Assigned Wards"
+              isDisabled={!formData.municipalityId}
+              isMulti={true}
+            />
             <p className="text-[11px] mt-1" style={{ color: 'var(--muted)' }}>Hold Ctrl/Cmd to select multiple</p>
           </div>
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import MainLayout from '../../layouts/MainLayout';
+import SearchableSelect from '../../components/common/SearchableSelect.jsx';
 
 
 const WorkerTaskList = () => {
@@ -54,16 +55,20 @@ const WorkerTaskList = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">My Tasks</h1>
-          <select 
-            value={statusFilter} 
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
-          >
-            <option value="ALL">All Tasks</option>
-            <option value="ACTIVE">Active (Assigned/In Progress)</option>
-            <option value="COMPLETION_SUBMITTED">Pending Review</option>
-            <option value="RESOLVED">Resolved</option>
-          </select>
+          <div className="w-64">
+            <SearchableSelect 
+              name="statusFilter"
+              options={[
+                { value: 'ALL', label: 'All Tasks' },
+                { value: 'ACTIVE', label: 'Active (Assigned/In Progress)' },
+                { value: 'COMPLETION_SUBMITTED', label: 'Pending Review' },
+                { value: 'RESOLVED', label: 'Resolved' }
+              ]}
+              value={statusFilter} 
+              onChange={(e) => setStatusFilter(e.target.value)}
+              isClearable={false}
+            />
+          </div>
         </div>
 
         {loading ? (

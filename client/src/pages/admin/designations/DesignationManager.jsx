@@ -3,6 +3,7 @@ import api from '../../../utils/axiosConfig.js';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 const LEVELS = ['EXECUTIVE', 'OFFICER', 'SUPERVISOR', 'STAFF', 'WORKER'];
 
@@ -209,18 +210,14 @@ function DesignationManager() {
           
           <div className="flex flex-col gap-1">
             <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Municipality *</label>
-            <select
-              required
+            <SearchableSelect
+              name="municipalityId"
+              options={municipalities.map(m => ({ value: m._id, label: m.name }))}
               value={formData.municipalityId}
               onChange={(e) => setFormData({...formData, municipalityId: e.target.value})}
-              className="px-3 py-2 text-[14px] outline-none"
-              style={inputStyles}
-            >
-              <option value="" disabled>Select Municipality</option>
-              {municipalities.map(m => (
-                <option key={m._id} value={m._id}>{m.name}</option>
-              ))}
-            </select>
+              placeholder="Select Municipality"
+              isClearable={false}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -250,16 +247,14 @@ function DesignationManager() {
 
           <div className="flex flex-col gap-1">
             <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Hierarchy Level</label>
-            <select
+            <SearchableSelect
+              name="level"
+              options={LEVELS.map(l => ({ value: l, label: l }))}
               value={formData.level}
               onChange={(e) => setFormData({...formData, level: e.target.value})}
-              className="px-3 py-2 text-[14px] outline-none"
-              style={inputStyles}
-            >
-              {LEVELS.map(l => (
-                <option key={l} value={l}>{l}</option>
-              ))}
-            </select>
+              placeholder="Select Level"
+              isClearable={false}
+            />
           </div>
 
           <div className="flex flex-col gap-1">

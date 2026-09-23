@@ -37,6 +37,18 @@ const complaintSchema = new mongoose.Schema(
       ref: 'Municipality',
       required: true,
     },
+    zillaParishadId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ZillaParishad',
+    },
+    panchayatSamitiId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'PanchayatSamiti',
+    },
+    gramPanchayatId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'GramPanchayat',
+    },
     wardId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Ward',

@@ -5,6 +5,7 @@ import { createComplaint, uploadComplaintEvidence, clearCreateState } from '../.
 import { showToast } from '../../store/uiSlice.js';
 import MainLayout from '../../layouts/MainLayout.jsx';
 import complaintService from '../../services/complaintService.js';
+import SearchableSelect from '../../components/common/SearchableSelect.jsx';
 
 // ════════════════════════════════════════════════════════════
 // Hardcoded fallback categories (used if API categories empty)
@@ -356,51 +357,42 @@ function StepLocation({ formData, onFormDataChange }) {
       {/* Municipality */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Municipality *</label>
-        <select
+        <SearchableSelect
+          name="municipalityId"
+          options={municipalities.map(m => ({ value: m._id, label: m.name }))}
           value={formData.municipalityId}
           onChange={(e) => handleChange('municipalityId', e.target.value)}
-          className="px-4 py-3 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">Select Municipality</option>
-          {municipalities.map((m) => (
-            <option key={m._id} value={m._id}>{m.name}</option>
-          ))}
-        </select>
+          placeholder="Select Municipality"
+          isClearable={false}
+        />
       </div>
 
       {/* Ward */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Ward *</label>
-        <select
+        <SearchableSelect
+          name="wardId"
+          options={wards.map(w => ({ value: w._id, label: w.name }))}
           value={formData.wardId}
           onChange={(e) => handleChange('wardId', e.target.value)}
-          className="px-4 py-3 text-[14px] outline-none"
-          style={inputStyles}
-          disabled={!formData.municipalityId || loadingWards}
-        >
-          <option value="">{loadingWards ? 'Loading...' : 'Select Ward'}</option>
-          {wards.map((w) => (
-            <option key={w._id} value={w._id}>{w.name}</option>
-          ))}
-        </select>
+          placeholder={loadingWards ? 'Loading...' : 'Select Ward'}
+          isDisabled={!formData.municipalityId || loadingWards}
+          isClearable={false}
+        />
       </div>
 
       {/* Area */}
       <div className="flex flex-col gap-1.5">
         <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Area *</label>
-        <select
+        <SearchableSelect
+          name="areaId"
+          options={areas.map(a => ({ value: a._id, label: a.name }))}
           value={formData.areaId}
           onChange={(e) => handleChange('areaId', e.target.value)}
-          className="px-4 py-3 text-[14px] outline-none"
-          style={inputStyles}
-          disabled={!formData.wardId || loadingAreas}
-        >
-          <option value="">{loadingAreas ? 'Loading...' : 'Select Area'}</option>
-          {areas.map((a) => (
-            <option key={a._id} value={a._id}>{a.name}</option>
-          ))}
-        </select>
+          placeholder={loadingAreas ? 'Loading...' : 'Select Area'}
+          isDisabled={!formData.wardId || loadingAreas}
+          isClearable={false}
+        />
       </div>
 
       {/* Address */}

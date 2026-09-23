@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchComplaints } from '../../store/complaintsSlice.js';
 import MainLayout from '../../layouts/MainLayout.jsx';
 import StatusPill from '../../components/StatusPill.jsx';
+import SearchableSelect from '../../components/common/SearchableSelect.jsx';
 
 const STATUS_OPTIONS = [
   { key: '', label: 'All Statuses' },
@@ -107,27 +108,25 @@ function OfficerComplaintsList() {
             border: '1px solid var(--line)',
           }}
         >
-          <select
-            value={filters.status}
-            onChange={(e) => handleFilterChange('status', e.target.value)}
-            className="px-3 py-2 text-[13px] outline-none"
-            style={inputStyles}
-          >
-            {STATUS_OPTIONS.map((opt) => (
-              <option key={opt.key} value={opt.key}>{opt.label}</option>
-            ))}
-          </select>
+          <div className="w-48">
+            <SearchableSelect
+              name="status"
+              options={STATUS_OPTIONS.map(opt => ({ value: opt.key, label: opt.label }))}
+              value={filters.status}
+              onChange={(e) => handleFilterChange('status', e.target.value)}
+              placeholder="All Statuses"
+            />
+          </div>
 
-          <select
-            value={filters.priority}
-            onChange={(e) => handleFilterChange('priority', e.target.value)}
-            className="px-3 py-2 text-[13px] outline-none"
-            style={inputStyles}
-          >
-            {PRIORITY_OPTIONS.map((opt) => (
-              <option key={opt.key} value={opt.key}>{opt.label}</option>
-            ))}
-          </select>
+          <div className="w-48">
+            <SearchableSelect
+              name="priority"
+              options={PRIORITY_OPTIONS.map(opt => ({ value: opt.key, label: opt.label }))}
+              value={filters.priority}
+              onChange={(e) => handleFilterChange('priority', e.target.value)}
+              placeholder="All Priorities"
+            />
+          </div>
         </div>
 
         {/* Table */}

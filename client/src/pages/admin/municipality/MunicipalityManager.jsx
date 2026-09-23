@@ -5,6 +5,7 @@ import { showToast } from '../../../store/uiSlice.js';
 import Modal from '../../../components/Modal.jsx';
 import { LOCAL_BODY_TYPES, LOCAL_BODY_TYPE_OPTIONS } from '../../../constants/localBodyTypes.js';
 import { MAHARASHTRA_DISTRICTS } from '../../../constants/maharashtraDistricts.js';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 function MunicipalityManager() {
   const dispatch = useDispatch();
@@ -220,75 +221,67 @@ function MunicipalityManager() {
           className="px-3 py-2 text-[14px] outline-none flex-1 min-w-[200px]"
           style={inputStyles}
         />
-        <select
-          value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Types</option>
-          {LOCAL_BODY_TYPE_OPTIONS.map(opt => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
-          ))}
-        </select>
-        <select
-          value={divisionFilter}
-          onChange={(e) => {
-            setDivisionFilter(e.target.value);
-            setDistrictFilter('');
-            setTalukaFilter('');
-          }}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Divisions</option>
-          {divisions.map(div => (
-            <option key={div._id} value={div._id}>{div.name}</option>
-          ))}
-        </select>
-        <select
-          value={districtFilter}
-          onChange={(e) => {
-            setDistrictFilter(e.target.value);
-            setTalukaFilter('');
-          }}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-          disabled={!!divisionFilter && districts.filter(d => d.divisionId?._id === divisionFilter || d.divisionId === divisionFilter).length === 0}
-        >
-          <option value="">All Districts</option>
-          {districts
-            .filter(d => !divisionFilter || d.divisionId?._id === divisionFilter || d.divisionId === divisionFilter)
-            .map(dist => (
-              <option key={dist._id} value={dist._id}>{dist.name}</option>
-            ))
-          }
-        </select>
-        <select
-          value={talukaFilter}
-          onChange={(e) => setTalukaFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-          disabled={!districtFilter}
-        >
-          <option value="">All Talukas</option>
-          {talukas
-            .filter(t => !districtFilter || t.districtId?._id === districtFilter || t.districtId === districtFilter)
-            .map(t => (
-              <option key={t._id} value={t._id}>{t.name}</option>
-            ))
-          }
-        </select>
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none"
-          style={inputStyles}
-        >
-          <option value="">All Status</option>
-          <option value="ACTIVE">Active</option>
-          <option value="INACTIVE">Inactive</option>
-        </select>
+        <div className="w-48">
+          <SearchableSelect
+            name="typeFilter"
+            options={LOCAL_BODY_TYPE_OPTIONS.map(opt => ({ value: opt.value, label: opt.label }))}
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
+            placeholder="All Types"
+          />
+        </div>
+        <div className="w-48">
+          <SearchableSelect
+            name="divisionFilter"
+            options={divisions.map(div => ({ value: div._id, label: div.name }))}
+            value={divisionFilter}
+            onChange={(e) => {
+              setDivisionFilter(e.target.value);
+              setDistrictFilter('');
+              setTalukaFilter('');
+            }}
+            placeholder="All Divisions"
+          />
+        </div>
+        <div className="w-48">
+          <SearchableSelect
+            name="districtFilter"
+            options={districts
+              .filter(d => !divisionFilter || d.divisionId?._id === divisionFilter || d.divisionId === divisionFilter)
+              .map(dist => ({ value: dist._id, label: dist.name }))}
+            value={districtFilter}
+            onChange={(e) => {
+              setDistrictFilter(e.target.value);
+              setTalukaFilter('');
+            }}
+            placeholder="All Districts"
+            isDisabled={!!divisionFilter && districts.filter(d => d.divisionId?._id === divisionFilter || d.divisionId === divisionFilter).length === 0}
+          />
+        </div>
+        <div className="w-48">
+          <SearchableSelect
+            name="talukaFilter"
+            options={talukas
+              .filter(t => !districtFilter || t.districtId?._id === districtFilter || t.districtId === districtFilter)
+              .map(t => ({ value: t._id, label: t.name }))}
+            value={talukaFilter}
+            onChange={(e) => setTalukaFilter(e.target.value)}
+            placeholder="All Talukas"
+            isDisabled={!districtFilter}
+          />
+        </div>
+        <div className="w-40">
+          <SearchableSelect
+            name="statusFilter"
+            options={[
+              { value: "ACTIVE", label: "Active" },
+              { value: "INACTIVE", label: "Inactive" }
+            ]}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            placeholder="All Status"
+          />
+        </div>
       </div>
 
       {loading ? (
@@ -416,57 +409,43 @@ function MunicipalityManager() {
 
           <div className="flex flex-col gap-1">
             <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Local Body Type *</label>
-            <select
-              required
+            <SearchableSelect
+              name="type"
+              options={LOCAL_BODY_TYPE_OPTIONS.map(opt => ({ value: opt.value, label: `${opt.label} (${opt.marathiLabel})` }))}
               value={formData.type}
               onChange={(e) => setFormData({...formData, type: e.target.value})}
-              className="px-3 py-2 text-[14px] outline-none"
-              style={inputStyles}
-            >
-              {LOCAL_BODY_TYPE_OPTIONS.map(opt => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label} ({opt.marathiLabel})
-                </option>
-              ))}
-            </select>
+              placeholder="Select Type"
+              isClearable={false}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>District *</label>
-              <select
-                required
+              <SearchableSelect
+                name="district"
+                options={districts.map(dist => ({ value: dist.name, label: dist.name }))}
                 value={formData.district}
                 onChange={(e) => setFormData({...formData, district: e.target.value, talukaId: ''})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-              >
-                <option value="" disabled>Select District</option>
-                {districts.map(dist => (
-                  <option key={dist.name} value={dist.name}>{dist.name}</option>
-                ))}
-              </select>
+                placeholder="Select District"
+                isClearable={false}
+              />
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-[13px] font-medium" style={{ color: 'var(--ink)' }}>Taluka</label>
-              <select
-                value={formData.talukaId}
-                onChange={(e) => setFormData({...formData, talukaId: e.target.value})}
-                className="px-3 py-2 text-[14px] outline-none"
-                style={inputStyles}
-                disabled={!formData.district}
-              >
-                <option value="">Select Taluka</option>
-                {talukas
+              <SearchableSelect
+                name="talukaId"
+                options={talukas
                   .filter(t => {
                     const distObj = districts.find(d => d.name === formData.district);
                     return distObj && (t.districtId?._id === distObj._id || t.districtId === distObj._id);
                   })
-                  .map(t => (
-                    <option key={t._id} value={t._id}>{t.name}</option>
-                  ))
-                }
-              </select>
+                  .map(t => ({ value: t._id, label: t.name }))}
+                value={formData.talukaId}
+                onChange={(e) => setFormData({...formData, talukaId: e.target.value})}
+                placeholder="Select Taluka"
+                isDisabled={!formData.district}
+              />
             </div>
           </div>
 

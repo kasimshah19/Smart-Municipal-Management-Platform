@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import userService from '../../../services/userService';
 import api from '../../../services/api';
+import SearchableSelect from '../../../components/common/SearchableSelect.jsx';
 
 const UserManager = () => {
   const { user } = useSelector(state => state.auth);
@@ -169,49 +170,46 @@ const UserManager = () => {
             <form onSubmit={handleRoleScopeUpdate}>
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">Role</label>
-                <select 
-                  className="w-full border p-2 rounded"
+                <SearchableSelect 
+                  name="role"
+                  options={[
+                    { value: "CITIZEN", label: "CITIZEN" },
+                    { value: "WORKER", label: "WORKER" },
+                    { value: "INSPECTOR", label: "INSPECTOR" },
+                    { value: "DEPARTMENT_OFFICER", label: "DEPARTMENT_OFFICER" },
+                    { value: "WARD_OFFICER", label: "WARD_OFFICER" },
+                    { value: "MUNICIPAL_ADMIN", label: "MUNICIPAL_ADMIN" },
+                    ...(user.role === 'SUPER_ADMIN' ? [{ value: "SUPER_ADMIN", label: "SUPER_ADMIN" }] : [])
+                  ]}
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                >
-                  <option value="CITIZEN">CITIZEN</option>
-                  <option value="WORKER">WORKER</option>
-                  <option value="INSPECTOR">INSPECTOR</option>
-                  <option value="DEPARTMENT_OFFICER">DEPARTMENT_OFFICER</option>
-                  <option value="WARD_OFFICER">WARD_OFFICER</option>
-                  <option value="MUNICIPAL_ADMIN">MUNICIPAL_ADMIN</option>
-                  {user.role === 'SUPER_ADMIN' && <option value="SUPER_ADMIN">SUPER_ADMIN</option>}
-                </select>
+                  placeholder="Select Role"
+                  isClearable={false}
+                />
               </div>
 
               {role !== 'SUPER_ADMIN' && (
                 <>
                   <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">District</label>
-                    <select 
-                      className="w-full border p-2 rounded"
+                    <SearchableSelect 
+                      name="district"
+                      options={DISTRICTS.map(d => ({ value: d, label: d }))}
                       value={district}
                       onChange={handleDistrictChange}
-                    >
-                      <option value="">Select District (Filter)</option>
-                      {DISTRICTS.map(d => (
-                        <option key={d} value={d}>{d}</option>
-                      ))}
-                    </select>
+                      placeholder="Select District (Filter)"
+                    />
                   </div>
 
                   <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Municipality</label>
-                    <select 
-                      className="w-full border p-2 rounded"
+                    <SearchableSelect 
+                      name="municipalityId"
+                      options={municipalities.map(m => ({ value: m._id, label: m.name }))}
                       value={municipalityId}
                       onChange={handleMunicipalityChange}
-                    >
-                      <option value="">Select Municipality</option>
-                      {municipalities.map(m => (
-                        <option key={m._id} value={m._id}>{m.name}</option>
-                      ))}
-                    </select>
+                      placeholder="Select Municipality"
+                    />
                   </div>
                 </>
               )}
@@ -219,32 +217,26 @@ const UserManager = () => {
               {role === 'WARD_OFFICER' && (
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-1">Ward</label>
-                  <select 
-                    className="w-full border p-2 rounded"
+                  <SearchableSelect 
+                    name="wardId"
+                    options={wards.map(w => ({ value: w._id, label: w.name }))}
                     value={wardId}
                     onChange={(e) => setWardId(e.target.value)}
-                  >
-                    <option value="">Select Ward</option>
-                    {wards.map(w => (
-                      <option key={w._id} value={w._id}>{w.name}</option>
-                    ))}
-                  </select>
+                    placeholder="Select Ward"
+                  />
                 </div>
               )}
 
               {role === 'DEPARTMENT_OFFICER' && (
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-1">Department</label>
-                  <select 
-                    className="w-full border p-2 rounded"
+                  <SearchableSelect 
+                    name="departmentId"
+                    options={departments.map(d => ({ value: d._id, label: d.name }))}
                     value={departmentId}
                     onChange={(e) => setDepartmentId(e.target.value)}
-                  >
-                    <option value="">Select Department</option>
-                    {departments.map(d => (
-                      <option key={d._id} value={d._id}>{d.name}</option>
-                    ))}
-                  </select>
+                    placeholder="Select Department"
+                  />
                 </div>
               )}
 

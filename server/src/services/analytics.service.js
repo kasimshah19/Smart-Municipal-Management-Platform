@@ -50,6 +50,15 @@ class AnalyticsService {
       if (queryParams.municipalityId) {
         filter.municipalityId = new mongoose.Types.ObjectId(queryParams.municipalityId);
       }
+      if (queryParams.zillaParishadId) {
+        filter.zillaParishadId = new mongoose.Types.ObjectId(queryParams.zillaParishadId);
+      }
+      if (queryParams.panchayatSamitiId) {
+        filter.panchayatSamitiId = new mongoose.Types.ObjectId(queryParams.panchayatSamitiId);
+      }
+      if (queryParams.gramPanchayatId) {
+        filter.gramPanchayatId = new mongoose.Types.ObjectId(queryParams.gramPanchayatId);
+      }
     }
 
     // 2. Refine with user-provided query parameters (only if they don't violate mandatory scope)
