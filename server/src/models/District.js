@@ -5,7 +5,6 @@ const districtSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'District name is required'],
-      unique: true,
       trim: true
     },
     marathiName: {
@@ -27,12 +26,22 @@ const districtSchema = new mongoose.Schema(
     divisionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Division',
-      required: [true, 'Division ID is required']
+      default: null
     },
     state: {
       type: String,
       trim: true,
       default: 'Maharashtra'
+    },
+    stateId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'State',
+      default: null
+    },
+    lgdCode: {
+      type: String,
+      trim: true,
+      default: null
     },
     metadata: {
       type: mongoose.Schema.Types.Mixed,
@@ -51,5 +60,6 @@ const districtSchema = new mongoose.Schema(
 // Non-unique index on code for lookups
 districtSchema.index({ code: 1 });
 districtSchema.index({ divisionId: 1 });
+districtSchema.index({ stateId: 1, lgdCode: 1 });
 
 export default mongoose.model('District', districtSchema);

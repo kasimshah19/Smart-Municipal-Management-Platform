@@ -35,7 +35,7 @@ const talukaSchema = new mongoose.Schema(
     divisionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Division',
-      required: [true, 'Division ID is required']
+      default: null
     },
     divisionName: {
       type: String,
@@ -51,6 +51,16 @@ const talukaSchema = new mongoose.Schema(
       type: String,
       trim: true,
       default: 'Maharashtra'
+    },
+    stateId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'State',
+      default: null
+    },
+    type: {
+      type: String,
+      enum: ['TALUKA', 'TEHSIL', 'MANDAL', 'CIRCLE', 'SUB_DISTRICT'],
+      default: 'TALUKA'
     },
     isActive: {
       type: Boolean,

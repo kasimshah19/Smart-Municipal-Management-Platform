@@ -16,24 +16,29 @@ const municipalitySchema = new mongoose.Schema(
     },
     code: {
       type: String,
-      required: [true, 'Municipality code is required'],
       unique: true,
+      sparse: true,
       trim: true,
       uppercase: true
     },
     type: {
       type: String,
-      enum: Object.keys(LOCAL_BODY_TYPES),
-      default: LOCAL_BODY_TYPES.MUNICIPAL_COUNCIL.value
+      default: 'MUNICIPAL_COUNCIL'
     },
     district: {
       type: String,
-      required: [true, 'District is required'],
       trim: true,
-      enum: {
-        values: MAHARASHTRA_DISTRICTS,
-        message: '{VALUE} is not a valid Maharashtra district'
-      }
+      default: null
+    },
+    stateId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'State',
+      default: null
+    },
+    districtId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'District',
+      default: null
     },
     talukaId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -81,7 +86,7 @@ const municipalitySchema = new mongoose.Schema(
     state: {
       type: String,
       trim: true,
-      default: 'Maharashtra'
+      default: null
     },
     country: {
       type: String,
@@ -127,5 +132,6 @@ municipalitySchema.index({ name: 1, district: 1, type: 1 }, { unique: true });
 municipalitySchema.index({ talukaId: 1 });
 municipalitySchema.index({ district: 1 });
 municipalitySchema.index({ type: 1 });
+municipalitySchema.index({ stateId: 1, districtId: 1, type: 1 });
 
 export default mongoose.model('Municipality', municipalitySchema);

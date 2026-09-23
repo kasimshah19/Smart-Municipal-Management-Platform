@@ -82,6 +82,11 @@ const gramPanchayatSchema = new mongoose.Schema(
       default: 'Maharashtra',
       trim: true
     },
+    stateId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'State',
+      default: null
+    },
     status: {
       type: String,
       enum: ['ACTIVE', 'INACTIVE'],

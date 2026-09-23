@@ -52,6 +52,21 @@ Core Solutions Provided:
 
 ---
 
+## Demo Credentials (For Testing)
+
+Use the following credentials to test the various dashboards and role-based access. **(Password for all test accounts is `password123`)**
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Super Admin** | `admin@smartmunicipal.com` | `password123` |
+| **Municipal Admin** | `municipal_admin@example.com` | `password123` |
+| **Department Officer** | `dept_officer@example.com` | `password123` |
+| **Ward Officer** | `ward_officer@example.com` | `password123` |
+| **Worker** | `worker@example.com` | `password123` |
+| **Citizen** | `testuser2@example.com` | `password123` |
+
+---
+
 ## Documentation Status
 This README documents the current implementation state of the Smart Municipal Management Platform. It is intentionally maintained as a living document and will be updated as additional modules, deployments, integrations, testing, and production hardening are completed.
 
