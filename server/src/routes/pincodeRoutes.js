@@ -1,7 +1,8 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import Pincode from '../models/Pincode.js';
-import { protect, authorizeRoles } from '../middleware/auth.js';
+import { authenticate as protect } from '../middlewares/auth.middleware.js';
+import { authorizeRoles } from '../middlewares/role.middleware.js';
 
 const router = express.Router();
 

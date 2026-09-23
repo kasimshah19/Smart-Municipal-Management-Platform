@@ -85,6 +85,16 @@ function Header() {
                   >
                     Rural Admin
                   </button>
+                  <button
+                    onClick={() => window.location.href = '/admin/pincodes'}
+                    className="px-3 py-1.5 text-[13px] font-medium text-white transition-colors"
+                    style={{
+                      backgroundColor: window.location.pathname === '/admin/pincodes' ? 'var(--primary)' : 'rgba(255, 255, 255, 0.08)',
+                      borderRadius: '6px'
+                    }}
+                  >
+                    Postal Admin
+                  </button>
                 </>
               )}
               
