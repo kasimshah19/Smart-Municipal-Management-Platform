@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComplaint } from '../../store/complaintsSlice.js';
 import { showToast } from '../../store/uiSlice.js';
+import PincodeLookup from '../common/PincodeLookup.jsx';
+import PostalInfoCard from '../common/PostalInfoCard.jsx';
 
 const CATEGORIES = [
   'Pothole / Road Damage',
@@ -15,6 +17,7 @@ function NewComplaintForm() {
   const dispatch = useDispatch();
   const [type, setType] = useState(CATEGORIES[0]);
   const [location, setLocation] = useState('');
+  const [postalOffice, setPostalOffice] = useState(null);
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
@@ -29,6 +32,11 @@ function NewComplaintForm() {
       id: `CMP${Math.floor(Math.random() * 10000)}`,
       type,
       location,
+      postalOfficeDetails: postalOffice ? {
+        pincode: postalOffice.pincode,
+        officeName: postalOffice.officeName,
+        postalDistrict: postalOffice.postalDistrictName,
+      } : null,
       description,
       status: 'submitted',
       date: new Date().toISOString(),
@@ -40,6 +48,7 @@ function NewComplaintForm() {
     setLocation('');
     setDescription('');
     setType(CATEGORIES[0]);
+    setPostalOffice(null);
   };
 
   const inputStyles = {
@@ -94,6 +103,11 @@ function NewComplaintForm() {
             className="px-3 py-2 text-[14px] outline-none transition-colors focus:border-[var(--primary)]"
             style={inputStyles}
           />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <PincodeLookup onOfficeSelected={(office) => setPostalOffice(office)} />
+          <PostalInfoCard office={postalOffice} />
         </div>
 
         <div className="flex flex-col gap-1.5">

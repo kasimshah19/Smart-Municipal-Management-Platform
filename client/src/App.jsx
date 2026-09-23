@@ -13,6 +13,7 @@ import CitizenComplaintDetails from './pages/citizen/CitizenComplaintDetails';
 import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
 import StructureManagement from './pages/admin/StructureManagement.jsx';
 import GramPanchayatManager from './pages/admin/gram-panchayats/GramPanchayatManager.jsx';
+import PincodeExplorer from './pages/admin/pincodes/PincodeExplorer.jsx';
 import OfficerDashboard from './components/officer/OfficerDashboard.jsx';
 import CitizenDashboard from './components/citizen/CitizenDashboard.jsx';
 import AdminDashboard from './pages/dashboard/AdminDashboard.jsx';
@@ -155,6 +156,16 @@ function App() {
             <ProtectedRoute allowedRoles={['SUPER_ADMIN']}>
               <MainLayout>
                 <GramPanchayatManager />
+              </MainLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/pincodes" 
+          element={
+            <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MUNICIPAL_ADMIN']}>
+              <MainLayout>
+                <PincodeExplorer />
               </MainLayout>
             </ProtectedRoute>
           } 
