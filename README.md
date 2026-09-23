@@ -55,9 +55,9 @@ Core Solutions Provided:
 ## Documentation Status
 This README documents the current implementation state of the Smart Municipal Management Platform. It is intentionally maintained as a living document and will be updated as additional modules, deployments, integrations, testing, and production hardening are completed.
 
-- **Current documentation version**: v1.0
-- **Current project stage**: Phase 13 Complete (Post-Reconciliation Integrity Audit)
-- **Last Updated**: 2026-09-22
+- **Current documentation version**: v1.1
+- **Current project stage**: Phase 15B Complete (Pincode Hardening & Admin Filters)
+- **Last Updated**: 2026-09-23
 
 ---
 
@@ -79,6 +79,8 @@ This README documents the current implementation state of the Smart Municipal Ma
 - [Data Ingestion Architecture](#data-ingestion-architecture)
 - [LGD Code Architecture](#lgd-code-architecture)
 - [Gram Panchayat Reconciliation](#gram-panchayat-reconciliation)
+- [Administrative vs Postal Geography](#administrative-vs-postal-geography)
+- [Pincode Integration (Phase 14 & 15)](#pincode-integration-phase-14--15)
 - [Complaint Lifecycle](#complaint-lifecycle)
 - [SLA Architecture](#sla-architecture)
 - [Duplicate Complaint Detection](#duplicate-complaint-detection)
@@ -616,6 +618,11 @@ The backend REST API is grouped by domain and protected by JWT authentication.
 ### Gram Panchayats
 - `GET /api/gram-panchayats` - Paginated rural lookup. (`SUPER_ADMIN`)
 
+### Postal Geography (Pincodes)
+- `GET /api/pincodes/:pincode` - Public 6-digit pincode lookup (Rate Limited). (Public)
+- `GET /api/pincodes/admin/search` - Paginated administrative explorer with filters. (`SUPER_ADMIN`, `MUNICIPAL_ADMIN`)
+- `GET /api/pincodes/admin/districts` - Get distinct postal districts for filtering. (`SUPER_ADMIN`, `MUNICIPAL_ADMIN`)
+
 ---
 
 ## API Pagination
@@ -767,10 +774,12 @@ The platform is designed for a decoupled deployment architecture, optimizing fro
 ### Administrative vs Postal Geography
 The platform maintains a strict boundary between Canonical Administrative Geography (Gram Panchayats, Municipalities) and Postal Geography (Pincodes). Pincodes are not assumed to map 1:1 with administrative boundaries. 
 
-### Pincode Integration (Phase 14)
+### Pincode Integration (Phase 14 & 15)
 - **Source:** India Post official Pincode directory (`data.gov.in`).
 - **Scale:** 13,762 Maharashtra postal records.
 - **Identity & Schema:** Pincodes are stored as Strings (to preserve leading zeros). Uniqueness is enforced via a compound index (`pincode`, `officeName`, `officeType`), allowing multiple post offices to share a single 6-digit Pincode.
+- **Frontend Integration (Phase 15):** Added `PincodeLookup` component with 500ms debounce, 6-digit validation, and `PostalInfoCard` for citizen reporting. Added `PincodeExplorer` for Admin dashboards.
+- **Security & Hardening (Phase 15B):** Added `express-rate-limit` to public endpoints, regex sanitization, and administrative filters (District, Office Type, Delivery Status). The Admin Explorer is strictly protected by `role.middleware.js` for `SUPER_ADMIN` and `MUNICIPAL_ADMIN`.
 - **API Access:** Fast, regex-validated lookup via `GET /api/pincodes/:pincode`.
 
 ---
@@ -870,6 +879,8 @@ The project has been developed iteratively through distinct implementation phase
 7.  **Gram Panchayat LGD Integration:** Integrating 28,000+ rural local bodies and implementing server-side pagination to handle the massive dataset safely.
 8.  **Security Hardening:** Implementing mass-assignment protections and rigorous IDOR testing (Phase 12).
 9.  **Taluka Reconciliation & Integrity Audit:** Resolving orphaned Gram Panchayat references and purging BSON-type unique constraint duplicates (Phase 13).
+10. **Pincode Data Integration:** Imported 13,700+ postal records and separated Canonical Administrative Geography from Postal Geography (Phase 14).
+11. **Pincode UI & Security Hardening:** Implemented `PincodeLookup` frontend, Admin Explorer, rate-limiting, and RBAC authorization (Phase 15 & 15B). *Note: Browser-level runtime verification is pending user execution.*
 
 ---
 
@@ -887,6 +898,10 @@ The project has been developed iteratively through distinct implementation phase
 | Role-Specific Dashboards | Implemented / Verified |
 | Server-Side Pagination | Implemented / Verified |
 | Mass Assignment Protection | Implemented / Verified |
+| Pincode Backend Integration | Implemented / Code Verified |
+| Pincode Frontend Components | Implemented / Code Verified |
+| Pincode Security (Rate Limiting) | Implemented / Code Verified |
+| Runtime UI Verification | Pending User Execution |
 | Deployment | Configuration prepared / Live pending |
 
 ---
