@@ -402,15 +402,26 @@ Phase 13A verified that Division ID is stored directly on Gram Panchayat records
 
 ---
 
-## Maharashtra Administrative Geography
+## Maharashtra Administrative Geography (CURRENT DATA SCOPE)
 
-The platform implements a highly accurate geographic hierarchy for the State of Maharashtra, sourced from official directories:
+The project is currently being developed and maintained ONLY for Maharashtra. The Pan-India data-import plan is officially PAUSED because importing complete national master datasets would create unnecessary MongoDB Atlas storage consumption. The architecture remains Pan-India-ready, but the current production scope is Maharashtra-only.
 
-- **6 Divisions** (Konkan, Pune, Nashik, Aurangabad, Amravati, Nagpur)
-- **36 Districts** (including current canonical names such as Ahilyanagar, Chhatrapati Sambhajinagar, Dharashiv)
-- **350+ Talukas**
-- **395 Urban Municipalities** (Municipal Corporations, Municipal Councils, Nagar Panchayats)
-- **28,087 Gram Panchayats** (Rural Local Bodies)
+Current production scope:
+
+```text
+🇮🇳 INDIA
+│
+└── 🇮🇳 MAHARASHTRA  ← CURRENT PRODUCTION SCOPE
+    │
+    ├── 6 Divisions
+    ├── 36 Districts
+    ├── 359 Talukas
+    ├── 28,087 Gram Panchayats
+    ├── 420 Municipalities
+    └── 13,762 Pincodes
+```
+
+These are the CURRENT, CORRECT totals that are maintained in the database.
 
 *Note: The exact counts of rural and urban local bodies are sourced directly from external integration scripts and represent the imported state of the system snapshot. These numbers may fluctuate as government classifications change.*
 

@@ -24,7 +24,8 @@ const BASELINE = {
   districts: 36,
   talukas: 359,
   gramPanchayats: 28087,
-  municipalities: 395
+  municipalities: 420,
+  pincodes: 13762
 };
 
 async function checkCounts() {
