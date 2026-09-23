@@ -12,10 +12,10 @@ router.get('/:pincode', async (req, res) => {
   try {
     const { pincode } = req.params;
 
-    if (!pincode || pincode.length !== 6) {
+    if (!pincode || !/^\d{6}$/.test(pincode.trim())) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide a valid 6-digit Pincode.'
+        message: 'Please provide a valid 6-digit numeric Pincode.'
       });
     }
 

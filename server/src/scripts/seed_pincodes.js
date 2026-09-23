@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const BATCH_SIZE = 5000;
-const DATA_FILE = path.join(__dirname, 'data', 'pincodes.csv.csv');
+const DATA_FILE = path.join(__dirname, 'data', 'original', 'india_post_pincodes.csv');
 
 async function seedPincodes() {
   console.log('Connecting to MongoDB...');
@@ -33,9 +33,6 @@ async function seedPincodes() {
   let totalProcessed = 0;
   let totalInserted = 0;
 
-  console.log('Clearing old Pincodes data...');
-  await Pincode.deleteMany({});
-  
   console.log('Reading CSV and seeding Maharashtra pincodes...');
 
   return new Promise((resolve, reject) => {
@@ -46,20 +43,37 @@ async function seedPincodes() {
         
         // Filter only Maharashtra records
         if (row.statename && row.statename.trim().toUpperCase() === 'MAHARASHTRA') {
+          const pincodeStr = row.pincode ? row.pincode.trim() : '';
+          const officeNameStr = row.officename ? row.officename.trim() : '';
+          const officeTypeStr = row.officetype ? row.officetype.trim() : '';
+          
+          let lat = null;
+          let lon = null;
+          if (row.latitude && row.latitude.trim() !== 'NA' && !isNaN(parseFloat(row.latitude))) {
+            lat = parseFloat(row.latitude);
+          }
+          if (row.longitude && row.longitude.trim() !== 'NA' && !isNaN(parseFloat(row.longitude))) {
+            lon = parseFloat(row.longitude);
+          }
+
           batch.push({
-            insertOne: {
-              document: {
-                pincode: row.pincode ? row.pincode.trim() : '',
-                officeName: row.officename ? row.officename.trim() : '',
-                officeType: row.officetype ? row.officetype.trim() : '',
-                deliveryStatus: row.delivery ? row.delivery.trim() : '',
-                talukaName: row.district ? row.district.trim().toUpperCase() : '', // The CSV uses 'district' which sometimes acts as taluka in Postal zones
-                districtName: row.district ? row.district.trim().toUpperCase() : '', // Assuming district field is mostly district
-                divisionName: row.divisionname ? row.divisionname.trim().toUpperCase() : '',
-                stateName: 'MAHARASHTRA',
-                latitude: row.latitude && row.latitude !== 'NA' ? row.latitude.trim() : null,
-                longitude: row.longitude && row.longitude !== 'NA' ? row.longitude.trim() : null,
-              }
+            updateOne: {
+              filter: { pincode: pincodeStr, officeName: officeNameStr, officeType: officeTypeStr },
+              update: {
+                $set: {
+                  pincode: pincodeStr,
+                  officeName: officeNameStr,
+                  officeType: officeTypeStr,
+                  deliveryStatus: row.delivery ? row.delivery.trim() : '',
+                  postalTalukaName: row.district ? row.district.trim().toUpperCase() : '',
+                  postalDistrictName: row.district ? row.district.trim().toUpperCase() : '',
+                  postalDivisionName: row.divisionname ? row.divisionname.trim().toUpperCase() : '',
+                  stateName: 'MAHARASHTRA',
+                  latitude: lat,
+                  longitude: lon,
+                }
+              },
+              upsert: true
             }
           });
         }

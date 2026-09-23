@@ -1,0 +1,303 @@
+{
+  "counts": {
+    "total": 28087,
+    "withTalukaId": 28087,
+    "withoutTalukaId": 0,
+    "withTalukaName": 28087,
+    "withoutTalukaName": 0,
+    "withDistrictId": 28087,
+    "withoutDistrictId": 0,
+    "withDivisionId": 28087,
+    "withoutDivisionId": 0
+  },
+  "talukaRef": {
+    "valid": 28087,
+    "broken": 0
+  },
+  "talukaName": {
+    "exact": 28087,
+    "normalized": 0,
+    "mismatched": 0,
+    "missing": 0
+  },
+  "districtCons": {
+    "mismatches": 0
+  },
+  "divisionCons": {
+    "valid": 28087,
+    "invalid": 0,
+    "missing": 0
+  },
+  "hierarchy": {
+    "valid": 28087,
+    "invalid": 0,
+    "incomplete": 0
+  },
+  "matchQuality": {
+    "exact": 24113,
+    "normalized": 260,
+    "alias": 3714,
+    "fuzzy": 0
+  },
+  "crossDistrictCollisions": [
+    "karjat",
+    "khed",
+    "shirur",
+    "malegaon",
+    "kalamb",
+    "ashti",
+    "karanja"
+  ],
+  "normalization": [
+    {
+      "orig": "Ahemadpur",
+      "clean": "ahmedpur"
+    },
+    {
+      "orig": "Ahmedpur",
+      "clean": "ahmedpur"
+    },
+    {
+      "orig": "Ahmadpur",
+      "clean": "ahmadpur"
+    },
+    {
+      "orig": "Akarani",
+      "clean": "akrani"
+    },
+    {
+      "orig": "Akkarani",
+      "clean": "akkarani"
+    },
+    {
+      "orig": "Deogad",
+      "clean": "devgad"
+    },
+    {
+      "orig": "Devgad",
+      "clean": "devgad"
+    },
+    {
+      "orig": "Chipalun",
+      "clean": "chiplun"
+    },
+    {
+      "orig": "Chiplun",
+      "clean": "chiplun"
+    },
+    {
+      "orig": "Basmat",
+      "clean": "basmath"
+    },
+    {
+      "orig": "Basmath",
+      "clean": "basmath"
+    },
+    {
+      "orig": "Desaiganj",
+      "clean": "desaiganj"
+    },
+    {
+      "orig": "Desaiganj (Wadsa)",
+      "clean": "desaiganj"
+    },
+    {
+      "orig": "Parali V.",
+      "clean": "parali v."
+    },
+    {
+      "orig": "Anjangaon S.",
+      "clean": "anjangaon s."
+    },
+    {
+      "orig": "Nandgaon Kh.",
+      "clean": "nandgaon kh."
+    },
+    {
+      "orig": "D. Raja",
+      "clean": "deulgaon raja"
+    },
+    {
+      "orig": "Zari Jamni",
+      "clean": "zari-jamani"
+    }
+  ],
+  "failedSamplesValidation": [
+    {
+      "district": "Nashik",
+      "source": "Peth",
+      "assignedTaluka": "Peint",
+      "assignedDist": "Nashik",
+      "valid": "PASS"
+    },
+    {
+      "district": "Latur",
+      "source": "Ahemadpur",
+      "assignedTaluka": "Ahmedpur",
+      "assignedDist": "Latur",
+      "valid": "PASS"
+    },
+    {
+      "district": "Nagpur",
+      "source": "Saoner",
+      "assignedTaluka": "Savner",
+      "assignedDist": "Nagpur",
+      "valid": "PASS"
+    },
+    {
+      "district": "Sindhudurg",
+      "source": "Deogad",
+      "assignedTaluka": "Devgad",
+      "assignedDist": "Sindhudurg",
+      "valid": "PASS"
+    },
+    {
+      "district": "Thane",
+      "source": "Ambernath",
+      "assignedTaluka": "Ambarnath",
+      "assignedDist": "Thane",
+      "valid": "PASS"
+    },
+    {
+      "district": "Ratnagiri",
+      "source": "Chipalun",
+      "assignedTaluka": "Chiplun",
+      "assignedDist": "Ratnagiri",
+      "valid": "PASS"
+    },
+    {
+      "district": "Palghar",
+      "source": "Wada",
+      "assignedTaluka": "Vada",
+      "assignedDist": "Palghar",
+      "valid": "PASS"
+    },
+    {
+      "district": "Sangli",
+      "source": "Jath",
+      "assignedTaluka": "Jat",
+      "assignedDist": "Sangli",
+      "valid": "PASS"
+    },
+    {
+      "d": "Beed",
+      "b": "Parali V.",
+      "status": "Not Found"
+    },
+    {
+      "district": "Solapur",
+      "source": "South Solapur",
+      "assignedTaluka": "Solapur South",
+      "assignedDist": "Solapur",
+      "valid": "PASS"
+    },
+    {
+      "district": "Dhule",
+      "source": "Shindkheda",
+      "assignedTaluka": "Sindkheda",
+      "assignedDist": "Dhule",
+      "valid": "PASS"
+    },
+    {
+      "district": "Sindhudurg",
+      "source": "Vaibhavawadi",
+      "assignedTaluka": "Vaibhavwadi",
+      "assignedDist": "Sindhudurg",
+      "valid": "PASS"
+    },
+    {
+      "district": "Nandurbar",
+      "source": "Akarani",
+      "assignedTaluka": "Akrani",
+      "assignedDist": "Nandurbar",
+      "valid": "PASS"
+    },
+    {
+      "d": "Amravati",
+      "b": "Anjangaon S.",
+      "status": "Not Found"
+    },
+    {
+      "district": "Yavatmal",
+      "source": "Zari Jamni",
+      "assignedTaluka": "Zari-Jamani",
+      "assignedDist": "Yavatmal",
+      "valid": "PASS"
+    },
+    {
+      "district": "Hingoli",
+      "source": "Basmat",
+      "assignedTaluka": "Basmath",
+      "assignedDist": "Hingoli",
+      "valid": "PASS"
+    },
+    {
+      "d": "Amravati",
+      "b": "Nandgaon Kh.",
+      "status": "Not Found"
+    },
+    {
+      "district": "Nashik",
+      "source": "Yeola",
+      "assignedTaluka": "Yevala",
+      "assignedDist": "Nashik",
+      "valid": "PASS"
+    },
+    {
+      "district": "Parbhani",
+      "source": "Sailu",
+      "assignedTaluka": "Selu",
+      "assignedDist": "Parbhani",
+      "valid": "PASS"
+    },
+    {
+      "district": "Chhatrapati Sambhajinagar",
+      "source": "Kanand",
+      "assignedTaluka": "Kannad",
+      "assignedDist": "Chhatrapati Sambhajinagar",
+      "valid": "PASS"
+    }
+  ],
+  "duplicateTalukas": [],
+  "talukaIndexes": [
+    {
+      "v": 2,
+      "key": {
+        "_id": 1
+      },
+      "name": "_id_"
+    },
+    {
+      "v": 2,
+      "key": {
+        "districtId": 1,
+        "name": 1
+      },
+      "name": "districtId_1_name_1",
+      "background": true,
+      "unique": true
+    },
+    {
+      "v": 2,
+      "key": {
+        "divisionId": 1
+      },
+      "name": "divisionId_1",
+      "background": true
+    },
+    {
+      "v": 2,
+      "key": {
+        "districtId": 1
+      },
+      "name": "districtId_1",
+      "background": true
+    }
+  ],
+  "recordCount": {
+    "duplicates": 0
+  },
+  "urbanRegression": {
+    "municipalityCount": 395
+  }
+}

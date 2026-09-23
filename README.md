@@ -764,6 +764,15 @@ The platform is designed for a decoupled deployment architecture, optimizing fro
    - `NODE_ENV=production`
 5. **Deploy:** Click Deploy. Once live, verify connectivity by accessing the `/api/health` endpoint (if implemented) or observing the build logs.
 
+### Administrative vs Postal Geography
+The platform maintains a strict boundary between Canonical Administrative Geography (Gram Panchayats, Municipalities) and Postal Geography (Pincodes). Pincodes are not assumed to map 1:1 with administrative boundaries. 
+
+### Pincode Integration (Phase 14)
+- **Source:** India Post official Pincode directory (`data.gov.in`).
+- **Scale:** 13,762 Maharashtra postal records.
+- **Identity & Schema:** Pincodes are stored as Strings (to preserve leading zeros). Uniqueness is enforced via a compound index (`pincode`, `officeName`, `officeType`), allowing multiple post offices to share a single 6-digit Pincode.
+- **API Access:** Fast, regex-validated lookup via `GET /api/pincodes/:pincode`.
+
 ---
 
 ## Project Directory Structure

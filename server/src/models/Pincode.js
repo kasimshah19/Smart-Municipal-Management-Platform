@@ -16,15 +16,15 @@ const pincodeSchema = new mongoose.Schema({
   deliveryStatus: { 
     type: String 
   },
-  talukaName: { 
+  postalTalukaName: { 
     type: String,
     index: true
   },
-  districtName: { 
+  postalDistrictName: { 
     type: String,
     index: true
   },
-  divisionName: { 
+  postalDivisionName: { 
     type: String 
   },
   stateName: { 
@@ -33,15 +33,16 @@ const pincodeSchema = new mongoose.Schema({
     index: true
   },
   latitude: {
-    type: String
+    type: Number
   },
   longitude: {
-    type: String
+    type: Number
   }
 }, { timestamps: true });
 
 // Compound indexes for common queries
-pincodeSchema.index({ districtName: 1, talukaName: 1 });
+pincodeSchema.index({ postalDistrictName: 1, postalTalukaName: 1 });
+pincodeSchema.index({ pincode: 1, officeName: 1, officeType: 1 }, { unique: true });
 
 const Pincode = mongoose.model('Pincode', pincodeSchema);
 
