@@ -11,12 +11,18 @@ import DepartmentManager from './departments/DepartmentManager.jsx';
 import DesignationManager from './designations/DesignationManager.jsx';
 import EmployeeManager from './employees/EmployeeManager.jsx';
 import WorkerTeamManager from './worker-teams/WorkerTeamManager.jsx';
+import GramPanchayatManager from './gram-panchayats/GramPanchayatManager.jsx';
+import ZillaParishadManager from './zilla-parishads/ZillaParishadManager.jsx';
+import PanchayatSamitiManager from './panchayat-samitis/PanchayatSamitiManager.jsx';
 
 const ENTITIES = [
   { key: 'divisions', label: 'Revenue Divisions', component: DivisionManager },
   { key: 'districts', label: 'Districts', component: DistrictManager },
   { key: 'talukas', label: 'Talukas', component: TalukaManager },
-  { key: 'municipalities', label: 'Local Bodies', component: MunicipalityManager },
+  { key: 'municipalities', label: 'Urban Local Bodies', component: MunicipalityManager },
+  { key: 'zilla-parishads', label: 'Zilla Parishads', component: ZillaParishadManager },
+  { key: 'panchayat-samitis', label: 'Panchayat Samitis', component: PanchayatSamitiManager },
+  { key: 'gram-panchayats', label: 'Gram Panchayats', component: GramPanchayatManager },
   { key: 'wards', label: 'Wards', component: WardManager },
   { key: 'areas', label: 'Areas', component: AreaManager },
   { key: 'departments', label: 'Departments', component: DepartmentManager },

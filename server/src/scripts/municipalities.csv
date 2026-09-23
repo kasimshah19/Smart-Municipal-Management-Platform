@@ -1,7 +1,424 @@
-name,code,type,district,state,status
-Dhule Municipal Corporation,DMC,MUNICIPAL_CORPORATION,Dhule,Maharashtra,ACTIVE
-Dondaicha-Varwade Municipal Council,DVMC,MUNICIPAL_COUNCIL,Dhule,Maharashtra,ACTIVE
-Pimpalner Municipal Council,PIMPALNER_MC,MUNICIPAL_COUNCIL,Dhule,Maharashtra,ACTIVE
-Shirpur-Varwade Municipal Council,SHIRPUR_MC,MUNICIPAL_COUNCIL,Dhule,Maharashtra,ACTIVE
-Sakri Nagar Panchayat,SAKRI_NP,NAGAR_PANCHAYAT,Dhule,Maharashtra,ACTIVE
-Shindkheda Nagar Panchayat,SHINDKHEDA_NP,NAGAR_PANCHAYAT,Dhule,Maharashtra,ACTIVE
+﻿Urban Local bodies of Maharashtra (State Code: 27) State,,,,,,,,
+S.No.,Localbody Type Code,Localbody Type Name,Localbody Code,Localbody Version,Localbody Name (In English),Localbody Name (In Local),Census 2001 Code,Census 2011 Code
+1,4,Municipal Corporation,251548,3,Ahmadnagar,अहमदनगर,802828,4
+2,4,Municipal Corporation,251312,2,Akola,अकोला,802676,4
+3,4,Municipal Corporation,251328,4,Amravati,अमरावती,802690,4
+4,4,Municipal Corporation,251428,5,Aurangabad,औरंगाबाद,802765,4
+5,4,Municipal Corporation,251477,7,Bhiwandi,भिवंडी,802789,4
+6,4,Municipal Corporation,248082,4,Chandrapur,चंद्रपूर,802722,4
+7,4,Municipal Corporation,251282,19,Dhule,धुळे,802646,4
+8,4,Municipal Corporation,251488,5,Greater Mumbai,मोठे मुंबई,802794,4
+9,4,Municipal Corporation,251619,4,Ichalkaranji,इचलकरंजी,802884,4
+10,4,Municipal Corporation,276571,3,Jalgaon,जळगाव,802653,4
+11,4,Municipal Corporation,251423,3,Jalna,जालना,802760,4
+12,4,Municipal Corporation,251483,6,Kalyan-Dombivli,कल्याण-डोंबिवली,802790,4
+13,4,Municipal Corporation,251625,2,Kolhapur,कोल्हापूर,802887,4
+14,4,Municipal Corporation,251561,3,Latur,लातूर,802840,4
+15,4,Municipal Corporation,251438,9,Malegaon,मालेगांव,802772,4
+16,4,Municipal Corporation,251470,5,Mira-Bhayandar,मिरा-भाईंदर,802786,4
+17,4,Municipal Corporation,251362,5,Nagpur,नागपूर,802710,4
+18,4,Municipal Corporation,251401,2,Nanded-Waghala,नांदेड-वाघाळा,802737,4
+19,4,Municipal Corporation,251442,2,Nashik,नाशिक,802776,4
+20,4,Municipal Corporation,251472,3,Navi Mumbai,नवी मुंबई,802788,4
+21,4,Municipal Corporation,251492,26,Panvel,पनवेल,802796,4
+22,4,Municipal Corporation,251416,3,Parbhani,परभणी,802753,4
+23,4,Municipal Corporation,251528,2,Pimpri Chinchwad,पिंपरी चिंचवड,802811,4
+24,4,Municipal Corporation,251530,15,Pune,पुणे,802814,4
+25,4,Municipal Corporation,251639,2,Sangli-Miraj Kupwad,सांगली-मिरज कुपवाड,802895,4
+26,4,Municipal Corporation,251577,2,Solapur,सोलापूर,802856,4
+27,4,Municipal Corporation,251471,7,Thane,ठाणे,802787,4
+28,4,Municipal Corporation,251484,3,Ulhasnagar,उल्हासनगर,802791,4
+29,4,Municipal Corporation,251463,9,Vasai-Virar,वासी-विरार,802785,4
+30,5,Municipality,251323,3,Achalpur,अचलपूर,802685,5
+31,5,Municipality,251562,2,Ahmadpur,अहमदपूर,802841,5
+32,5,Municipality,251581,1,Akkalkot,अक्कलकोट,802860,5
+33,5,Municipality,300383,2,Akluj,अकलूज,0,5
+34,5,Municipality,251310,3,Akot,अकोट,802674,5
+35,5,Municipality,251521,1,Alandi,आळंदी,802808,5
+36,5,Municipality,251503,2,Alibag,अलिबाग,802801,5
+37,5,Municipality,251294,2,Amalner,अंमळनेर,802656,5
+38,5,Municipality,251424,2,Ambad,अंबड,802761,5
+39,5,Municipality,251560,2,Ambajogai,अंबाजोगाई,802839,5
+40,5,Municipality,251485,4,Ambarnath,अंबरनाथ,802793,5
+41,5,Municipality,276364,3,Amgaon,आमगांव,537972,5
+42,5,Municipality,251322,1,Anjangaon,अंजनगाव सुर्जी,802684,5
+43,5,Municipality,259703,2,Arni,आर्णी,543235,5
+44,5,Municipality,251332,2,Arvi,आर्वी,802694,5
+45,5,Municipality,251634,2,Ashta,आष्टा,802892,5
+46,5,Municipality,251563,1,Ausa,औसा,802842,5
+47,5,Municipality,251486,4,Badlapur,बदलापूर,802792,5
+48,5,Municipality,251311,2,Balapur,बाळापूर,802675,5
+49,5,Municipality,251381,2,Ballarpur,बल्लारपूर,802724,5
+50,5,Municipality,251536,3,Baramati,बारामती,802820,5
+51,5,Municipality,251576,1,Barshi,बार्शी,802855,5
+52,5,Municipality,251413,1,Basmath,वसमत,802750,5
+53,5,Municipality,253140,2,Bhadgaon,भडगाव,802658,5
+54,5,Municipality,251375,3,Bhadravati,भद्रावती,802721,5
+55,5,Municipality,251444,1,Bhagur,भगूर,802778,5
+56,5,Municipality,248078,2,Bhandara,भंडारा,802713,5
+57,5,Municipality,259697,1,Bhokar,भोकर,802739,5
+58,5,Municipality,251422,2,Bhokardan,भोकरदन,802759,5
+59,5,Municipality,251535,2,Bhor,भोर,802819,5
+60,5,Municipality,251567,1,Bhum,भूम,802846,5
+61,5,Municipality,251290,2,Bhusawal,भुसावळ,802652,5
+62,5,Municipality,251557,4,Bid,बीड,802835,5
+63,5,Municipality,251406,2,Biloli,बिलोली,802743,5
+64,5,Municipality,251373,2,Brahmapuri,ब्रह्मपूरी,802720,5
+65,5,Municipality,251305,1,Buldana,बुलढाणा,802669,5
+66,5,Municipality,251520,2,Chakan,चाकण,555862,5
+67,5,Municipality,251296,2,Chalisgaon,चाळीसगाव,802659,5
+68,5,Municipality,251330,1,Chandur,चांदुर रेल्वे,802692,5
+69,5,Municipality,251324,2,Chandurbazar,चांदूर बाजार,802686,5
+70,5,Municipality,276281,3,Chandwad,चांदवड,561228,5
+71,5,Municipality,276634,2,Chikhaldara,चिखलदरा,802683,5
+72,5,Municipality,251304,3,Chikhli,चिखली,802668,5
+73,5,Municipality,265713,2,Chimur,चिमुर,540550,5
+74,5,Municipality,251602,2,Chiplun,चिपळूण,802874,5
+75,5,Municipality,251283,2,Chopda,चोपडा,802647,5
+76,5,Municipality,251451,6,Dahanu,डहाणू,802782,5
+77,5,Municipality,251389,2,Darwha,दारव्हा,802728,5
+78,5,Municipality,251329,1,Daryapur Banosa,दर्यापूर,802691,5
+79,5,Municipality,251331,1,Dattapur Dhamangaon,धामणगाव रेल्वे,802693,5
+80,5,Municipality,251531,1,Daund,दौंड,802816,5
+81,5,Municipality,251410,2,Deglur,देगलूर,802747,5
+82,5,Municipality,251552,2,Deolali Pravara,देवळाली प्रवरा,802831,5
+83,5,Municipality,251337,2,Deoli,देवळी,802698,5
+84,5,Municipality,251306,1,Deulgaon Raja,देऊळगाव राजा,802670,5
+85,5,Municipality,251293,1,Dharangaon,धरणगाव,802655,5
+86,5,Municipality,251404,2,Dharmabad,धर्माबाद,802741,5
+87,5,Municipality,303127,1,Digdoh Devi Municipal Council,,0,5
+88,5,Municipality,251390,2,Digras,दिग्रस,802729,5
+89,5,Municipality,251281,1,Dondaicha-Warwade,दोंडाईचा,802645,5
+90,5,Municipality,251583,1,Dudhani,दूधनी,802862,5
+91,5,Municipality,251292,2,Erandol,एरंडोल,802654,5
+92,5,Municipality,251285,1,Faizpur,फैजपूर,802649,5
+93,5,Municipality,303134,2,Fursungi Uruli Devachi,फुरसुंगी -उरुळी देवाची ,0,5
+94,5,Municipality,265791,2,Gadchandur Nagar Parishad,गडचांदूर,541663,5
+95,5,Municipality,251631,2,Gadhinglaj,गडहिंग्लज,802890,5
+96,5,Municipality,251420,1,Gangakhed,गंगाखेड,802757,5
+97,5,Municipality,251432,3,Gangapur,गंगापूर,802769,5
+98,5,Municipality,251555,1,Georai,गेवराई,802833,5
+99,5,Municipality,251394,3,Ghatanji,घाटंजी,802732,5
+100,5,Municipality,298902,1,Ghugus,Ghugus,0,5
+101,5,Municipality,251371,2,Gondiya,गोंदिया,802716,5
+102,5,Municipality,251399,1,Hadgaon,हदगाव,802736,5
+103,5,Municipality,251338,2,Hinganghat,हिंगनघाट,802699,5
+104,5,Municipality,251411,1,Hingoli,हिंगोली,802748,5
+105,5,Municipality,303119,2,Hiwarkhed,,0,5
+106,5,Municipality,276296,1,Hupari,हुपरी,567321,5
+107,5,Municipality,251445,2,Igatpuri,इगतपूरी,802779,5
+108,5,Municipality,251537,2,Indapur,इंदापूर,802821,5
+109,5,Municipality,251298,2,Jalgaon - Jamod,जळगाव जामोद,802662,5
+110,5,Municipality,251554,3,Jamkhed,जामखेड,558718,5
+111,5,Municipality,253139,3,Jamner,जामनेर,802661,5
+112,5,Municipality,259699,1,Jath,जत,568926,5
+113,5,Municipality,251453,2,Jawhar,जव्हार,802783,5
+114,5,Municipality,251621,2,Jaysingpur,जयसिंगपूर,802885,5
+115,5,Municipality,251533,2,Jejuri,जेजुरी,802818,5
+116,5,Municipality,251415,2,Jintur,जिंतुर,802752,5
+117,5,Municipality,251516,2,Junnar,जुन्नर,802806,5
+118,5,Municipality,251628,2,Kagal,कागल,802888,5
+119,5,Municipality,251568,3,Kalamb,कळंब,802847,5
+120,5,Municipality,251342,3,Kalameshwar,कळमेश्वर-ब्राम्हणी,802703,5
+121,5,Municipality,251412,1,Kalamnuri,कळमनुरी,802749,5
+122,5,Municipality,251356,1,Kamptee,कामठी,802708,5
+123,5,Municipality,251408,2,Kandhar,कंधार,802745,5
+124,5,Municipality,251350,3,Kanhan - Pipri,कन्हान पिंपरी,535452,5
+125,5,Municipality,251426,2,Kannad,कन्नड,802763,5
+126,5,Municipality,251598,2,Karad,कराड,802870,5
+127,5,Municipality,251318,3,Karanja,कारंजा,802680,5
+128,5,Municipality,251498,2,Karjat,कर्जत,802798,5
+129,5,Municipality,251574,1,Karmala,करमाळा,802853,5
+130,5,Municipality,251341,2,Katol,काटोल,802702,5
+131,5,Municipality,251302,1,Khamgaon,खामगाव,802666,5
+132,5,Municipality,251345,3,Khapa,खापा,802706,5
+133,5,Municipality,251601,2,Khed,खेड,802873,5
+134,5,Municipality,251501,4,Khopoli,खोपोली,802799,5
+135,5,Municipality,251430,2,Khuldabad,खुल्दाबाद,802767,5
+136,5,Municipality,251558,2,Kille Dharur, किल्ले धारूर,802837,5
+137,5,Municipality,251398,2,Kinwat,किनवट,802735,5
+138,5,Municipality,251540,1,Kopargaon,कोपरगाव,802823,5
+139,5,Municipality,251405,2,Kundalwadi,कुंडलवाडी,802742,5
+140,5,Municipality,251575,3,Kurduvadi,कुर्डुवाडी,802854,5
+141,5,Municipality,251622,2,Kurundvad,कुरूंदवाड,802886,5
+142,5,Municipality,251407,2,Loha,लोहा,802744,5
+143,5,Municipality,251308,2,Lonar,लोणार,802672,5
+144,5,Municipality,251526,3,Lonavala,लोणावळा,802810,5
+145,5,Municipality,251584,2,Mahabaleshwar,महाबळेश्वर,802863,5
+146,5,Municipality,251513,1,Mahad,महाड,802805,5
+147,5,Municipality,298893,1,Mahalung Shripur,Mahalung Shripur,0,5
+148,5,Municipality,251582,1,Maindargi,मैन्दरगी,802861,5
+149,5,Municipality,251556,2,Majalgaon,माजलगांव,802834,5
+150,5,Municipality,251301,2,Malkapur,मलकापूर,802665,5
+151,5,Municipality,251614,3,Malkapur-Kolhapur,मलकापूर-कोल्हापुर,802881,5
+152,5,Municipality,251610,2,Malwan,मालवण,802878,5
+153,5,Municipality,251580,1,Mangalvedhe,मंगळवेढा,7221,5
+154,5,Municipality,251317,2,Mangrulpir,मंगरूळपीर,802679,5
+155,5,Municipality,251440,1,Manmad,मनमाड,802774,5
+156,5,Municipality,251417,1,Manwath,मानवत,802754,5
+157,5,Municipality,251497,1,Matheran,माथेरान,802797,5
+158,5,Municipality,251303,2,Mehkar,मेहेकर,802667,5
+159,5,Municipality,251589,2,Mhaswad,म्हसवड,802867,5
+160,5,Municipality,276301,3,Mohol,मोहोळ,4248,5
+161,5,Municipality,251343,3,Mohpa,मोहपा,802704,5
+162,5,Municipality,251325,2,Morshi,मोर्शी,802687,5
+163,5,Municipality,251339,2,Mowad,मोवाड,802700,5
+164,5,Municipality,251402,2,Mudkhed,मुदखेड,802738,5
+165,5,Municipality,251409,1,Mukhed,मुखेड,802746,5
+166,5,Municipality,251382,2,Mul,मूल,802723,5
+167,5,Municipality,297866,2,Municipal Council Armori,नगर परिषद आरमोरी ,0,5
+168,5,Municipality,248081,2,Municipal Council Desaiganj ( Wadsa),देसाईगंज,802717,5
+169,5,Municipality,248080,2,Municipal Council Gadchiroli,गडचिरोली,802718,5
+170,5,Municipality,251629,2,Murgud,मुर्गुद,802889,5
+171,5,Municipality,251315,2,Murtijapur,मुर्तीजापुर,802677,5
+172,5,Municipality,251504,1,Murud,मुरुड,802802,5
+173,5,Municipality,251572,2,Murum,मुरुम,802851,5
+174,5,Municipality,276361,7,Nagbhid Muncipal Council,नागभीड नगरपरिषद,540611,5
+175,5,Municipality,251571,1,Naldurg,नळदुर्ग,802850,5
+176,5,Municipality,251439,2,Nandgaon,नांदगाव,802773,5
+177,5,Municipality,251300,1,Nandura,नंदूरा,802664,5
+178,5,Municipality,251278,6,Nandurbar,नंदुरबार,802642,5
+179,5,Municipality,251340,1,Narkhed,नरखेड,802701,5
+180,5,Municipality,251279,2,Nawapur,नवापुर,802643,5
+181,5,Municipality,259704,3,Ner Nababpur,नेर नबाबपूर,802726,5
+182,5,Municipality,251564,2,Nilanga,निलंगा,802843,5
+183,5,Municipality,251569,2,Osmanabad,उस्मानाबाद,802848,5
+184,5,Municipality,251297,2,Pachora,पाचोरा,802660,5
+185,5,Municipality,251433,2,Paithan,पैठण,802770,5
+186,5,Municipality,251460,4,Palghar,पालघर,802784,5
+187,5,Municipality,276350,6,Palus,पलूस,568415,5
+188,5,Municipality,251585,1,Panchgani,पंचगनी,802864,5
+189,5,Municipality,251395,3,Pandharkawda,पांढरकवडा,802733,5
+190,5,Municipality,297006,2,Pandharpur,पंढरपूर,7219,5
+191,5,Municipality,251615,1,Panhala,पन्हाला,802882,5
+192,5,Municipality,251566,1,Paranda,पारंडा,802845,5
+193,5,Municipality,251559,1,Parli,परळी,802838,5
+194,5,Municipality,251295,1,Parola,पारोला,802657,5
+195,5,Municipality,251425,2,Partur,परतूर,802762,5
+196,5,Municipality,251546,2,Pathardi,पाथर्डी,802827,5
+197,5,Municipality,251418,2,Pathri,पाथरी,802755,5
+198,5,Municipality,251316,1,Patur,पातुर,802678,5
+199,5,Municipality,248077,2,Pauni,पौनी,802714,5
+200,5,Municipality,251502,1,Pen,पेन,802800,5
+201,5,Municipality,251403,2,Peth Umri,पेठ उमरी,802740,5
+202,5,Municipality,251588,2,Phaltan,फलटण,802866,5
+203,5,Municipality,303075,1,Pimpalgaon Baswant,,0,5
+204,5,Municipality,251336,1,Pulgaon,पुलगाव,802697,5
+205,5,Municipality,251421,2,Purna,पूर्ण,802758,5
+206,5,Municipality,251391,2,Pusad,पुसद,802730,5
+207,5,Municipality,251590,2,Rahimatpur,राहिमतपूर,802868,5
+208,5,Municipality,251543,2,Rahta Pimplas,राहाता पिंपलस,802825,5
+209,5,Municipality,251551,1,Rahuri,राहुरी,802830,5
+210,5,Municipality,251608,2,Rajapur,राजापूर,802876,5
+211,5,Municipality,296912,1,Rajgurunagar,राजगुरुनगर,555861,5
+212,5,Municipality,251384,2,Rajura,राजूरा,802725,5
+213,5,Municipality,251353,2,Ramtek,रामटेक,802707,5
+214,5,Municipality,251605,2,Ratnagiri,रत्नागिरी,802875,5
+215,5,Municipality,251287,2,Raver,रावेर,802651,5
+216,5,Municipality,251320,2,Risod,रीसोड,802682,5
+217,5,Municipality,251506,1,Roha Ashtami,रोहा अष्टमी,802803,5
+218,5,Municipality,251414,2,Sailu,सेलू,802751,5
+219,5,Municipality,276319,3,Sakoli,साकोली,537168,5
+220,5,Municipality,251539,3,Sangamner,संगमनेर,802822,5
+221,5,Municipality,251579,2,Sangole,सांगोला,7220,5
+222,5,Municipality,251532,2,Sasvad,सासवड,802817,5
+223,5,Municipality,251435,3,Satana,सटाणा,802771,5
+224,5,Municipality,251593,9,Satara,सातारा,802869,5
+225,5,Municipality,251286,1,Savda,सावधा,802650,5
+226,5,Municipality,251344,2,Savner,सावनेर,802705,5
+227,5,Municipality,251613,2,Sawantwadi,सावंतवाडी,802880,5
+228,5,Municipality,251277,3,Shahade,शाहाडे,802641,5
+229,5,Municipality,251299,4,Shegaon,शेगाव,802663,5
+230,5,Municipality,251327,1,Shendurjana,शेंदुरजना,802689,5
+231,5,Municipality,276331,3,Shevgaon,शेवगांव,557863,5
+232,5,Municipality,276635,2,Shirol,शिरोल,4286,5
+233,5,Municipality,251280,2,Shirpur-Warwade,शिरपूर-वारावडे,802644,5
+234,5,Municipality,251518,4,Shirur,शिरूर,802807,5
+235,5,Municipality,251553,2,Shrigonda,श्रीगोंदा,802832,5
+236,5,Municipality,251544,2,Shrirampur,श्रीरामपूर,802826,5
+237,5,Municipality,251511,2,Shrivardhan,श्रीवर्धन,802804,5
+238,5,Municipality,297092,2,Sillod Municipal Council,सिल्लोड नगरपरिषद,7125,5
+239,5,Municipality,251333,2,Sindi,सिंडी,802695,5
+240,5,Municipality,251307,2,Sindkhed Raja,सिंदखेड राजा,802671,5
+241,5,Municipality,251447,2,Sinnar,सिन्नर,802780,5
+242,5,Municipality,251419,2,Sonpeth,सोनापेथ,802756,5
+243,5,Municipality,251522,1,Talegaon Dabhade,तळेगाव दाभाडे,802809,5
+244,5,Municipality,251275,2,Talode,तालोडे,802640,5
+245,5,Municipality,251636,2,Tasgaon,तसगाव,802894,5
+246,5,Municipality,251309,3,Telhara,तेल्हारा,802673,5
+247,5,Municipality,251370,3,Tirora,तिरोरा,802715,5
+248,5,Municipality,251441,1,Trimbak,त्रंबक,802775,5
+249,5,Municipality,251570,1,Tuljapur,तुळजापूर,802849,5
+250,5,Municipality,248079,2,Tumsar,तुमसर,802712,5
+251,5,Municipality,251565,2,Udgir,उदगीर,802844,5
+252,5,Municipality,251573,1,Umarga,उमरगा,802852,5
+253,5,Municipality,251393,3,Umarkhed,उमरखेड,802731,5
+254,5,Municipality,251366,1,Umred,उमरेड,802711,5
+255,5,Municipality,251491,1,Uran,उरण,802795,5
+256,5,Municipality,251633,2,Uran Islampur,उरण इस्लामपूर,802891,5
+257,5,Municipality,251616,2,Vadgaon Kasba,वडगाव कसबा,802883,5
+258,5,Municipality,251431,1,Vaijapur,वैजापूर,802768,5
+259,5,Municipality,276273,1,Varangaon,वरणगांव,527150,5
+260,5,Municipality,251611,2,Vengurla,वेंगुर्ला,802879,5
+261,5,Municipality,251635,3,Vita,विटा,802893,5
+262,5,Municipality,277475,1,Wadgaon,वडगांव,541656,5
+263,5,Municipality,251359,2,Wadi,वाडी,535970,5
+264,5,Municipality,251586,1,Wai,वाई,802865,5
+265,5,Municipality,251363,2,Wanadongri,वानाडोंगरी,536125,5
+266,5,Municipality,251397,2,Wani,वणी,802734,5
+267,5,Municipality,251334,1,Wardha,वर्धा,802696,5
+268,5,Municipality,251376,2,Warora,वॉरोरा,802719,5
+269,5,Municipality,251326,2,Warud,वरूड,802688,5
+270,5,Municipality,251319,3,Washim,वाशिम,802681,5
+271,5,Municipality,251386,9,Yavatmal,यवतमाळ,802727,5
+272,5,Municipality,251284,4,Yawal,यावल,802648,5
+273,5,Municipality,251450,2,Yevla,येवला,802781,5
+274,7,Nagar Panchayat,276327,3,Aheri,अहेरी,539998,7
+275,7,Nagar Panchayat,251630,2,Ajara,आजरा,567972,7
+276,7,Nagar Panchayat,275728,1,Akole,अकोले,554278,7
+277,7,Nagar Panchayat,300382,1,Angar,अनगर,0,7
+278,7,Nagar Panchayat,258020,3,Ardhapur,अर्धापूर्,544645,7
+279,7,Nagar Panchayat,276366,2,Arjuni,अर्जुनी,537520,7
+280,7,Nagar Panchayat,275734,2,Ashti,आष्टी,535627,7
+281,7,Nagar Panchayat,276380,3,Ashti (Wardha),आष्टी,533465,7
+282,7,Nagar Panchayat,300410,1,Atpadi,आटपाडी,0,7
+283,7,Nagar Panchayat,296909,1,Aundha Nagnath,औंढा नागनाथ,546018,7
+284,7,Nagar Panchayat,272842,2,Babhulgaon Nagar Panchayat,बाभूळगाव नगर पंचायत,542160,7
+285,7,Nagar Panchayat,276369,2,Badnapur,बदनापूर,547736,7
+286,7,Nagar Panchayat,301085,1,Bahadura Nagar Panchayat,Bahadura Nagar Panchayat,0,7
+287,7,Nagar Panchayat,276332,6,Barshitakli,बार्शीटाकळी,530476,7
+288,7,Nagar Panchayat,301078,1,Besa Pipla Nagar Panchayat,Besa Pipla Nagar Panchayat,0,7
+289,7,Nagar Panchayat,276283,2,Bhamragad,भामरागड,539754,7
+290,7,Nagar Panchayat,276290,4,Bhatkuli,भातकूली,532701,7
+291,7,Nagar Panchayat,300392,1,Bhisi,भिसी,0,7
+292,7,Nagar Panchayat,263363,4,Bhiwapur,भिवापूर,536621,7
+293,7,Nagar Panchayat,303126,1,Bidgaon Tarodi Khurd Pandhurna,,0,7
+294,7,Nagar Panchayat,276272,2,Bodwad,बोदवड,527082,7
+295,7,Nagar Panchayat,277411,2,Butibori,बुटीबोरी,535969,7
+296,7,Nagar Panchayat,276375,2,Chakur,चाकूर,560510,7
+297,7,Nagar Panchayat,276329,3,Chamorshi,चामोर्शी,539228,7
+298,7,Nagar Panchayat,290433,2,Chandgad.,चंदगड,568092,7
+299,7,Nagar Panchayat,276417,2,Dahiwadi,दहिवडी,551168,7
+300,7,Nagar Panchayat,251599,2,Dapoli Camp,दापोली,802872,7
+301,7,Nagar Panchayat,298888,1,Dehu,देहू,0,7
+302,7,Nagar Panchayat,276277,3,Deola,देवळा,549681,7
+303,7,Nagar Panchayat,276377,4,Deoni (Bk),देवणी,560922,7
+304,7,Nagar Panchayat,276363,2,Deori,देवरी,538467,7
+305,7,Nagar Panchayat,276321,4,Devgad-Jamsande,देवगड-जामसांडे,566311,7
+306,7,Nagar Panchayat,259684,2,Devrukh,देवरुख,259684,7
+307,7,Nagar Panchayat,276345,2,Dhadgaon,धडगांव,525237,7
+308,7,Nagar Panchayat,290430,4,Dhanki,ढाणकी,543000,7
+309,7,Nagar Panchayat,276284,2,Dhanora,धनोरा,548658,7
+310,7,Nagar Panchayat,276292,2,Dharni,धारणी,531532,7
+311,7,Nagar Panchayat,276276,3,Dindori,दिंडोरी,550649,7
+312,7,Nagar Panchayat,276330,2,Etapalli,एटापल्ली,539650,7
+313,7,Nagar Panchayat,276353,10,Fulambri,फुलंब्री,548730,7
+314,7,Nagar Panchayat,276370,2,Ghansawangi,घनसावंगी,547961,7
+315,7,Nagar Panchayat,303128,1,Godhani Railway,,0,7
+316,7,Nagar Panchayat,276358,2,Gondpimpri,गोंडपिंपरी,8474,7
+317,7,Nagar Panchayat,251510,1,Goregaon,गोरेगाव,537675,7
+318,7,Nagar Panchayat,251604,1,Guhagar,गुहागर,251604,7
+319,7,Nagar Panchayat,290434,2,Hatkanangale.,हातकणंगले,0,7
+320,7,Nagar Panchayat,276606,2,Himayatnagar Nagarpanchayat,हिमायतनगर नगर पंचायत,544400,7
+321,7,Nagar Panchayat,263362,4,Hingna,हिंगणा,535269,7
+322,7,Nagar Panchayat,276372,2,Jafrabad,जाफ़्राबाद,547443,7
+323,7,Nagar Panchayat,276373,2,Jalkot,जळकोट,560431,7
+324,7,Nagar Panchayat,276355,2,Jiwati,जिवती,16602,7
+325,7,Nagar Panchayat,290358,2,Kadegaon.,कडेगाव,568486,7
+326,7,Nagar Panchayat,259696,4,Kaij,केज,802836,7
+327,7,Nagar Panchayat,266073,4,Kalamb Nagar Panchayat,कळंब नगर पंचायत,542234,7
+328,7,Nagar Panchayat,276278,2,Kalwan,कळवण,549915,7
+329,7,Nagar Panchayat,301086,1,Kandri Kanhan Nagar Panchayat,Kandri Kanhan Nagar Panchayat,0,7
+330,7,Nagar Panchayat,251609,2,Kankavli,कणकवली,802877,7
+331,7,Nagar Panchayat,276633,6,Karanja Wardha,कारंजा,802680,7
+332,7,Nagar Panchayat,275729,2,Karjat,कर्जत,558631,7
+333,7,Nagar Panchayat,263884,3,Kasai Dodamarg,कसाई दोडामार्ग  नगर पंचायत,566944,7
+334,7,Nagar Panchayat,276346,2,Kavthemahankal,कवठेमहांकाळ,568794,7
+335,7,Nagar Panchayat,276267,2,Khalapur,खालापूर,553748,7
+336,7,Nagar Panchayat,276348,2,Khanapur,खानापूर,568552,7
+337,7,Nagar Panchayat,276383,2,Khandala,खंडाळा,535644,7
+338,7,Nagar Panchayat,303129,1,Kondhali,,0,7
+339,7,Nagar Panchayat,305207,1,Korchi,कोरची ,0,7
+340,7,Nagar Panchayat,276381,2,Koregaon,कोरेगांव,563744,7
+341,7,Nagar Panchayat,276357,2,Korpana,कोरपणा,541560,7
+342,7,Nagar Panchayat,251612,1,Kudal,कुडाळ,566839,7
+343,7,Nagar Panchayat,263364,3,Kuhi Nagar Parishad,कुही ,0,7
+344,7,Nagar Panchayat,276286,4,Kurkheda,कूरखेडा,538734,7
+345,7,Nagar Panchayat,276324,2,Lakhandur,लाखांदूर,537497,7
+346,7,Nagar Panchayat,276323,2,Lakhani,लाखणी,537190,7
+347,7,Nagar Panchayat,251607,2,Lanja,लांजा,251607,7
+348,7,Nagar Panchayat,276313,2,Lohara (Bk),लोहरा (बु),561640,7
+349,7,Nagar Panchayat,276414,3,Lonand,लोणंद,563232,7
+350,7,Nagar Panchayat,276302,2,Madha,माढा,4245,7
+351,7,Nagar Panchayat,251358,2,Mahadula,महादुला,535809,7
+352,7,Nagar Panchayat,276309,2,Mahagaon,महागांव,543170,7
+353,7,Nagar Panchayat,258024,3,Mahur,माहूर,556515,7
+354,7,Nagar Panchayat,276293,2,Malegaon,मालेगाव,530646,7
+355,7,Nagar Panchayat,300394,1,Malegaon Budruk,माळेगाव (बु.),0,7
+356,7,Nagar Panchayat,251314,2,Malkapur,मलकापूर,802871,7
+357,7,Nagar Panchayat,276303,2,Malshiras,माळशिरस,562439,7
+358,7,Nagar Panchayat,300391,1,Manchar,मंचर,0,7
+359,7,Nagar Panchayat,276295,2,Mandangad,मंडणगड,276295,7
+360,7,Nagar Panchayat,276268,3,Mangaon,माणगांव,554652,7
+361,7,Nagar Panchayat,276294,2,Manora,मनोरा,4,7
+362,7,Nagar Panchayat,276371,2,Mantha,मंठा,548208,7
+363,7,Nagar Panchayat,276310,3,Maregaon,मारेगांव,543786,7
+364,7,Nagar Panchayat,276415,2,Medha,मेधा,564121,7
+365,7,Nagar Panchayat,251512,1,Mhasla,म्हसळा,554960,7
+366,7,Nagar Panchayat,276325,2,Mohadi,मोहाडी,536901,7
+367,7,Nagar Panchayat,276317,3,Mokhada,मोखाडा,551969,7
+368,7,Nagar Panchayat,276275,3,Motala,मेाताला,528754,7
+369,7,Nagar Panchayat,259672,3,Mouda,मौदा,535734,7
+370,7,Nagar Panchayat,276421,2,Muktainagar,मुक्ताईनगर,527028,7
+371,7,Nagar Panchayat,276287,3,Mulchera,मूलचेरा,539451,7
+372,7,Nagar Panchayat,251487,2,Murbad,मुरबाड,553290,7
+373,7,Nagar Panchayat,276623,2,Naigaon (Khairgaon),नाइगांव,543478,7
+374,7,Nagar Panchayat,276291,2,Nandgaon Khandeshwar,नांदगाव खंंडेश्वर,4012,7
+375,7,Nagar Panchayat,300384,1,Natepute,नातेपुते,0,7
+376,7,Nagar Panchayat,276320,2,Nevasa,नेवासा खु.,557710,7
+377,7,Nagar Panchayat,303130,1,NIldoh,,0,7
+378,7,Nagar Panchayat,276279,6,Niphad,निफाड,551368,7
+379,7,Nagar Panchayat,276297,2,Palam,पालम,174,7
+380,7,Nagar Panchayat,300027,1,Pali,पाली,0,7
+381,7,Nagar Panchayat,275730,1,Parner,पारनेर,558320,7
+382,7,Nagar Panchayat,276305,6,Parshivni,पारशिवनी,535404,7
+383,7,Nagar Panchayat,251596,1,Patan,पाटण,564465,7
+384,7,Nagar Panchayat,275732,3,Patoda.,पाटोदा,548078,7
+385,7,Nagar Panchayat,276280,2,Peth,पेठ,560178,7
+386,7,Nagar Panchayat,303133,1,Pimpalner Nagar Pnchayat,,0,7
+387,7,Nagar Panchayat,276636,2,Poladpur,पोलादपूर,555230,7
+388,7,Nagar Panchayat,276359,2,Pombhurna,पोंभूर्णा,541483,7
+389,7,Nagar Panchayat,276308,4,Ralegaon,राळेगांव,543581,7
+390,7,Nagar Panchayat,276376,4,Renapur,रेनापूर,560262,7
+391,7,Nagar Panchayat,276368,2,Sadak-Arjuni,सडकअर्जुनी,538130,7
+392,7,Nagar Panchayat,276339,2,Sakri,साक्री,526464,7
+393,7,Nagar Panchayat,276365,3,Salekasa,सालेकसा,175633,7
+394,7,Nagar Panchayat,276379,2,Samudrapur,समुद्रपुर,534619,7
+395,7,Nagar Panchayat,276274,2,Sangrampur,संग्रामपूर,528353,7
+396,7,Nagar Panchayat,276356,2,Saoli,सावली,540861,7
+397,7,Nagar Panchayat,276378,2,Seloo,सेळू,802751,7
+398,7,Nagar Panchayat,296910,1,Sengaon,सेनगावं,545809,7
+399,7,Nagar Panchayat,276333,2,Shahapur,शहापूर,533384,7
+400,7,Nagar Panchayat,277413,1,Shendurni,शेंदुर्णी,550214,7
+401,7,Nagar Panchayat,276349,2,Shirala,शिराळा,568295,7
+402,7,Nagar Panchayat,251542,3,Shirdi,शिर्डी,802824,7
+403,7,Nagar Panchayat,276374,2,Shirur-Anantpal,शिरुर-अनंतपाल,560562,7
+404,7,Nagar Panchayat,275726,2,Shirur Kasar,शिरुर कासार,559021,7
+405,7,Nagar Panchayat,276362,3,Sindewahi,सिंदेवाही,541049,7
+406,7,Nagar Panchayat,259701,3,Sindhakeda,सिंदखेडा,526155,7
+407,7,Nagar Panchayat,276288,2,Sironcha,सिरोंचा,540146,7
+408,7,Nagar Panchayat,251436,2,Soyagaon,सोयगाव,548490,7
+409,7,Nagar Panchayat,251434,1,Surgana,सुरगाणा,549783,7
+410,7,Nagar Panchayat,276270,4,Tala,तळा,554759,7
+411,7,Nagar Panchayat,276315,2,Talasari,तलासरी,551566,7
+412,7,Nagar Panchayat,276289,3,Tiwsa,तिवसा,532528,7
+413,7,Nagar Panchayat,263834,2,Vabhave Vaibhavwadi Nagar Panchayat,वाभवे -वैभववाडी,566375,7
+414,7,Nagar Panchayat,276637,2,Vadgaon Mawal,वडगाव मावळ,556053,7
+415,7,Nagar Panchayat,276416,2,Vaduj,वडुज,563537,7
+416,7,Nagar Panchayat,300385,2,Vairag,वैराग,0,7
+417,7,Nagar Panchayat,276316,2,Vikramgad,विक्रमगड,551844,7
+418,7,Nagar Panchayat,276318,2,Wada,वाडा,552182,7
+419,7,Nagar Panchayat,275731,1,Wadvani,वडवणी,559435,7
+420,7,Nagar Panchayat,276312,2,Washi,वाशी,567438,7
+421,7,Nagar Panchayat,303131,1,Yerkheda,,0,7
+422,7,Nagar Panchayat,272845,3,Zari Zamani,झरी झामणी,543914,7

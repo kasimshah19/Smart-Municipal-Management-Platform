@@ -19,6 +19,8 @@ import workerRoutes from './routes/worker.routes.js';
 import analyticsRoutes from './routes/analytics.routes.js';
 import geographyRoutes from './routes/geography.routes.js';
 import gramPanchayatRoutes from './routes/gramPanchayat.routes.js';
+import zillaParishadRoutes from './routes/zillaParishad.routes.js';
+import panchayatSamitiRoutes from './routes/panchayatSamiti.routes.js';
 import pincodeRoutes from './routes/pincodeRoutes.js';
 import { notFoundHandler, globalErrorHandler } from './middlewares/error.middleware.js';
 
@@ -72,6 +74,8 @@ app.use('/api/employees', employeeRoutes);
     app.use('/api/analytics', analyticsRoutes);
     app.use('/api/geography', geographyRoutes);
     app.use('/api/gram-panchayats', gramPanchayatRoutes);
+    app.use('/api/zilla-parishads', zillaParishadRoutes);
+    app.use('/api/panchayat-samitis', panchayatSamitiRoutes);
     app.use('/api/pincodes', pincodeRoutes);
 
 // --------------- Error Handling ---------------

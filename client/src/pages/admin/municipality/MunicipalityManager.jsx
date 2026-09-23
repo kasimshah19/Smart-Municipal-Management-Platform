@@ -86,7 +86,7 @@ function MunicipalityManager() {
     }
   };
 
-  const handleOpenModal = (item = null) => {
+  const handleOpenModal = (item = null, defaultType = LOCAL_BODY_TYPES.MUNICIPAL_COUNCIL.value) => {
     if (item) {
       setEditingItem(item);
       setFormData({
@@ -109,7 +109,7 @@ function MunicipalityManager() {
       setFormData({
         name: '',
         code: '',
-        type: LOCAL_BODY_TYPES.MUNICIPAL_COUNCIL.value,
+        type: defaultType,
         district: '',
         talukaId: '',
         state: 'Maharashtra',
@@ -186,22 +186,38 @@ function MunicipalityManager() {
         <h2 className="text-lg font-bold" style={{ color: 'var(--ink)' }}>
           Local Bodies
         </h2>
-        <button 
-          onClick={() => handleOpenModal()}
-          className="px-4 py-2 rounded-lg font-medium text-sm text-white transition-opacity hover:opacity-90"
-          style={{ backgroundColor: 'var(--accent)' }}
-        >
-          + Add Local Body
-        </button>
+        <div className="flex gap-2">
+          <button 
+            onClick={() => handleOpenModal(null, LOCAL_BODY_TYPES.MUNICIPAL_CORPORATION.value)}
+            className="px-4 py-2 rounded-lg font-medium text-sm text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            + Add Maha Nagar Palika
+          </button>
+          <button 
+            onClick={() => handleOpenModal(null, LOCAL_BODY_TYPES.MUNICIPAL_COUNCIL.value)}
+            className="px-4 py-2 rounded-lg font-medium text-sm text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            + Add Nagar Palika
+          </button>
+          <button 
+            onClick={() => handleOpenModal(null, LOCAL_BODY_TYPES.MUNICIPAL_COUNCIL.value)}
+            className="px-4 py-2 rounded-lg font-medium text-sm text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            + Add Nagar Parishad
+          </button>
+        </div>
       </div>
 
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <input
           type="text"
           placeholder="Search by name or code..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="px-3 py-2 text-[14px] outline-none w-1/3"
+          className="px-3 py-2 text-[14px] outline-none flex-1 min-w-[200px]"
           style={inputStyles}
         />
         <select
