@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { User } from '../models/User.js';
 import { generateToken } from '../utils/jwt.js';
 import { ROLES } from '../constants/roles.js';
-
+import GramPanchayat from '../models/GramPanchayat.js';
 dotenv.config();
 
 const API_URL = 'http://localhost:5000/api';
@@ -78,6 +78,7 @@ async function runTests() {
     assert(data.data.length <= 100, 'Pagination is strictly bounded (max 100 limit enforced even if 10000 requested)');
 
     // 6. Mass Assignment Protection
+    await GramPanchayat.deleteOne({ lgdCode: 999999 }); // clean up
     const payload = {
       name: 'TEST GP INJECTION',
       lgdCode: 999999,
